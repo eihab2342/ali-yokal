@@ -1,16 +1,14 @@
 import { getRequestConfig } from "next-intl/server";
-import { headers } from "next/headers";
-import { notFound } from "next/navigation";
+import { routing } from "./routing";
 
-const locales = ["en", "ar"] as const;
 const namespaces = ["home"] as const;
 
-export default getRequestConfig(async () => {
-  const h = await headers();
-  const raw = h.get("x-next-intl-locale") ?? "en";
-  const locale = raw.toLowerCase() as (typeof locales)[number];
+export default getRequestConfig(async ({ requestLocale }) => {
+  let locale = await requestLocale;
 
-  if (!locales.includes(locale as "en" | "ar")) notFound();
+  if (!locale || !routing.locales.includes(locale as "en" | "ar")) {
+    locale = routing.defaultLocale;
+  }
 
   const messages = Object.fromEntries(
     await Promise.all(

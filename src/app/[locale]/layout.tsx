@@ -7,7 +7,6 @@ import { getMessages, setRequestLocale } from "next-intl/server";
 import SmoothScrollProvider from "@/app/Providers/SmoothScrollProvider";
 import "@/styles/globals.css";
 import { Toaster } from "sonner";
-import Header from "@/components/Header/Header";
 
 
 const geistSans = Geist({ variable: "--font-geist-sans", subsets: ["latin"] });
@@ -41,7 +40,6 @@ export default async function Layout({
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         <NextIntlClientProvider messages={messages} locale={locale}>
-          <Header type="drawer" />
           <SmoothScrollProvider>{children}</SmoothScrollProvider>
           <Toaster position="top-center" />
         </NextIntlClientProvider>
