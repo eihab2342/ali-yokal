@@ -39,7 +39,7 @@ export default async function page({
       <ScannerSection />
       <ServicesSection services={services} />
       <ExecutionProcess sections={sections} />
-      <BeforeAfterSection />
+      <BeforeAfterSection projects={projects} />
       <Projects projects={projects} />
       <ContactSection contact={contact} />
       <Footer social_links={social_links} services={services} />

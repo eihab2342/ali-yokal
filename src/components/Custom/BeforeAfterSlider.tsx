@@ -4,6 +4,9 @@ import { useState, useRef } from "react";
 import Image from "next/image";
 import { Sparkles, MoveHorizontal } from "lucide-react";
 
+import { Project } from "@/types/homeApiTypes";
+import { cleanImageUrl } from "@/lib/utils";
+
 interface BeforeAfterItem {
   id: number;
   title: string;
@@ -44,11 +47,33 @@ const defaultCases: BeforeAfterItem[] = [
   },
 ];
 
-export default function BeforeAfterSection() {
+export default function BeforeAfterSection({ projects }: { projects?: Project[] }) {
   const [sliderPosition, setSliderPosition] = useState(50);
   const [activeCase, setActiveCase] = useState(0);
   const [isDragging, setIsDragging] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
+
+  const apiCases: BeforeAfterItem[] = (projects || [])
+    .filter((p) => p.images && p.images.length >= 1)
+    .map((p, idx) => ({
+      id: p.id || idx + 1,
+      title: p.name,
+      subtitle: p.type || "حالة علاجية تخصصية",
+      beforeImg: cleanImageUrl(p.images[0]?.image_url || p.thumbnail_url),
+      afterImg: cleanImageUrl(p.images[1]?.image_url || p.thumbnail_url),
+      description: p.short_desc || p.long_desc || "",
+      tag: p.type || "تجميل الأسنان",
+    }));
+
+  const isOldContracting = projects?.some((p) =>
+    p.name?.includes("Be group") ||
+    p.name?.includes("شقة سكنية") ||
+    p.name?.includes("مكتب إداري") ||
+    p.name?.includes("غرف معقمة")
+  );
+
+  const casesToDisplay = apiCases.length > 0 && !isOldContracting ? apiCases : defaultCases;
+  const currentItem = casesToDisplay[activeCase] || casesToDisplay[0] || defaultCases[0];
 
   const handleMove = (clientX: number) => {
     if (!containerRef.current) return;
@@ -68,18 +93,16 @@ export default function BeforeAfterSection() {
     }
   };
 
-  const currentItem = defaultCases[activeCase];
-
   return (
-    <section id="cases" className="relative py-24 px-6 md:px-12 lg:px-20 overflow-hidden bg-gradient-to-b from-[#171410] via-[#1a1612] to-[#171410]">
+    <section id="cases" className="relative py-20 px-6 md:px-12 lg:px-20 overflow-hidden bg-gradient-to-b from-[#171410] via-[#1a1612] to-[#171410]">
       <div className="max-w-7xl mx-auto">
         {/* Header */}
-        <div className="text-center mb-16">
+        <div className="text-center mb-14">
           <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-[#c9a750]/30 bg-[#c9a750]/10 text-[#c9a750] text-xs font-bold tracking-[0.25em] uppercase mb-4">
             <Sparkles className="w-3.5 h-3.5" />
             <span>نتائج واقعية حية</span>
           </div>
-          <h2 className="text-4xl md:text-6xl font-bold text-[#e6d5c0] leading-tight">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-[#e6d5c0] leading-tight">
             معرض الحالات <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#c9a750] via-[#b2913c] to-[#8c6d3b]">قبل وبعد</span>
           </h2>
           <p className="text-[#e6d5c0]/70 max-w-2xl mx-auto mt-4 text-base md:text-lg">
@@ -89,7 +112,7 @@ export default function BeforeAfterSection() {
 
         {/* Case Selector Tabs */}
         <div className="flex flex-wrap justify-center gap-3 mb-10">
-          {defaultCases.map((item, idx) => (
+          {casesToDisplay.map((item, idx) => (
             <button
               key={item.id}
               onClick={() => {
