@@ -19,6 +19,7 @@ export interface Data {
 /* ================= HOME ================= */
 export interface Home {
   description: string;
+  logo: string | null;
   sliders: Slider[];
 }
 

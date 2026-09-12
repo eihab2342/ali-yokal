@@ -8,43 +8,42 @@ import ScrollSmoother from "gsap/ScrollSmoother";
 import ScrollTrigger from "gsap/ScrollTrigger";
 import gsap from "gsap";
 import Image from "next/image";
-import logo from "@/assets/logo.png";
+import staticLogo from "@/assets/logo.png";
 import { useGSAP } from "@gsap/react";
 import { useLocale, useTranslations } from "next-intl";
+import { cleanImageUrl } from "@/lib/utils";
 
 gsap.registerPlugin(ScrollTrigger);
 
 interface HeaderProps {
   type?: "drawer" | "popup";
+  logoSrc?: string | null;
 }
 
 const HEADER_HEIGHT = 64;
 
-export default function Header({ type = "popup" }: HeaderProps) {
+export default function Header({ type = "popup", logoSrc }: HeaderProps) {
   const headerRef = useRef<HTMLElement>(null);
   const logoRef = useRef<HTMLAnchorElement>(null);
   const navRef = useRef<HTMLDivElement>(null);
   const langRef = useRef<HTMLDivElement>(null);
   const [activeSection, setActiveSection] = useState<string>("#home");
   const locale = useLocale();
-   const t = useTranslations("home");
+  const t = useTranslations("home");
 
   const navItems = [
     { name: t("Home"), href: "#home" },
     { name: t("About"), href: "#about" },
+    { name: t("Technology"), href: "#technology" },
     { name: t("Services"), href: "#services" },
     { name: t("Execution Process"), href: "#execution-process" },
-    { name: t("Our Work"), href: "#projects" },
+    { name: t("Our Work"), href: "#cases" },
     { name: t("Contact"), href: "#contact-us" },
   ];
 
-  // ─────────────────────────────────────────────
-  // 🎨 Enhanced animations with smooth transitions
-  // ─────────────────────────────────────────────
   useGSAP(() => {
     if (!headerRef.current) return;
 
-    // ✨ Smoother header background transition with backdrop blur effect
     ScrollTrigger.create({
       start: 1,
       onEnter: () => {
@@ -68,7 +67,6 @@ export default function Header({ type = "popup" }: HeaderProps) {
       },
     });
 
-    // Active section tracking - using center-based detection
     navItems.forEach((item) => {
       const section = document.querySelector(item.href);
       if (!section) return;
@@ -81,13 +79,10 @@ export default function Header({ type = "popup" }: HeaderProps) {
         onEnterBack: () => setActiveSection(item.href),
       });
     });
-  },    {
-      scope: headerRef,
-    });
+  }, {
+    scope: headerRef,
+  });
 
-  // ─────────────────────────────────────────────
-  // 🎯 Enhanced smooth scroll with easing
-  // ─────────────────────────────────────────────
   const handleScroll = (e: React.MouseEvent, target: string) => {
     e.preventDefault();
     const smoother = ScrollSmoother.get();
@@ -116,7 +111,6 @@ export default function Header({ type = "popup" }: HeaderProps) {
       style={{ backdropFilter: "blur(0px)" }}
     >
       <div className="container mx-auto px-4 h-16 flex items-center justify-between relative">
-        {/* Logo with hover effect */}
         <Link
           ref={logoRef}
           href="#home"
@@ -124,7 +118,7 @@ export default function Header({ type = "popup" }: HeaderProps) {
           className="flex items-center gap-2 font-bold transition-all duration-300 hover:scale-105"
         >
           <Image
-            src={logo}
+            src={logoSrc ? cleanImageUrl(logoSrc) : staticLogo}
             alt="Logo"
             width={120}
             height={50}
@@ -132,7 +126,6 @@ export default function Header({ type = "popup" }: HeaderProps) {
           />
         </Link>
 
-        {/* Desktop Nav */}
         <nav className="hidden md:flex items-center gap-8">
           <div ref={navRef} className="flex items-center gap-6">
             {navItems.map((item) => {
@@ -143,10 +136,9 @@ export default function Header({ type = "popup" }: HeaderProps) {
                   href={item.href}
                   onClick={(e) => handleScroll(e, item.href)}
                   className={`relative text-base font-medium transition-all duration-300 hover:scale-105
-                    ${
-                      isActive
-                        ? "text-[#b2913c]"
-                        : "text-[#b2913c] hover:text-[#b2913c]"
+                    ${isActive
+                      ? "text-[#b2913c]"
+                      : "text-[#b2913c] hover:text-[#b2913c]"
                     }
                   `}
                 >
@@ -156,7 +148,6 @@ export default function Header({ type = "popup" }: HeaderProps) {
                       ${isActive ? "w-full opacity-100" : "w-0 opacity-0"}
                     `}
                   />
-                  {/* Hover underline */}
                   <span
                     className={`absolute -bottom-1 left-0 h-[2px] bg-[#5d492c] rounded-full transition-all duration-300 ease-out opacity-0 hover:opacity-50
                       ${isActive ? "w-0" : "w-0 hover:w-full"}
@@ -166,15 +157,11 @@ export default function Header({ type = "popup" }: HeaderProps) {
               );
             })}
           </div>
-          <div
-            ref={langRef}
-            className="transition-all duration-300 hover:scale-105"
-          >
+          <div ref={langRef} className="transition-all duration-300 hover:scale-105">
             <LanguageSwitcher />
           </div>
         </nav>
 
-        {/* Mobile */}
         <div className="md:hidden">
           {type === "drawer" ? (
             <DrawerMenu navItems={navItems} locale={locale} />

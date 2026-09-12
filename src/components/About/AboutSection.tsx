@@ -4,15 +4,37 @@ import { useRef } from "react";
 import Image from "next/image";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap/all";
-import aboutImg from "@/assets/3.jpg";
+import doctorAboutImg from "@/assets/_DSC8629 copy.JPG.jpeg";
 import { useTranslations } from "next-intl";
 import { About, Statistic } from "@/types/homeApiTypes";
 import { Check } from "lucide-react";
+import { cleanImageUrl } from "@/lib/utils";
 
-export default function AboutSection({ about, statistics }: { about: About, statistics: Statistic[] }) {
+export default function AboutSection({ about, statistics }: { about: About; statistics: Statistic[] }) {
   const sectionRef = useRef<HTMLElement>(null);
   const statRefs = useRef<(HTMLDivElement | null)[]>([]);
   const t = useTranslations("home");
+
+  const defaultBadges = [
+    "دكتوراه في العلاج التحفظي وتجميل الأسنان",
+    "تخصيص ساعة كاملة لكل مريض لضمان أعلى دقة",
+    "تطبيق بروتوكول العزل الكامل Rubber Dam في كل جلسة",
+    "استخدام أحدث ماسح رقمي 3D Scanner بدون مقاسات مزعجة",
+    "إنقاذ وحماية العصب الطبيعي في حالات التسوس العميق",
+    "خدمة معتمدة لمرتادي نادي سبورتنج وطلبة الجامعة ونقابة المهن الطبية",
+  ];
+
+  const defaultStats = statistics && statistics.length > 0 ? statistics.map((s) => ({
+    id: s.id,
+    title: s.title,
+    count: s.count,
+    suffix: "+",
+  })) : [
+    { id: 1, title: "دكتوراه في العلاج التحفظي", count: 1, suffix: "" },
+    { id: 2, title: "ساعة مخصصة لكل مريض", count: 60, suffix: " دقيقة" },
+    { id: 3, title: "نسبة نجاح الحفاظ على العصب", count: 98, suffix: "%" },
+    { id: 4, title: "مرضى يومياً لضمان الدقة", count: 4, suffix: " كحد أقصى" },
+  ];
 
   useGSAP(() => {
     const tl = gsap.timeline({
@@ -22,30 +44,24 @@ export default function AboutSection({ about, statistics }: { about: About, stat
         toggleActions: "play none none reverse",
       },
       onComplete: () => {
-        // ✅ RUN COUNTING LOGIC ONLY AFTER ALL ANIMATIONS
-        statRefs.current.forEach((el, index) => {
+        statRefs.current.forEach((el) => {
           if (!el) return;
 
           const endValue = Number(el.dataset.value) || 0;
           let current = 0;
-
-          // reset text hard
-          el.innerText = `0${index === 3 ? "" : "+"}`;
-
-          const duration = 2000; // total time in ms
-          const stepTime = 20; // update interval
+          const duration = 1800;
+          const stepTime = 25;
           const steps = duration / stepTime;
           const increment = endValue / steps;
 
           const counter = setInterval(() => {
             current += increment;
-
             if (current >= endValue) {
               current = endValue;
               clearInterval(counter);
             }
-
-            el.innerText = Math.floor(current) + (index === 3 ? "" : "+");
+            const suffix = el.dataset.suffix || "+";
+            el.innerText = Math.floor(current) + suffix;
           }, stepTime);
         });
       },
@@ -63,11 +79,11 @@ export default function AboutSection({ about, statistics }: { about: About, stat
       ".about-header-line",
       {
         scaleX: 0,
-        transformOrigin: "left",
+        transformOrigin: "center",
         duration: 1,
         ease: "power3.out",
       },
-      "-=0.5",
+      "-=0.5"
     );
 
     // Content
@@ -79,7 +95,7 @@ export default function AboutSection({ about, statistics }: { about: About, stat
         duration: 1,
         ease: "power3.out",
       },
-      "-=0.5",
+      "-=0.5"
     );
 
     tl.from(
@@ -90,182 +106,136 @@ export default function AboutSection({ about, statistics }: { about: About, stat
         duration: 1,
         ease: "power3.out",
       },
-      "-=0.8",
-    );
-
-    // Value Tags
-    tl.from(
-      ".about-value-tag",
-      {
-        scale: 0.8,
-        opacity: 0,
-        duration: 0.5,
-        stagger: 0.1,
-        ease: "back.out(1.7)",
-      },
-      "-=0.5",
-    );
-
-    // Divider
-    tl.from(
-      ".about-divider",
-      {
-        scaleX: 0,
-        transformOrigin: "center",
-        duration: 1.5,
-        ease: "power3.inOut",
-      },
-      "-=0.5",
-    );
-
-    // Stats Container
-    tl.from(
-      ".about-stats-container",
-      {
-        y: 30,
-        opacity: 0,
-        duration: 0.8,
-        ease: "power2.out",
-      },
-      "-=0.3",
+      "-=0.8"
     );
   }, []);
 
-  const values = [t("QUALITY"), t("CLARITY"), t("TIME SAVING")];
+  const values = ["دقة ميكرونية", "عزل تام RUBBER DAM", "ساعة لكل مريض", "بدون مقاسات مزعجة"];
 
   return (
-    <>
-      <section
-        id="about"
-        ref={sectionRef}
-        className="relative overflow-hidden pt-28 pb-20 px-6 md:px-12 lg:px-20"
-      >
+    <section
+      id="about"
+      ref={sectionRef}
+      className="relative overflow-hidden pt-28 pb-20 px-6 md:px-12 lg:px-20 bg-[#171410]"
+    >
       <div className="relative max-w-7xl mx-auto">
-
-        {/* ── CENTERED HEADER ── */}
-        <div className="about-header text-center mb-10 xl:mb-20">
-          <div className="inline-block mb-6">
-            <span className="text-[#c9a750] text-xs font-bold tracking-[0.5em] uppercase">{t("About")}</span>
-            <div className="about-header-line h-0.5 w-full bg-gradient-to-r from-transparent via-[#c9a750] to-transparent mt-2"></div>
+        {/* Header */}
+        <div className="about-header text-center mb-16">
+          <div className="inline-block mb-4">
+            <span className="text-[#c9a750] text-xs font-bold tracking-[0.5em] uppercase">
+              {t("About")}
+            </span>
+            <div className="about-header-line h-0.5 w-full bg-gradient-to-r from-transparent via-[#c9a750] to-transparent mt-2" />
           </div>
-            <h2 className="text-[55px] md:text-[100px] font-bold text-transparent bg-clip-text bg-gradient-to-r from-[#c9a750] via-[#b2913c] to-[#8c6d3b] leading-tight">
-            {t("ABOUT_TITLE_PART1")}{" "}
-              <span className="text-[#e6d5c0] animate-gradient">
-              {t("ABOUT_TITLE_PART2")}
+          <h2 className="text-4xl sm:text-6xl lg:text-7xl font-bold text-[#e6d5c0] leading-tight">
+            فلسفة العيادة{" "}
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#c9a750] via-[#b2913c] to-[#8c6d3b]">
+              والعلاج التحفظي
             </span>
           </h2>
         </div>
 
-        {/* ── MAIN CONTENT GRID ── */}
-        <div className="grid lg:grid-cols-2 gap-16 mb-10 xl:mb-20 items-center">
-
-          {/* LEFT: Capability list + quote + specialisation */}
-          <div className="about-description flex flex-col gap-10">
-            {/* Bullet list – 2-col grid, last item full-width */}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
-                {about.badges?.map((point, i, arr) => (
-                <div
-                  key={i} 
-                  className={`group flex items-center gap-4 p-4 rounded-xl border border-[#c9a750]/10 bg-[#1a1712] hover:border-[#c9a750]/35 transition-all duration-400 ${
-                    i === arr.length - 1 && arr.length % 2 !== 0 ? "md:col-span-2" : ""
-                  }`}
-                >
-                  <div className="flex-shrink-0 w-9 h-9 rounded-lg flex items-center justify-center bg-[#c9a750]/8 text-[#c9a750] group-hover:bg-[#c9a750] group-hover:text-[#171410] transition-all duration-400">
-                    <Check className="w-4 h-4" strokeWidth={2.5} />
-                  </div>
-                  <span className="text-[#e6d5c0]/80 text-sm font-semibold leading-snug group-hover:text-[#e6d5c0] transition-colors">{point}</span>
-                </div>
-              ))}
-            </div>
-
-            {/* Mindset quote */}
-            <div className="relative pl-6 border-l-2 border-[#c9a750]">
-              <p className="text-[#c9a750] text-xl md:text-2xl font-bold italic leading-snug">
+        {/* Main Grid */}
+        <div className="grid lg:grid-cols-12 gap-12 lg:gap-16 mb-20 items-center">
+          {/* Left Column */}
+          <div className="lg:col-span-7 about-description flex flex-col gap-8">
+            {/* Mindset Quote Box */}
+            <div className="relative p-6 rounded-2xl bg-gradient-to-r from-[#c9a750]/10 via-[#1f1b16] to-[#1f1b16] border-r-4 border-[#c9a750]">
+              <p className="text-[#c9a750] text-lg sm:text-xl font-bold leading-relaxed">
                 &ldquo;{t("Mindset Quote")}&rdquo;
               </p>
             </div>
 
-            {/* Specialisation */}
-            <div 
-              className="text-[#e6d5c0]/60 text-base md:text-lg leading-relaxed"
-              dangerouslySetInnerHTML={{ __html: about.description }}
-            />
+            {/* Specialization Description */}
+            <p className="text-[#e6d5c0]/75 text-base sm:text-lg leading-relaxed">
+              {t("Specialization")}
+            </p>
 
-            {/* Value Pills – refined */}
-            <div className="flex flex-wrap gap-3 pt-2">
+            {/* Bullet points grid */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
+              {(about?.badges && about.badges.length > 0 ? about.badges : defaultBadges).map((point, i) => (
+                <div
+                  key={i}
+                  className="group flex items-center gap-3 p-3.5 rounded-xl border border-[#c9a750]/15 bg-[#1a1712] hover:border-[#c9a750]/40 transition-all duration-300"
+                >
+                  <div className="flex-shrink-0 w-8 h-8 rounded-lg flex items-center justify-center bg-[#c9a750]/10 text-[#c9a750] group-hover:bg-[#c9a750] group-hover:text-[#171410] transition-colors">
+                    <Check className="w-4 h-4" strokeWidth={3} />
+                  </div>
+                  <span className="text-[#e6d5c0]/85 text-xs sm:text-sm font-semibold leading-snug">
+                    {point}
+                  </span>
+                </div>
+              ))}
+            </div>
+
+            {/* Value Pills */}
+            <div className="flex flex-wrap gap-2.5 pt-2">
               {values.map((v) => (
-                <span key={v} className="about-value-tag group flex items-center gap-2 px-5 py-2.5 rounded-lg border border-[#c9a750]/20 bg-[#c9a750]/5 text-[#c9a750] text-[11px] font-black tracking-[0.25em] uppercase hover:bg-[#c9a750] hover:text-[#171410] hover:border-[#c9a750] transition-all duration-400 cursor-default">
-                  <span className="w-1 h-1 rounded-full bg-current"></span>
+                <span
+                  key={v}
+                  className="px-4 py-2 rounded-xl border border-[#c9a750]/20 bg-[#c9a750]/5 text-[#c9a750] text-xs font-bold tracking-wider uppercase hover:bg-[#c9a750] hover:text-[#171410] transition-all cursor-default"
+                >
                   {v}
                 </span>
               ))}
             </div>
           </div>
 
-          {/* RIGHT: Image – stretched to match left height */}
-          <div className="hidden lg:flex about-content-right self-stretch">
-            <div className="relative w-full rounded-3xl overflow-hidden border border-[#c9a750]/20 group hover:border-[#c9a750]/50 transition-all duration-700 shadow-2xl min-h-[500px]">
-              <Image
-                src={about.image_url ?? aboutImg}
-                alt={about.alt_image || "KOIA Execution"}
-                fill
-                className="object-cover brightness-90 group-hover:scale-105 group-hover:brightness-100 transition-all duration-[2000ms]"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-[#171410] via-[#171410]/20 to-transparent opacity-70 group-hover:opacity-40 transition-opacity duration-700"></div>
+          {/* Right Column / Image Card */}
+          <div className="lg:col-span-5 about-content-right flex justify-center">
+            <div className="relative w-full max-w-[420px] rounded-[2.5rem] overflow-hidden border border-[#c9a750]/30 group hover:border-[#c9a750]/60 transition-all duration-700 shadow-[0_20px_60px_rgba(0,0,0,0.6)]">
+              <div className="relative h-[520px] w-full">
+                <Image
+                  src={about?.image_url ? cleanImageUrl(about.image_url) : doctorAboutImg}
+                  alt="Doctor Portrait"
+                  fill
+                  className="object-cover object-top brightness-95 group-hover:scale-105 transition-all duration-700"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-[#171410] via-transparent to-transparent opacity-80" />
+              </div>
+
+              <div className="absolute bottom-6 left-6 right-6 p-4 rounded-2xl bg-[#171410]/90 border border-[#c9a750]/30 backdrop-blur-md">
+                <p className="text-sm font-bold text-[#e6d5c0]">
+                  رعاية علاجية وتجميلية متكاملة
+                </p>
+                <p className="text-xs text-[#c9a750] mt-1">
+                  أعلى معايير الدقة والتعقيم والنتائج طويلة الأمد
+                </p>
+              </div>
             </div>
           </div>
         </div>
 
-        {/* ── DIVIDER ── */}
-        <div className="about-divider h-px bg-gradient-to-r from-transparent via-[#c9a750]/40 to-transparent mb-20"></div>
+        {/* Divider */}
+        <div className="about-divider h-px bg-gradient-to-r from-transparent via-[#c9a750]/30 to-transparent mb-16" />
 
-        {/* ── STATS — untouched ── */}
-        <div className="about-stats-container grid grid-cols-2 lg:grid-cols-4 gap-4 md:gap-8">
-          {statistics.map((stat, index) => (
+        {/* Stats Grid */}
+        <div className="about-stats-container grid grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
+          {defaultStats.map((stat, index) => (
             <div
               key={stat.id}
-              className="about-stat-item group relative text-center py-10 px-4 md:px-8 bg-gradient-to-br from-[#1f1b16] to-[#171410] rounded-3xl border border-[#c9a750]/10 hover:border-[#c9a750]/40 transition-all duration-500 hover:shadow-2xl hover:shadow-[#c9a750]/5 overflow-hidden"
+              className="relative text-center py-8 px-4 bg-gradient-to-br from-[#1f1b16] to-[#171410] rounded-3xl border border-[#c9a750]/15 hover:border-[#c9a750]/40 transition-all duration-500 hover:shadow-2xl overflow-hidden group"
             >
-              <span className="pointer-events-none absolute -bottom-6 -right-4 text-[9rem] font-black text-[#c9a750]/4 leading-none select-none group-hover:text-[#c9a750]/8 transition-colors">{stat.count}</span>
-
               <div className="relative z-10">
                 <div
-                  ref={(el) => { statRefs.current[index] = el; }}
+                  ref={(el) => {
+                    statRefs.current[index] = el;
+                  }}
                   data-value={stat.count}
-                  className="text-5xl md:text-6xl font-black text-transparent bg-clip-text bg-gradient-to-br from-[#c9a750] via-[#b2913c] to-[#8c6d3b] mb-4"
+                  data-suffix={stat.suffix}
+                  className="text-4xl sm:text-5xl font-black text-transparent bg-clip-text bg-gradient-to-br from-[#c9a750] via-[#b2913c] to-[#8c6d3b] mb-3"
                 >
-                  0+
+                  0{stat.suffix}
                 </div>
-                <div className="h-px w-10 bg-[#c9a750] mx-auto mb-4 group-hover:w-16 transition-all duration-500"></div>
-                <div className="text-[#e6d5c0]/60 text-xs md:text-sm font-bold uppercase tracking-widest leading-relaxed">
+                <div className="h-0.5 w-10 bg-[#c9a750] mx-auto mb-3 group-hover:w-16 transition-all duration-500" />
+                <div className="text-[#e6d5c0]/70 text-xs sm:text-sm font-bold uppercase tracking-wider">
                   {stat.title}
                 </div>
               </div>
             </div>
           ))}
         </div>
-
-        {/* ── BOTTOM DIVIDER ── */}
-        <div className="about-divider mt-20 h-px bg-gradient-to-r from-transparent via-[#c9a750]/20 to-transparent"></div>
       </div>
     </section>
-      <style jsx>{`
-        @keyframes gradient {
-          0%,
-          100% {
-            background-position: 0% 50%;
-          }
-          50% {
-            background-position: 100% 50%;
-          }
-        }
-
-        .animate-gradient {
-          background-size: 200% 200%;
-          animation: gradient 3s ease infinite;
-        }
-      `}</style>
-    </>
   );
 }
-

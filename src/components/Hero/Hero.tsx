@@ -1,24 +1,17 @@
 "use client";
 
-import { useState, useEffect } from "react";
 import Image from "next/image";
 import gsap from "gsap";
 import { ScrollSmoother } from "gsap/ScrollSmoother";
-import { useTranslations } from "next-intl";
+import { useLocale } from "next-intl";
 import { Home } from "@/types/homeApiTypes";
-import { cleanImageUrl } from "@/lib/utils";
+import doctorHeroImg from "@/assets/_DSC1018 copy.jpg.jpeg";
+import { Sparkles, Shield, Clock, Scan, Award, ChevronLeft, ChevronRight, MessageCircle } from "lucide-react";
 
 const HEADER_HEIGHT = 64;
 
-export default function HeroSection({ home }: { home: Home }) {
-  const [currentSlide, setCurrentSlide] = useState(0);
-  const t = useTranslations("home");
-  useEffect(() => {
-    const timer = setInterval(() => {
-      setCurrentSlide((prev) => (prev + 1) % home.sliders.length);
-    }, 5000);
-    return () => clearInterval(timer);
-  }, [home.sliders.length]);
+export default function HeroSection({ _home }: { _home?: Home; [key: string]: unknown }) {
+  const locale = useLocale();
 
   const handleScroll = (e: React.MouseEvent, target: string) => {
     e.preventDefault();
@@ -26,8 +19,7 @@ export default function HeroSection({ home }: { home: Home }) {
     const section = document.querySelector(target);
     if (!smoother || !section) return;
 
-    const top =
-      section.getBoundingClientRect().top + window.scrollY - HEADER_HEIGHT;
+    const top = section.getBoundingClientRect().top + window.scrollY - HEADER_HEIGHT;
     const scrollProxy = { y: smoother.scrollTop() };
 
     gsap.to(scrollProxy, {
@@ -40,187 +32,129 @@ export default function HeroSection({ home }: { home: Home }) {
     });
   };
 
+  const isAr = locale === "ar";
+  const ArrowIcon = isAr ? ChevronLeft : ChevronRight;
+
   return (
     <section
-      className="relative flex flex-col py-20 min-h-[100svh] xl:h-screen w-full overflow-hidden"
+      className="relative flex flex-col justify-center min-h-[100svh] w-full pt-28 pb-16 px-6 md:px-12 lg:px-20 overflow-hidden bg-gradient-to-b from-[#13110d] via-[#1a1612] to-[#171410]"
       id="home"
     >
-      {/* Animated Background Slider */}
-      <div className="absolute inset-0">
-        {home.sliders.map((slider, index) => (
-          <div
-            key={slider.id}
-            className={`absolute inset-0 transition-all duration-1000 ease-in-out ${
-              index === currentSlide
-                ? "opacity-100 scale-100"
-                : "opacity-0 scale-105"
-            }`}
-          >
-            <div className="absolute inset-0 bg-gradient-to-br from-[var(--color-dark-ui)]/75 via-[var(--color-dark-ui)]/85 to-[var(--color-dark-secondary)]/75 z-10" />
-            <Image
-              src={cleanImageUrl(slider.image_url)}
-              alt={slider.alt_image || slider.title}
-              width={1920}
-              height={1080}
-              className="w-full h-full object-cover"
-            />
-          </div>
-        ))}
-      </div>
+      {/* Background ambient lighting */}
+      <div className="absolute top-1/4 -right-20 w-[500px] h-[500px] bg-[#c9a750]/10 rounded-full blur-[150px] pointer-events-none" />
+      <div className="absolute bottom-10 -left-20 w-[400px] h-[400px] bg-[#b2913c]/10 rounded-full blur-[130px] pointer-events-none" />
 
-      {/* Content Container */}
-      <div className="relative z-30 flex-1 flex items-center w-full">
-        <div className="container mx-auto px-6 md:px-12 lg:px-20">
-          <div className="max-w-4xl">
-            {/* Main Heading */}
-            <h1 className="text-[clamp(2.4rem,6vw,6rem)] font-bold mb-6 animate-fade-in-up-delay-1 opacity-0">
-              <span className="block text-[var(--color-text-secondary)] leading-tight mb-2">
-                {t("Make Your")}
+      <div className="container max-w-7xl mx-auto relative z-10">
+        <div className="grid lg:grid-cols-12 gap-12 lg:gap-8 items-center">
+          {/* Left / Info Column */}
+          <div className="lg:col-span-7 flex flex-col items-start text-start">
+            {/* Top Credential Badge */}
+            <div className="inline-flex items-center gap-2.5 px-4 py-2 rounded-full border border-[#c9a750]/30 bg-[#c9a750]/10 text-[#c9a750] text-xs font-bold tracking-wider mb-6 animate-fade-in-up">
+              <Award className="w-4 h-4 text-[#c9a750]" />
+              <span>دكتوراه في العلاج التحفظي وتجميل الأسنان</span>
+            </div>
+
+            {/* Main Headline */}
+            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-[#e6d5c0] leading-[1.15] mb-6 tracking-tight">
+              <span className="block text-[#e6d5c0]">
+                {isAr ? "فن الحفاظ على ابتسامتك الطبيعية" : "Preserving Your Natural Smile"}
               </span>
-              <span className="block bg-gradient-to-r from-[var(--color-primary-bg)] via-[var(--color-secondary-gold)] to-[var(--color-accent-bronze)] bg-clip-text text-transparent leading-tight">
-                {t("Commercial Space")}
-              </span>
-              <span className="block text-[var(--color-text-secondary)] leading-tight">
-                {t("Stand Out")}
+              <span className="block text-transparent bg-clip-text bg-gradient-to-r from-[#c9a750] via-[#d4b568] to-[#8c6d3b] mt-2">
+                {isAr ? "بأعلى دقة ميكرونية وعناية فردية" : "With Micron Precision & Dedicated Care"}
               </span>
             </h1>
 
             {/* Description */}
-            <div
-              className="text-lg md:text-xl text-[var(--color-text-secondary)]/80 mb-5 xl:mb-10 max-w-2xl leading-relaxed animate-fade-in-up-delay-2 opacity-0"
-              dangerouslySetInnerHTML={{ __html: home.description }}
-            />
+            <p className="text-base sm:text-lg text-[#e6d5c0]/75 max-w-2xl leading-relaxed mb-8">
+              {isAr
+                ? "نؤمن بأن أفضل سن هو سنك الطبيعي. نطبق بروتوكول العلاج التحفظي الدقيق مع العزل المطاطي الكامل وحماية العصب، ونخصص ساعة كاملة لكل مريض لضمان أقصى مستويات الراحة والجودة."
+                : "We believe your natural tooth is irreplaceable. Applying meticulous conservative dentistry with full rubber dam isolation, pulp protection, and dedicating a full hour per patient for unmatched quality."}
+            </p>
 
-            {/* CTA Button */}
-            <div className="flex flex-wrap gap-4 animate-fade-in-up-delay-3 opacity-0">
-              <button
-                suppressHydrationWarning
-                onClick={(e) => handleScroll(e, "#projects")}
-                className="group cursor-pointer relative px-10 py-4 bg-gradient-to-r from-[var(--color-primary-bg)] to-[var(--color-secondary-gold)] rounded-md overflow-hidden transition-all duration-300 hover:scale-105"
-              >
-                <span className="relative z-10 text-[var(--color-dark-secondary)] font-semibold text-xl tracking-wide flex items-center gap-2">
-                  {t("View Projects")}
-                </span>
-                <div className="absolute inset-0 bg-gradient-to-r from-[var(--color-secondary-gold)] to-[var(--color-accent-bronze)] opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-              </button>
+            {/* Key Quality Pillars / Badges */}
+            <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 w-full mb-8">
+              <div className="p-3 rounded-2xl bg-[#1f1b16] border border-[#c9a750]/15 flex items-center gap-2.5">
+                <Shield className="w-5 h-5 text-[#c9a750] flex-shrink-0" />
+                <span className="text-xs font-semibold text-[#e6d5c0]/90">عزل Rubber Dam</span>
+              </div>
+              <div className="p-3 rounded-2xl bg-[#1f1b16] border border-[#c9a750]/15 flex items-center gap-2.5">
+                <Clock className="w-5 h-5 text-[#c9a750] flex-shrink-0" />
+                <span className="text-xs font-semibold text-[#e6d5c0]/90">ساعة لكل مريض</span>
+              </div>
+              <div className="p-3 rounded-2xl bg-[#1f1b16] border border-[#c9a750]/15 flex items-center gap-2.5">
+                <Scan className="w-5 h-5 text-[#c9a750] flex-shrink-0" />
+                <span className="text-xs font-semibold text-[#e6d5c0]/90">ماسح رقمي 3D</span>
+              </div>
+              <div className="p-3 rounded-2xl bg-[#1f1b16] border border-[#c9a750]/15 flex items-center gap-2.5">
+                <Sparkles className="w-5 h-5 text-[#c9a750] flex-shrink-0" />
+                <span className="text-xs font-semibold text-[#e6d5c0]/90">حشو تجميلي دقيق</span>
+              </div>
             </div>
 
-            {/* Slide Indicators */}
-            <div className="flex gap-2 mt-8 xl:mt-12 animate-fade-in-up-delay-4 opacity-0">
-              {home.sliders.map((_, index) => (
-                <button
-                  key={index}
-                  suppressHydrationWarning
-                  onClick={() => setCurrentSlide(index)}
-                  className="group relative cursor-pointer h-1 w-12 bg-[var(--color-text-secondary)]/20 rounded-full overflow-hidden transition-all duration-300 hover:bg-[var(--color-text-secondary)]/30"
-                >
-                  <div
-                    className={`absolute inset-0 bg-gradient-to-r from-[var(--color-primary-bg)] to-[var(--color-secondary-gold)] transition-all duration-300 ${
-                      index === currentSlide ? "w-full" : "w-0"
-                    }`}
-                  />
-                </button>
-              ))}
+            {/* CTA Action Buttons */}
+            <div className="flex flex-wrap items-center gap-4 w-full sm:w-auto">
+              <button
+                suppressHydrationWarning
+                onClick={(e) => handleScroll(e, "#contact-us")}
+                className="group relative cursor-pointer px-8 py-4 bg-gradient-to-r from-[#c9a750] via-[#b2913c] to-[#8c6d3b] rounded-2xl overflow-hidden transition-all duration-300 hover:scale-105 shadow-[0_0_30px_rgba(201,167,80,0.25)] flex items-center gap-3"
+              >
+                <span className="relative z-10 text-[#171410] font-bold text-base tracking-wide">
+                  احجز استشارتك الخاصة
+                </span>
+                <ArrowIcon className="w-5 h-5 text-[#171410] group-hover:translate-x-1 transition-transform" />
+              </button>
+
+              <a
+                href="https://wa.me/201000000000?text=%D9%85%D8%B1%D8%AD%D8%A8%D8%A7%D9%8B%20%D8%AF%D9%83%D8%AA%D9%88%D8%B1%D8%8C%20%D8%A3%D9%88%D8%AF%20%D8%A7%D9%84%D8%A7%D8%B3%D8%AA%D9%81%D8%B3%D8%A7%D8%B1%20%D9%88%D8%AD%D8%AC%D8%B2%20%D9%85%D9%88%D8%B9%D8%AF%20%D9%81%D9%8A%20%D8%A7%D9%84%D8%B9%D9%8A%D8%A7%D8%AF%D8%A9."
+                target="_blank"
+                rel="noopener noreferrer"
+                className="px-6 py-4 rounded-2xl bg-[#1f1b16] border border-[#c9a750]/30 hover:border-[#c9a750] text-[#e6d5c0] font-semibold text-sm transition-all duration-300 flex items-center gap-2.5 hover:bg-[#c9a750]/10"
+              >
+                <MessageCircle className="w-5 h-5 text-[#25D366]" />
+                <span>تواصل واتساب</span>
+              </a>
+            </div>
+          </div>
+
+          {/* Right / Doctor Portrait Column */}
+          <div className="lg:col-span-5 relative flex justify-center">
+            {/* Aura glow behind card */}
+            <div className="absolute inset-0 bg-gradient-to-tr from-[#c9a750]/20 to-transparent rounded-[2.5rem] filter blur-2xl transform scale-95" />
+
+            <div className="relative w-full max-w-[420px] rounded-[2.5rem] overflow-hidden border-2 border-[#c9a750]/40 bg-gradient-to-b from-[#1f1b16] to-[#171410] shadow-[0_20px_60px_rgba(0,0,0,0.6)] group">
+              {/* Doctor Image */}
+              <div className="relative h-[480px] sm:h-[540px] w-full overflow-hidden">
+                <Image
+                  src={doctorHeroImg}
+                  alt="Doctor Portrait - Conservative & Cosmetic Dentistry"
+                  fill
+                  priority
+                  className="object-cover object-top filter brightness-[0.98] contrast-[1.03] transition-transform duration-700 group-hover:scale-105"
+                />
+                {/* Bottom gradient fade */}
+                <div className="absolute inset-0 bg-gradient-to-t from-[#171410] via-[#171410]/20 to-transparent" />
+              </div>
+
+              {/* Floating Profile Badge */}
+              <div className="absolute bottom-6 left-6 right-6 p-5 rounded-2xl bg-[#171410]/90 border border-[#c9a750]/30 backdrop-blur-md shadow-2xl">
+                <div className="flex items-center justify-between mb-1">
+                  <h3 className="text-lg font-bold text-[#e6d5c0]">
+                    عيادة العلاج التحفظي وتجميل الأسنان
+                  </h3>
+                  <span className="w-2.5 h-2.5 rounded-full bg-[#25D366] animate-pulse" />
+                </div>
+                <p className="text-xs text-[#c9a750] font-semibold mb-2">
+                  دكتوراه العلاج التحفظي • الإسكندرية (سبورتنج)
+                </p>
+                <div className="flex items-center justify-between text-[11px] text-[#e6d5c0]/70 pt-2 border-t border-[#c9a750]/15">
+                  <span>جلسات مخصصة بمواعيد مسبقة</span>
+                  <span className="font-bold text-[#c9a750]">١ - ٤ مرضى يومياً</span>
+                </div>
+              </div>
             </div>
           </div>
         </div>
       </div>
-
-      <style jsx>{`
-        @import url("https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Inter:wght@400;500;600;700&display=swap");
-
-        section {
-          font-family: "Inter", sans-serif;
-        }
-
-        h1 {
-          font-family: "Playfair Display", serif;
-          font-weight: 900;
-        }
-
-        @keyframes fade-in-up {
-          from {
-            opacity: 0;
-            transform: translateY(30px);
-          }
-          to {
-            opacity: 1;
-            transform: translateY(0);
-          }
-        }
-
-        @keyframes pulse-slow {
-          0%,
-          100% {
-            opacity: 0.3;
-          }
-          50% {
-            opacity: 0.5;
-          }
-        }
-
-        @keyframes pulse-slower {
-          0%,
-          100% {
-            opacity: 0.2;
-          }
-          50% {
-            opacity: 0.4;
-          }
-        }
-
-        @keyframes bounce-slow {
-          0%,
-          100% {
-            transform: translateY(0);
-          }
-          50% {
-            transform: translateY(-10px);
-          }
-        }
-
-        .animate-fade-in-up {
-          opacity: 0;
-          animation: fade-in-up 0.8s ease-out forwards;
-          animation-fill-mode: both;
-        }
-
-        .animate-fade-in-up-delay-1 {
-          opacity: 0;
-          animation: fade-in-up 0.8s ease-out 0.2s forwards;
-          animation-fill-mode: both;
-        }
-
-        .animate-fade-in-up-delay-2 {
-          opacity: 0;
-          animation: fade-in-up 0.8s ease-out 0.4s forwards;
-          animation-fill-mode: both;
-        }
-
-        .animate-fade-in-up-delay-3 {
-          opacity: 0;
-          animation: fade-in-up 0.8s ease-out 0.6s forwards;
-          animation-fill-mode: both;
-        }
-
-        .animate-fade-in-up-delay-4 {
-          opacity: 0;
-          animation: fade-in-up 0.8s ease-out 0.8s forwards;
-          animation-fill-mode: both;
-        }
-
-        .animate-pulse-slow {
-          animation: pulse-slow 4s ease-in-out infinite;
-        }
-
-        .animate-pulse-slower {
-          animation: pulse-slower 5s ease-in-out infinite;
-        }
-
-        .animate-bounce-slow {
-          animation: bounce-slow 2s ease-in-out infinite;
-        }
-      `}</style>
     </section>
   );
 }

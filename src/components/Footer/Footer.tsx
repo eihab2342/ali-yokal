@@ -15,7 +15,6 @@ import {
   Github, 
   Globe, 
   Mail, 
-  MessageCircle, 
   Send,
   Link as LinkIcon,
   Phone,

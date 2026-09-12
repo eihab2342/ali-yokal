@@ -219,7 +219,7 @@ export default function KoiaContactSection({ contact }: { contact: Contact }) {
         </svg>
       ),
       title: t("Phone-Label"),
-      value: contact.phone,
+      value: contact?.phone || "+20 100 000 0000",
     },
     {
       icon: (
@@ -238,7 +238,7 @@ export default function KoiaContactSection({ contact }: { contact: Contact }) {
         </svg>
       ),
       title: t("Email-Label"),
-      value: contact.email,
+      value: contact?.email || "info@cosmetic-dentistry.com",
     },
     {
       icon: (
@@ -263,7 +263,7 @@ export default function KoiaContactSection({ contact }: { contact: Contact }) {
         </svg>
       ),
       title: t("Location-Label"),
-      value: contact.address,
+      value: contact?.address || (locale === "ar" ? "الإسكندرية - منطقة سبورتنج (بالقرب من نادي سبورتنج وجامعة الإسكندرية)" : "Alexandria - Sporting Area (Near Sporting Club & Alexandria University)"),
     },
   ];
 

@@ -5,14 +5,18 @@ export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs))
 }
 
-const PREFIX = ["https://koia-eg.com/dashboard/uploads/sliders/", "https://koia-eg.com/dashboard/uploads/services/", "https://koia-eg.com/dashboard/uploads/projects/"];
+export const cleanImageUrl = (url?: string | null): string => {
+  if (!url) return "";
 
-export const cleanImageUrl = (url: string) => {
+  // If the URL contains an embedded absolute URL (e.g. http://127.0.0.1:8000/uploads/services/https://img.freepik.com/...)
+  const lastHttpsIndex = url.lastIndexOf("https://");
+  if (lastHttpsIndex > 0) {
+    return url.substring(lastHttpsIndex);
+  }
 
-  for (let i = 0; i < PREFIX.length; i++) {
-    if (url.includes(PREFIX[i])) {
-      return url.replace(PREFIX[i], "");
-    }
+  const lastHttpIndex = url.lastIndexOf("http://");
+  if (lastHttpIndex > 0) {
+    return url.substring(lastHttpIndex);
   }
 
   return url;

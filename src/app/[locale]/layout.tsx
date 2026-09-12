@@ -17,9 +17,9 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: " KOIA - Constructions & Interior Finishing",
+  title: "عيادة دكتوراه العلاج التحفظي وتجميل الأسنان | دقة ميكرونية وعناية فردية",
   description:
-    " KOIA is a leading construction and interior finishing company specializing in high-end commercial spaces. With a commitment to quality and innovation, we transform ordinary spaces into extraordinary environments that inspire and captivate. Our team of experts delivers exceptional craftsmanship and attention to detail, ensuring every project exceeds expectations. From concept to completion, K.O.L.A is your trusted partner for creating stunning commercial interiors that leave a lasting impression.",
+    "عيادة متخصصة في العلاج التحفظي وتجميل الأسنان بالإسكندرية. حشوات تجميلية متقدمة، فينيرز، تبييض، علاج جذور وتركيبات وزراعة بأحدث التقنيات الرقمية والمسح ثلاثي الأبعاد 3D Intra-Oral Scanner.",
 };
 
 export default async function Layout({
