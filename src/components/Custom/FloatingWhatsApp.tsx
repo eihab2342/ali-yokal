@@ -2,8 +2,12 @@
 
 import { MessageCircle } from "lucide-react";
 
-export default function FloatingWhatsApp() {
-  const whatsappNumber = "201000000000"; // fallback or can be customized
+export default function FloatingWhatsApp({ whatsappNumber }: { whatsappNumber?: string }) {
+  // Normalize number (remove +, spaces, dashes)
+  const cleanNumber = whatsappNumber
+    ? whatsappNumber.replace(/[^0-9]/g, "")
+    : "201000000000";
+  const targetNumber = cleanNumber.startsWith("0") ? `2${cleanNumber}` : cleanNumber;
   const defaultMessage = encodeURIComponent("مرحباً دكتور، أود الاستفسار وحجز موعد كشف واستشارة في العيادة.");
 
   return (
@@ -15,7 +19,7 @@ export default function FloatingWhatsApp() {
 
       {/* Button */}
       <a
-        href={`https://wa.me/${whatsappNumber}?text=${defaultMessage}`}
+        href={`https://wa.me/${targetNumber}?text=${defaultMessage}`}
         target="_blank"
         rel="noopener noreferrer"
         aria-label="Chat on WhatsApp"

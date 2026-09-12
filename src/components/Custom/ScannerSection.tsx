@@ -3,8 +3,15 @@
 import { Scan, ShieldCheck, Zap, Smile, CheckCircle2 } from "lucide-react";
 import Image from "next/image";
 
-export default function ScannerSection() {
-  const features = [
+import { ScannerTechnologySectionData } from "@/types/homeApiTypes";
+import { cleanImageUrl } from "@/lib/utils";
+
+export default function ScannerSection({
+  scannerSection,
+}: {
+  scannerSection?: ScannerTechnologySectionData;
+}) {
+  const defaultFeatures = [
     {
       icon: Smile,
       title: "وداعاً للمقاسات المعجونية المزعجة",
@@ -27,6 +34,21 @@ export default function ScannerSection() {
     },
   ];
 
+  const icons = [Smile, Zap, ShieldCheck, Scan];
+
+  const featuresToDisplay = scannerSection?.features && scannerSection.features.length > 0
+    ? scannerSection.features.map((f, idx) => ({
+        icon: icons[idx % icons.length],
+        title: f.title,
+        description: f.description,
+      }))
+    : defaultFeatures;
+
+  const headerLabel = scannerSection?.label || "التكنولوجيا الرقمية في خدمتكم";
+  const headerTitle = scannerSection?.title || "الماسح الفموي الرقمي 3D Scanner";
+  const headerDesc = scannerSection?.description || scannerSection?.subtitle || "نستثمر في أحدث الأجهزة والتقنيات الطبية لنضمن لك تجربة علاجية استثنائية تجمع بين الراحة التامة وأعلى معايير الدقة العلمية.";
+  const sectionImage = scannerSection?.image ? cleanImageUrl(scannerSection.image) : "https://images.unsplash.com/photo-1629909613654-28e377c37b09?auto=format&fit=crop&w=800&q=80";
+
   return (
     <section id="technology" className="relative py-24 px-6 md:px-12 lg:px-20 overflow-hidden">
       {/* Background glow */}
@@ -37,13 +59,13 @@ export default function ScannerSection() {
         <div className="text-center mb-16">
           <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-[#52b788]/40 bg-[#2d6a4f]/20 text-[#52b788] text-xs font-bold tracking-[0.25em] uppercase mb-4 shadow-[0_0_15px_rgba(82,183,136,0.15)]">
             <Scan className="w-3.5 h-3.5" />
-            <span>التكنولوجيا الرقمية في خدمتكم</span>
+            <span>{headerLabel}</span>
           </div>
           <h2 className="text-4xl md:text-6xl font-bold text-[#f8fafc] leading-tight">
-            الماسح الفموي الرقمي <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#52b788] via-[#74c69d] to-[#40916c]">3D Scanner</span>
+            {headerTitle}
           </h2>
           <p className="text-[#cbd5e1] max-w-2xl mx-auto mt-4 text-base md:text-lg">
-            نستثمر في أحدث الأجهزة والتقنيات الطبية لنضمن لك تجربة علاجية استثنائية تجمع بين الراحة التامة وأعلى معايير الدقة العلمية.
+            {headerDesc}
           </p>
         </div>
 
@@ -51,7 +73,7 @@ export default function ScannerSection() {
         <div className="grid lg:grid-cols-12 gap-12 items-center">
           {/* Left Cards */}
           <div className="lg:col-span-7 grid sm:grid-cols-2 gap-6">
-            {features.map((item, idx) => {
+            {featuresToDisplay.map((item, idx) => {
               const Icon = item.icon;
               return (
                 <div
@@ -83,7 +105,7 @@ export default function ScannerSection() {
             <div className="relative rounded-3xl overflow-hidden border border-[#52b788]/30 bg-gradient-to-br from-[#141f1b] to-[#0c1311] p-8 shadow-2xl">
               <div className="relative h-[260px] rounded-2xl overflow-hidden mb-6 border border-[#52b788]/20">
                 <Image
-                  src="https://images.unsplash.com/photo-1629909613654-28e377c37b09?auto=format&fit=crop&w=800&q=80"
+                  src={sectionImage}
                   alt="Intra-Oral 3D Scanner"
                   fill
                   className="object-cover hover:scale-105 transition-transform duration-700"

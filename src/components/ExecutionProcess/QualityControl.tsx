@@ -1,10 +1,16 @@
 "use client";
 
-import { Section } from "@/types/homeApiTypes";
+import { Section, QualityControlItem } from "@/types/homeApiTypes";
 import { useTranslations } from "next-intl";
 import { ShieldCheck } from "lucide-react";
 
-export default function QualityControl({ sections }: { sections: Section }) {
+export default function QualityControl({
+  sections,
+  qualityControl,
+}: {
+  sections?: Section;
+  qualityControl?: QualityControlItem[];
+}) {
   const t = useTranslations("home");
 
   const iconList = [
@@ -44,7 +50,7 @@ export default function QualityControl({ sections }: { sections: Section }) {
     { id: 4, title: t("QC-Step-04-Title") || "فحص الإطباق الدقيق والملمس الطبيعي", description: t("QC-Step-04-Desc") || "صقل وتلميع مجهري للأسنان لضمان الراحة التامة ومحاكاة مظهر السن الأصلي." },
   ];
 
-  const backendItems = sections?.quality_control?.[0]?.items;
+  const backendItems = qualityControl || sections?.quality_control?.[0]?.items;
   const isOldContractingData = backendItems?.some((item) =>
     item.title?.includes("المواد") ||
     item.title?.includes("الموقع") ||

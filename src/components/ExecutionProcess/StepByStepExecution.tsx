@@ -1,12 +1,18 @@
 "use client";
 
-import { Section } from "@/types/homeApiTypes";
+import { Section, StepExecutionItem } from "@/types/homeApiTypes";
 import { useLocale, useTranslations } from "next-intl";
 import { ShieldCheck } from "lucide-react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { EffectCoverflow, Pagination } from "swiper/modules";
 
-export default function StepByStepExecution({ sections }: { sections: Section }) {
+export default function StepByStepExecution({
+  sections,
+  stepByStep,
+}: {
+  sections?: Section;
+  stepByStep?: StepExecutionItem[];
+}) {
   const t = useTranslations("home");
   const locale = useLocale();
   const isRtl = locale === "ar";
@@ -45,7 +51,7 @@ export default function StepByStepExecution({ sections }: { sections: Section })
     { id: 4, title: t("Execution-Step-4") || "المسح ثلاثي الأبعاد والتسليم النهائي" },
   ];
 
-  const backendItems = sections?.step_by_step?.[0]?.items;
+  const backendItems = stepByStep || sections?.step_by_step?.[0]?.items;
   const isOldContractingData = backendItems?.some((item) =>
     item.title?.includes("النطاق") ||
     item.title?.includes("التصميم") ||

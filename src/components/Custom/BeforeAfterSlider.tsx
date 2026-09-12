@@ -47,25 +47,38 @@ const defaultCases: BeforeAfterItem[] = [
   },
 ];
 
-export default function BeforeAfterSection({ projects }: { projects?: Project[] }) {
+export default function BeforeAfterSection({
+  cases,
+  projects,
+}: {
+  cases?: Project[];
+  projects?: Project[];
+}) {
   const [sliderPosition, setSliderPosition] = useState(50);
   const [activeCase, setActiveCase] = useState(0);
   const [isDragging, setIsDragging] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
 
-  const apiCases: BeforeAfterItem[] = (projects || [])
-    .filter((p) => p.images && p.images.length >= 1)
-    .map((p, idx) => ({
-      id: p.id || idx + 1,
-      title: p.name,
-      subtitle: p.type || "حالة علاجية تخصصية",
-      beforeImg: cleanImageUrl(p.images[0]?.image_url || p.thumbnail_url),
-      afterImg: cleanImageUrl(p.images[1]?.image_url || p.thumbnail_url),
-      description: p.short_desc || p.long_desc || "",
-      tag: p.type || "تجميل الأسنان",
-    }));
+  const rawList = cases && cases.length > 0 ? cases : projects || [];
 
-  const isOldContracting = projects?.some((p) =>
+  const apiCases: BeforeAfterItem[] = rawList
+    .map((p, idx) => {
+      const before = p.before_image_url || p.before_image || (p.images && p.images[0]?.image_url) || p.thumbnail_url;
+      const after = p.after_image_url || p.after_image || (p.images && p.images[1]?.image_url) || (p.images && p.images[0]?.image_url) || p.thumbnail_url;
+
+      return {
+        id: p.id || idx + 1,
+        title: p.name || p.title || "حالة تجميلية",
+        subtitle: p.subtitle || p.type || p.category || "حالة علاجية تخصصية",
+        beforeImg: cleanImageUrl(before),
+        afterImg: cleanImageUrl(after),
+        description: p.short_desc || p.description || p.long_desc || "",
+        tag: p.tag || p.type || p.category || "علاج تحفظي وتجميل",
+      };
+    })
+    .filter((c) => Boolean(c.beforeImg) && Boolean(c.afterImg));
+
+  const isOldContracting = rawList.some((p) =>
     p.name?.includes("Be group") ||
     p.name?.includes("شقة سكنية") ||
     p.name?.includes("مكتب إداري") ||

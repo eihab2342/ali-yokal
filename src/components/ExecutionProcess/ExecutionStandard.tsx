@@ -1,12 +1,18 @@
 "use client";
 
 import { useTranslations } from "next-intl";
-import { Section } from "@/types/homeApiTypes";
+import { Section, StandardItem } from "@/types/homeApiTypes";
 import { ShieldCheck } from "lucide-react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { EffectCoverflow, Pagination } from "swiper/modules";
 
-export default function ExecutionStandard({ sections }: { sections: Section }) {
+export default function ExecutionStandard({
+  sections,
+  standards,
+}: {
+  sections?: Section;
+  standards?: StandardItem[];
+}) {
   const t = useTranslations("home");
 
   const iconList = [
@@ -53,7 +59,7 @@ export default function ExecutionStandard({ sections }: { sections: Section }) {
     { id: 5, title: t("Std-Step-05-Title") || "المتابعة والضمان طويل الأمد", description: t("Std-Step-05-Desc") || "جلسات مراجعة للتأكد من راحة الإطباق واستقرار الحشوات والتركيبات وصحة اللثة." },
   ];
 
-  const backendItems = sections?.standards?.[0]?.items;
+  const backendItems = standards || sections?.standards?.[0]?.items;
   const isOldContractingData = backendItems?.some((item) =>
     item.title?.includes("الموقع") ||
     item.title?.includes("الميزانية") ||

@@ -6,27 +6,39 @@ import { useGSAP } from "@gsap/react";
 import gsap from "gsap/all";
 import doctorAboutImg from "@/assets/_DSC8629 copy.JPG.jpeg";
 import { useTranslations } from "next-intl";
-import { About, Statistic } from "@/types/homeApiTypes";
+import { About, AboutSectionData, Statistic } from "@/types/homeApiTypes";
 import { Check } from "lucide-react";
 import { cleanImageUrl } from "@/lib/utils";
 
-export default function AboutSection({ about, statistics }: { about: About; statistics: Statistic[] }) {
+export default function AboutSection({
+  aboutSection,
+  about,
+  statistics,
+}: {
+  aboutSection?: AboutSectionData;
+  about?: About;
+  statistics?: Statistic[];
+}) {
   const sectionRef = useRef<HTMLElement>(null);
   const statRefs = useRef<(HTMLDivElement | null)[]>([]);
   const t = useTranslations("home");
 
-  const defaultBadges = [
-    "دكتوراه في العلاج التحفظي وتجميل الأسنان",
-    "تخصيص ساعة كاملة لكل مريض لضمان أعلى دقة",
-    "تطبيق بروتوكول العزل الكامل Rubber Dam في كل جلسة",
-    "استخدام أحدث ماسح رقمي 3D Scanner بدون مقاسات مزعجة",
-    "إنقاذ وحماية العصب الطبيعي في حالات التسوس العميق",
-    "خدمة معتمدة لمرتادي نادي سبورتنج وطلبة الجامعة ونقابة المهن الطبية",
-  ];
+  const badgesList = aboutSection?.features && aboutSection.features.length > 0
+    ? aboutSection.features
+    : about?.badges && about.badges.length > 0
+    ? about.badges
+    : [
+        "دكتوراه في العلاج التحفظي وتجميل الأسنان",
+        "تخصيص ساعة كاملة لكل مريض لضمان أعلى دقة",
+        "تطبيق بروتوكول العزل الكامل Rubber Dam في كل جلسة",
+        "استخدام أحدث ماسح رقمي 3D Scanner بدون مقاسات مزعجة",
+        "إنقاذ وحماية العصب الطبيعي في حالات التسوس العميق",
+        "خدمة معتمدة لمرتادي نادي سبورتنج وطلبة الجامعة ونقابة المهن الطبية",
+      ];
 
   const defaultStats = [
-    { id: 1, title: t("Projects Delivered") || "حالة تجميلية ناجحة", count: 250 },
-    { id: 2, title: t("Collaborations") || "سنوات خبرة وتميز", count: 4 },
+    { id: 1, title: t("Projects Delivered") || "حالة تجميلية ناجحة", count: aboutSection?.satisfied_cases_count || 250 },
+    { id: 2, title: t("Collaborations") || "سنوات خبرة وتميز", count: aboutSection?.experience_years || 12 },
     { id: 3, title: t("Business Clients Reached") || "ساعة رعاية مخصصة", count: 60 },
     { id: 4, title: t("Projects Per Year") || "مرضى يومياً كحد أقصى", count: 4 },
   ];
@@ -119,15 +131,19 @@ export default function AboutSection({ about, statistics }: { about: About; stat
         <div className="about-header text-center mb-16">
           <div className="inline-block mb-4">
             <span className="text-[#52b788] text-xs font-bold tracking-[0.5em] uppercase">
-              {t("About")}
+              {aboutSection?.label || t("About")}
             </span>
             <div className="about-header-line h-0.5 w-full bg-gradient-to-r from-transparent via-[#52b788] to-transparent mt-2" />
           </div>
           <h2 className="text-4xl sm:text-6xl lg:text-7xl font-bold text-[#f8fafc] leading-tight">
-            فلسفة العيادة{" "}
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#52b788] via-[#74c69d] to-[#40916c]">
-              والعلاج التحفظي
-            </span>
+            {aboutSection?.title || (
+              <>
+                فلسفة العيادة{" "}
+                <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#52b788] via-[#74c69d] to-[#40916c]">
+                  والعلاج التحفظي
+                </span>
+              </>
+            )}
           </h2>
         </div>
 
@@ -138,18 +154,18 @@ export default function AboutSection({ about, statistics }: { about: About; stat
             {/* Mindset Quote Box */}
             <div className="relative p-6 rounded-2xl bg-gradient-to-r from-[#52b788]/15 via-[#141f1b] to-[#141f1b] border-r-4 border-[#52b788]">
               <p className="text-[#52b788] text-lg sm:text-xl font-bold leading-relaxed">
-                &ldquo;{t("Mindset Quote")}&rdquo;
+                &ldquo;{aboutSection?.description_1 || t("Mindset Quote")}&rdquo;
               </p>
             </div>
 
             {/* Specialization Description */}
             <p className="text-[#cbd5e1] text-base sm:text-lg leading-relaxed">
-              {t("Specialization")}
+              {aboutSection?.description_2 || about?.description || t("Specialization")}
             </p>
 
             {/* Bullet points grid */}
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
-              {(about?.badges && about.badges.length > 0 ? about.badges : defaultBadges).map((point, i) => (
+              {badgesList.map((point, i) => (
                 <div
                   key={i}
                   className="group flex items-center gap-3 p-3.5 rounded-xl border border-[#52b788]/20 bg-[#141f1b] hover:border-[#52b788]/50 transition-all duration-300"
@@ -182,7 +198,7 @@ export default function AboutSection({ about, statistics }: { about: About; stat
             <div className="relative w-full max-w-[420px] rounded-[2.5rem] overflow-hidden border border-[#52b788]/30 group hover:border-[#52b788]/60 transition-all duration-700 shadow-[0_20px_60px_rgba(0,0,0,0.6)]">
               <div className="relative h-[520px] w-full">
                 <Image
-                  src={about?.image_url ? cleanImageUrl(about.image_url) : doctorAboutImg}
+                  src={aboutSection?.doctor_image ? cleanImageUrl(aboutSection.doctor_image) : about?.image_url ? cleanImageUrl(about.image_url) : doctorAboutImg}
                   alt="Doctor Portrait"
                   fill
                   className="object-cover object-top brightness-95 group-hover:scale-105 transition-all duration-700"

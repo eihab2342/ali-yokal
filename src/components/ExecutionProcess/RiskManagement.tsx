@@ -1,10 +1,16 @@
 "use client";
 
-import { Section } from "@/types/homeApiTypes";
+import { Section, RiskPreventionItem } from "@/types/homeApiTypes";
 import { useTranslations } from "next-intl";
 import { ShieldCheck } from "lucide-react";
 
-export default function RiskManagement({ sections }: { sections: Section }) {
+export default function RiskManagement({
+  sections,
+  riskPrevention,
+}: {
+  sections?: Section;
+  riskPrevention?: RiskPreventionItem[];
+}) {
   const t = useTranslations("home");
 
   const iconList = [
@@ -43,7 +49,7 @@ export default function RiskManagement({ sections }: { sections: Section }) {
     { id: 4, title: t("Risk-Step-04-Title") || "مواعيد محددة بدقة وراحة تامة بدون انتظار", description: "" },
   ];
 
-  const backendItems = sections?.project_risks?.[0]?.items;
+  const backendItems = riskPrevention || sections?.project_risks?.[0]?.items;
   const isOldContractingData = backendItems?.some((item) =>
     item.title?.includes("الموقع") ||
     item.title?.includes("الميزانية") ||

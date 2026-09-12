@@ -13,16 +13,19 @@ import { useGSAP } from "@gsap/react";
 import { useLocale, useTranslations } from "next-intl";
 import { cleanImageUrl } from "@/lib/utils";
 
+import { ClinicInfo } from "@/types/homeApiTypes";
+
 gsap.registerPlugin(ScrollTrigger);
 
 interface HeaderProps {
   type?: "drawer" | "popup";
   logoSrc?: string | null;
+  clinicInfo?: ClinicInfo;
 }
 
 const HEADER_HEIGHT = 64;
 
-export default function Header({ type = "popup", logoSrc }: HeaderProps) {
+export default function Header({ type = "popup", logoSrc, clinicInfo }: HeaderProps) {
   const headerRef = useRef<HTMLElement>(null);
   const logoRef = useRef<HTMLAnchorElement>(null);
   const navRef = useRef<HTMLDivElement>(null);
@@ -122,7 +125,7 @@ export default function Header({ type = "popup", logoSrc }: HeaderProps) {
           <div className="bg-white/95 px-3 py-1.5 rounded-2xl shadow-[0_0_20px_rgba(82,183,136,0.3)] flex items-center justify-center">
             <Image
               src={logoSrc ? cleanImageUrl(logoSrc) : staticLogo}
-              alt="Ali Yakout Dental Clinic"
+              alt={clinicInfo?.name || "Ali Yakout Dental Clinic"}
               width={140}
               height={45}
               className="h-7 sm:h-9 w-auto object-contain cursor-pointer"

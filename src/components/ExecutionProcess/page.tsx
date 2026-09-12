@@ -9,7 +9,7 @@ import RiskManagement from "./RiskManagement";
 import QualityControl from "./QualityControl";
 import ExecutionStandard from "./ExecutionStandard";
 import StepByStepExecution from "./StepByStepExecution";
-import { Section } from "@/types/homeApiTypes";
+import { Section, StepExecutionItem, StandardItem, QualityControlItem, RiskPreventionItem } from "@/types/homeApiTypes";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -20,7 +20,21 @@ const Divider = () => (
   />
 );
 
-export default function ExecutionProcess({ sections }: { sections: Section }) {
+interface ExecutionProcessProps {
+  sections?: Section;
+  stepByStep?: StepExecutionItem[];
+  standards?: StandardItem[];
+  qualityControl?: QualityControlItem[];
+  riskPrevention?: RiskPreventionItem[];
+}
+
+export default function ExecutionProcess({
+  sections,
+  stepByStep,
+  standards,
+  qualityControl,
+  riskPrevention,
+}: ExecutionProcessProps) {
   const sectionRef = useRef<HTMLElement>(null);
 
   useGSAP(
@@ -102,12 +116,12 @@ export default function ExecutionProcess({ sections }: { sections: Section }) {
       /> */}
 
       <div className="relative max-w-[1550px] mx-auto">
-        <ExecutionStandard sections={sections} />
+        <ExecutionStandard sections={sections} standards={standards} />
         <Divider />
-        <StepByStepExecution sections={sections} />
+        <StepByStepExecution sections={sections} stepByStep={stepByStep} />
         <Divider />
-        <QualityControl sections={sections} />
-        <RiskManagement sections={sections} />
+        <QualityControl sections={sections} qualityControl={qualityControl} />
+        <RiskManagement sections={sections} riskPrevention={riskPrevention} />
         <Divider />
       </div>
     </section>

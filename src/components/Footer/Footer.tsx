@@ -1,12 +1,12 @@
 "use client";
-import Image from "next/image";
+import Image, { StaticImageData } from "next/image";
 import { useEffect, useRef } from "react";
 import logo from "@/assets/logo.png";
 import { Link } from "@/i18n/navigation";
 import ScrollSmoother from "gsap/ScrollSmoother";
 import gsap from "gsap";
 import { useTranslations } from "next-intl";
-import { SocialLink, Service } from "@/types/homeApiTypes";
+import { SocialLink, Service, ClinicInfo } from "@/types/homeApiTypes";
 import { 
   Facebook, 
   Instagram, 
@@ -18,16 +18,48 @@ import {
   Send,
   Link as LinkIcon,
   Phone,
-  Slack
+  Slack,
+  MapPin
 } from "lucide-react";
 
 const HEADER_HEIGHT = 64;
 
-export default function Footer({ social_links, services }: { social_links: SocialLink[], services: Service[] }) {
+interface FooterProps {
+  social_links?: SocialLink[] | Record<string, string>;
+  services?: Service[];
+  clinicInfo?: ClinicInfo;
+  logoSrc?: string | StaticImageData | null;
+}
+
+export default function Footer({ social_links, services = [], clinicInfo, logoSrc }: FooterProps) {
   const footerRef = useRef<HTMLElement>(null);
   const elementsRef = useRef<HTMLDivElement>(null);
 
   const t = useTranslations("home");
+
+  // Normalize social links whether array or object
+  const normalizedSocials: { platform: string; url: string }[] = [];
+  const rawSocials = social_links || clinicInfo?.social_links;
+
+  if (Array.isArray(rawSocials)) {
+    rawSocials.forEach((item) => {
+      if (item && item.url) {
+        normalizedSocials.push({
+          platform: item.platform || "website",
+          url: item.url,
+        });
+      }
+    });
+  } else if (rawSocials && typeof rawSocials === "object") {
+    Object.entries(rawSocials).forEach(([key, val]) => {
+      if (typeof val === "string" && val) {
+        normalizedSocials.push({
+          platform: key,
+          url: val,
+        });
+      }
+    });
+  }
 
   const handleScroll = (e: React.MouseEvent, target: string) => {
     e.preventDefault();
@@ -278,32 +310,70 @@ export default function Footer({ social_links, services }: { social_links: Socia
               <div className="mb-6">
                 <div className="transform transition-all duration-500 hover:scale-105 inline-block">
                   <div className="bg-white/95 px-3 py-1.5 rounded-2xl shadow-[0_0_20px_rgba(82,183,136,0.25)] flex items-center justify-center">
-                    <Image src={logo} alt="Ali Yakout Dental Clinic" width={140} height={45} className="h-8 w-auto object-contain" />
+                    {logoSrc && typeof logoSrc === "string" ? (
+                      /* eslint-disable-next-line @next/next/no-img-element */
+                      <img
+                        src={logoSrc}
+                        alt={clinicInfo?.name || "Ali Yakout Dental Clinic"}
+                        className="h-8 w-auto object-contain"
+                      />
+                    ) : (
+                      <Image
+                        src={logo}
+                        alt="Ali Yakout Dental Clinic"
+                        width={140}
+                        height={45}
+                        className="h-8 w-auto object-contain"
+                      />
+                    )}
                   </div>
                 </div>
                 <div className="h-1 w-20 bg-gradient-to-r from-[#52b788] to-transparent mt-3 animate-on-scroll delay-1"></div>
               </div>
               <p className="text-[#cbd5e1] text-base leading-relaxed mb-6 animate-on-scroll delay-2">
-                {t("Footer-Description")}
+                {clinicInfo?.description || t("Footer-Description")}
               </p>
-              {/* Social Links */}
-              <div className="grid grid-cols-5 gap-3 max-w-fit animate-on-scroll delay-3 p-1">
-                {social_links.map((social, index) => (
-                  <Link
-                    key={index}
-                    href={social.url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="group w-10 h-10 rounded-lg bg-[#141f1b] border border-[#52b788]/20 flex items-center justify-center text-[#52b788] hover:bg-[#52b788] hover:text-[#0c1311] hover:border-[#52b788] transition-all duration-300 hover:scale-110"
-                    style={{ animationDelay: `${index * 0.1}s` }}
-                    aria-label={social.platform}
-                  >
-                    <div className="transform transition-transform duration-300 group-hover:scale-110">
-                      {getSocialIcon(social.platform)}
+
+              {/* Clinic Quick Info */}
+              {(clinicInfo?.phone || clinicInfo?.address) && (
+                <div className="space-y-2 mb-6 text-sm text-[#94a3b8] animate-on-scroll delay-2">
+                  {clinicInfo?.address && (
+                    <div className="flex items-center gap-2">
+                      <MapPin size={16} className="text-[#52b788] flex-shrink-0" />
+                      <span className="line-clamp-1">{clinicInfo.address}</span>
                     </div>
-                  </Link>
-                ))}
-              </div>
+                  )}
+                  {clinicInfo?.phone && (
+                    <div className="flex items-center gap-2">
+                      <Phone size={16} className="text-[#52b788] flex-shrink-0" />
+                      <a href={`tel:${clinicInfo.phone}`} className="hover:text-[#52b788] transition-colors" dir="ltr">
+                        {clinicInfo.phone}
+                      </a>
+                    </div>
+                  )}
+                </div>
+              )}
+
+              {/* Social Links */}
+              {normalizedSocials.length > 0 && (
+                <div className="grid grid-cols-5 gap-3 max-w-fit animate-on-scroll delay-3 p-1">
+                  {normalizedSocials.map((social, index) => (
+                    <Link
+                      key={index}
+                      href={social.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="group w-10 h-10 rounded-lg bg-[#141f1b] border border-[#52b788]/20 flex items-center justify-center text-[#52b788] hover:bg-[#52b788] hover:text-[#0c1311] hover:border-[#52b788] transition-all duration-300 hover:scale-110"
+                      style={{ animationDelay: `${index * 0.1}s` }}
+                      aria-label={social.platform}
+                    >
+                      <div className="transform transition-transform duration-300 group-hover:scale-110">
+                        {getSocialIcon(social.platform)}
+                      </div>
+                    </Link>
+                  ))}
+                </div>
+              )}
             </div>
 
             {/* Company Links */}
@@ -364,7 +434,9 @@ export default function Footer({ social_links, services }: { social_links: Socia
           <div className="flex flex-col md:flex-row justify-center items-center gap-4 animate-on-scroll delay-4">
             <p className="text-[#94a3b8] text-sm">
               {t("All Rights Reserved")}{" "}
-              <span className="text-[#52b788] font-bold">عيادة د. علي ياقوت لطب وتجميل الأسنان</span>{" "}
+              <span className="text-[#52b788] font-bold">
+                {clinicInfo?.name || "عيادة د. علي ياقوت لطب وتجميل الأسنان"}
+              </span>{" "}
               © {new Date().getFullYear()}
             </p>
           </div>

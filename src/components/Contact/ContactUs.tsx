@@ -6,7 +6,7 @@ import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
 import { useLocale, useTranslations } from "next-intl";
-import { Contact } from "@/types/homeApiTypes";
+import { Contact, ClinicInfo, Service } from "@/types/homeApiTypes";
 import { sendContactData } from "@/api/contactService";
 
 gsap.registerPlugin(ScrollTrigger);
@@ -20,7 +20,14 @@ type ContactFormData = {
   message: string;
 };
 
-export default function KoiaContactSection({ contact }: { contact: Contact }) {
+export default function KoiaContactSection({
+  contact,
+  clinicInfo,
+}: {
+  contact?: Contact;
+  clinicInfo?: ClinicInfo;
+  services?: Service[];
+}) {
   const [formData, setFormData] = useState<ContactFormData>({
     name: "",
     email: "",
@@ -219,7 +226,7 @@ export default function KoiaContactSection({ contact }: { contact: Contact }) {
         </svg>
       ),
       title: t("Phone-Label"),
-      value: contact?.phone || "+20 100 000 0000",
+      value: clinicInfo?.phone || contact?.phone || "+20 100 000 0000",
     },
     {
       icon: (
@@ -238,7 +245,7 @@ export default function KoiaContactSection({ contact }: { contact: Contact }) {
         </svg>
       ),
       title: t("Email-Label"),
-      value: contact?.email || "info@cosmetic-dentistry.com",
+      value: clinicInfo?.email || contact?.email || "info@cosmetic-dentistry.com",
     },
     {
       icon: (
@@ -263,7 +270,7 @@ export default function KoiaContactSection({ contact }: { contact: Contact }) {
         </svg>
       ),
       title: t("Location-Label"),
-      value: contact?.address || (locale === "ar" ? "الإسكندرية - منطقة سبورتنج (بالقرب من نادي سبورتنج وجامعة الإسكندرية)" : "Alexandria - Sporting Area (Near Sporting Club & Alexandria University)"),
+      value: clinicInfo?.address || contact?.address || (locale === "ar" ? "الإسكندرية - منطقة سبورتنج (بالقرب من نادي سبورتنج وجامعة الإسكندرية)" : "Alexandria - Sporting Area (Near Sporting Club & Alexandria University)"),
     },
   ];
 
