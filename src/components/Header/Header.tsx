@@ -112,11 +112,12 @@ export default function Header({ type = "popup", logoSrc }: HeaderProps) {
       style={{ backdropFilter: "blur(0px)" }}
     >
       <div className="container mx-auto px-4 h-16 flex items-center justify-between relative">
+        {/* Left: Logo */}
         <Link
           ref={logoRef}
           href="#home"
           onClick={(e) => handleScroll(e, "#home")}
-          className="flex items-center gap-2 font-bold transition-all duration-300 hover:scale-105"
+          className="flex items-center gap-2 font-bold transition-all duration-300 hover:scale-105 z-10"
         >
           <div className="bg-white/95 px-3 py-1.5 rounded-2xl shadow-[0_0_20px_rgba(82,183,136,0.3)] flex items-center justify-center">
             <Image
@@ -129,43 +130,45 @@ export default function Header({ type = "popup", logoSrc }: HeaderProps) {
           </div>
         </Link>
 
-        <nav className="hidden md:flex items-center gap-8">
-          <div ref={navRef} className="flex items-center gap-6">
-            {navItems.map((item) => {
-              const isActive = activeSection === item.href;
-              return (
-                <Link
-                  key={item.name}
-                  href={item.href}
-                  onClick={(e) => handleScroll(e, item.href)}
-                  className={`relative text-base font-medium transition-all duration-300 hover:scale-105
-                    ${isActive
-                      ? "text-[#52b788] font-bold"
-                      : "text-[#f8fafc]/80 hover:text-[#52b788]"
-                    }
+        {/* Center: Navigation Items */}
+        <nav
+          ref={navRef}
+          className="hidden md:flex items-center gap-5 lg:gap-8 absolute left-1/2 -translate-x-1/2 top-1/2 -translate-y-1/2"
+        >
+          {navItems.map((item) => {
+            const isActive = activeSection === item.href;
+            return (
+              <Link
+                key={item.name}
+                href={item.href}
+                onClick={(e) => handleScroll(e, item.href)}
+                className={`relative text-sm lg:text-base font-medium transition-all duration-300 hover:scale-105 whitespace-nowrap
+                  ${isActive
+                    ? "text-[#52b788] font-bold"
+                    : "text-[#f8fafc]/80 hover:text-[#52b788]"
+                  }
+                `}
+              >
+                {item.name}
+                <span
+                  className={`absolute -bottom-1 left-0 h-[2px] bg-[#52b788] rounded-full transition-all duration-300 ease-out
+                    ${isActive ? "w-full opacity-100 shadow-[0_0_10px_#52b788]" : "w-0 opacity-0"}
                   `}
-                >
-                  {item.name}
-                  <span
-                    className={`absolute -bottom-1 left-0 h-[2px] bg-[#52b788] rounded-full transition-all duration-300 ease-out
-                      ${isActive ? "w-full opacity-100 shadow-[0_0_10px_#52b788]" : "w-0 opacity-0"}
-                    `}
-                  />
-                  <span
-                    className={`absolute -bottom-1 left-0 h-[2px] bg-[#52b788]/60 rounded-full transition-all duration-300 ease-out opacity-0 hover:opacity-100
-                      ${isActive ? "w-0" : "w-0 hover:w-full"}
-                    `}
-                  />
-                </Link>
-              );
-            })}
-          </div>
+                />
+              </Link>
+            );
+          })}
+        </nav>
+
+        {/* Right: Language Switcher & Actions */}
+        <div className="hidden md:flex items-center gap-4 z-10">
           <div ref={langRef} className="transition-all duration-300 hover:scale-105">
             <LanguageSwitcher />
           </div>
-        </nav>
+        </div>
 
-        <div className="md:hidden">
+        {/* Mobile Menu */}
+        <div className="md:hidden z-10">
           {type === "drawer" ? (
             <DrawerMenu navItems={navItems} locale={locale} />
           ) : (
