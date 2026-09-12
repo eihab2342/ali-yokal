@@ -10,7 +10,7 @@ import { Sparkles, Shield, Clock, Scan, Award, ChevronLeft, ChevronRight, Messag
 
 const HEADER_HEIGHT = 64;
 
-export default function HeroSection({ _home }: { _home?: Home; [key: string]: unknown }) {
+export default function HeroSection({ home: _unusedHome }: { home?: Home; [key: string]: unknown } = {}) {
   const locale = useLocale();
 
   const handleScroll = (e: React.MouseEvent, target: string) => {

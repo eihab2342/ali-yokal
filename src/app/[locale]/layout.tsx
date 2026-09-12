@@ -21,6 +21,10 @@ export const metadata: Metadata = {
     "عيادة متخصصة في العلاج التحفظي وتجميل الأسنان بالإسكندرية. حشوات تجميلية متقدمة، فينيرز، تبييض، علاج جذور وتركيبات وزراعة بأحدث التقنيات الرقمية والمسح ثلاثي الأبعاد 3D Intra-Oral Scanner.",
 };
 
+export function generateStaticParams() {
+  return routing.locales.map((locale) => ({ locale }));
+}
+
 export default async function Layout({
   children,
   params,
