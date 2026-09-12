@@ -1,5 +1,25 @@
 @import "tailwindcss";
 @import "tw-animate-css";
+@import "swiper/css";
+@import "swiper/css/effect-coverflow";
+@import "swiper/css/effect-cards";
+@import "swiper/css/pagination";
+@import "swiper/css/autoplay";
+
+.swiper-pagination-bullet {
+  background: rgba(201, 167, 80, 0.35) !important;
+  opacity: 1 !important;
+  width: 8px !important;
+  height: 8px !important;
+  transition: all 0.4s ease !important;
+}
+
+.swiper-pagination-bullet-active {
+  background: #c9a750 !important;
+  width: 24px !important;
+  border-radius: 9999px !important;
+  box-shadow: 0 0 12px rgba(201, 167, 80, 0.8) !important;
+}
 
 /* @custom-variant dark (&:is(.dark *)); */
 

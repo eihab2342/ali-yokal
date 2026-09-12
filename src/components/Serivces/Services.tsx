@@ -7,6 +7,8 @@ import Image from "next/image";
 import { useTranslations } from "next-intl";
 import { Service } from "@/types/homeApiTypes";
 import { cleanImageUrl } from "@/lib/utils";
+import { Swiper, SwiperSlide } from "swiper/react";
+import { EffectCoverflow, Pagination, Autoplay } from "swiper/modules";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -130,9 +132,84 @@ export default function KoiaServicesSection({ services }: { services: Service[] 
           </h2>
         </div>
 
-        {/* Services Horizontal Scroll */}
-        <div className="relative">
-          <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-6">
+        {/* Mobile: 3D Coverflow Swiper */}
+        <div className="block md:hidden relative pb-10">
+          <div className="flex items-center justify-center gap-2 mb-4 text-xs text-[#c9a750]/80">
+            <span>👈 اسحب للتنقل بين التخصصات 👉</span>
+          </div>
+
+          <Swiper
+            effect={"coverflow"}
+            grabCursor={true}
+            centeredSlides={true}
+            slidesPerView={"auto"}
+            coverflowEffect={{
+              rotate: 25,
+              stretch: 0,
+              depth: 120,
+              modifier: 1,
+              slideShadows: false,
+            }}
+            pagination={{
+              clickable: true,
+              dynamicBullets: true,
+            }}
+            autoplay={{
+              delay: 3500,
+              disableOnInteraction: false,
+            }}
+            modules={[EffectCoverflow, Pagination, Autoplay]}
+            className="w-full py-4 overflow-visible"
+          >
+            {displayServices.map((service, i) => (
+              <SwiperSlide key={service.id} className="!w-[82vw] max-w-[320px]">
+                <div className="relative h-[430px] rounded-3xl overflow-hidden border border-[#c9a750]/40 shadow-[0_10px_30px_rgba(0,0,0,0.5)] bg-[#171410]">
+                  {/* Background Image */}
+                  <div className="absolute inset-0">
+                    <Image
+                      src={cleanImageUrl(service.image_url)}
+                      alt={service.alt_image || "Dental Service"}
+                      fill
+                      className="w-full h-full object-cover brightness-75"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-b from-[#171410]/50 via-[#171410]/80 to-[#171410]"></div>
+                  </div>
+
+                  {/* Content */}
+                  <div className="absolute inset-0 p-6 flex flex-col justify-between z-10">
+                    {/* Top: Number Badge */}
+                    <div className="flex items-center justify-between">
+                      <div className="w-10 h-10 rounded-full border border-[#c9a750]/60 bg-[#171410]/80 flex items-center justify-center">
+                        <span className="text-sm font-bold text-[#c9a750]">0{i + 1}</span>
+                      </div>
+                      <span className="text-[10px] uppercase font-bold tracking-widest px-3 py-1 rounded-full bg-[#c9a750]/20 border border-[#c9a750]/40 text-[#c9a750]">
+                        تخصص دقيق
+                      </span>
+                    </div>
+
+                    {/* Bottom: Title & Description */}
+                    <div>
+                      <div className="h-0.5 w-12 bg-[#c9a750] mb-3"></div>
+                      <h3 className="text-xl font-bold text-[#e6d5c0] mb-2 leading-snug">
+                        {service.name}
+                      </h3>
+                      <p className="text-[#e6d5c0]/85 text-xs leading-relaxed">
+                        {service.short_desc}
+                      </p>
+                    </div>
+                  </div>
+
+                  {/* Gold Border Highlight */}
+                  <div className="absolute inset-0 border-2 border-[#c9a750]/30 rounded-3xl pointer-events-none"></div>
+                </div>
+              </SwiperSlide>
+            ))}
+          </Swiper>
+        </div>
+
+        {/* Desktop: 4-Column Grid */}
+        <div className="hidden md:block relative">
+          <div className="grid grid-cols-2 xl:grid-cols-4 gap-6">
             {displayServices.map((service, i) => (
               <div key={service.id} className="service-card group relative">
                 {/* Card Container */}

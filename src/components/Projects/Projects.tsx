@@ -9,6 +9,8 @@ import { X, ArrowRight, MapPin, ArrowLeft, Calendar } from "lucide-react";
 import { useLocale, useTranslations } from "next-intl";
 import { Project } from "@/types/homeApiTypes";
 import { cleanImageUrl } from "@/lib/utils";
+import { Swiper, SwiperSlide } from "swiper/react";
+import { EffectCoverflow, Pagination, Autoplay } from "swiper/modules";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -160,134 +162,220 @@ export default function Projects({ projects }: { projects: Project[] }) {
             </h2>
           </div>
 
-          {/* Projects Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {projects.map((project, index) => (
-              <div
-                key={project.id}
-                className="project-card group relative cursor-pointer"
-                onClick={() => openModal(project)}
-              >
-                {/* Card Container */}
-                <div className="relative h-[480px] rounded-3xl overflow-hidden border border-[#c9a750]/20 hover:border-[#c9a750]/60 transition-all duration-700">
-                  {/* Background Image */}
-                  <div className="absolute inset-0">
-                    <div className="w-full h-full transition-all duration-[1500ms] group-hover:scale-110">
+          {/* Mobile: 3D Coverflow Swiper */}
+          <div className="block md:hidden relative pb-10">
+            <div className="flex items-center justify-center gap-2 mb-4 text-xs text-[#c9a750]/80">
+              <span>👈 اسحب للتنقل بين الحالات العلاجية 👉</span>
+            </div>
+
+            <Swiper
+              effect={"coverflow"}
+              grabCursor={true}
+              centeredSlides={true}
+              slidesPerView={"auto"}
+              coverflowEffect={{
+                rotate: 20,
+                stretch: 0,
+                depth: 120,
+                modifier: 1,
+                slideShadows: false,
+              }}
+              pagination={{
+                clickable: true,
+                dynamicBullets: true,
+              }}
+              autoplay={{
+                delay: 4000,
+                disableOnInteraction: false,
+              }}
+              modules={[EffectCoverflow, Pagination, Autoplay]}
+              className="w-full py-4 overflow-visible"
+            >
+              {projects.map((project, index) => (
+                <SwiperSlide key={project.id || index} className="!w-[84vw] max-w-[330px]">
+                  <div
+                    onClick={() => openModal(project)}
+                    className="relative h-[450px] rounded-3xl overflow-hidden border border-[#c9a750]/40 shadow-[0_12px_35px_rgba(0,0,0,0.6)] cursor-pointer bg-[#171410]"
+                  >
+                    {/* Background Image */}
+                    <div className="absolute inset-0">
                       <Image
                         src={cleanImageUrl(project.thumbnail_url)}
                         alt={project.name}
                         fill
-                        className="object-cover"
+                        className="object-cover brightness-85"
                       />
+                      <div className="absolute inset-0 bg-gradient-to-b from-[#171410]/40 via-[#171410]/70 to-[#171410]"></div>
                     </div>
-                    {/* Dark Overlay */}
-                    <div className="absolute inset-0 bg-gradient-to-b from-[#171410]/20 via-[#171410]/60 to-[#171410]"></div>
-                  </div>
 
-                  {/* Content */}
-                  <div
-                    className="absolute inset-0 p-8 flex flex-col justify-between"
-                    dir={locale === "ar" ? "rtl" : "ltr"}
-                  >
-                    {/* Top: Number & Category */}
-                    <div className="relative">
-                      <div className="text-6xl sm:text-7xl font-bold text-transparent bg-clip-text bg-gradient-to-br from-[#c9a750]/30 to-[#8c6d3b]/30 group-hover:from-[#c9a750] group-hover:to-[#8c6d3b] transition-all duration-700 leading-none">
-                        {(index + 1).toString().padStart(2, "0")}
-                      </div>
-                      <div className="mt-4">
-                        <span className="inline-block px-4 py-1 bg-[#c9a750]/10 border border-[#c9a750]/30 rounded-full text-[#c9a750] text-xs font-semibold tracking-wider">
+                    {/* Content */}
+                    <div
+                      className="absolute inset-0 p-6 flex flex-col justify-between z-10"
+                      dir={locale === "ar" ? "rtl" : "ltr"}
+                    >
+                      {/* Top: Number & Category */}
+                      <div className="flex items-center justify-between">
+                        <div className="w-10 h-10 rounded-full border border-[#c9a750]/60 bg-[#171410]/85 flex items-center justify-center">
+                          <span className="text-sm font-bold text-[#c9a750]">
+                            {(index + 1).toString().padStart(2, "0")}
+                          </span>
+                        </div>
+                        <span className="px-3 py-1 bg-[#c9a750]/20 border border-[#c9a750]/40 rounded-full text-[#c9a750] text-[10px] font-bold">
                           {project.type}
                         </span>
                       </div>
-                    </div>
 
-                    {/* Bottom: Title & Info */}
-                    <div>
-                      {/* Divider Line */}
-                      <div
-                        className={`h-px w-full bg-gradient-to-r from-[#c9a750] to-transparent mb-4 transform ${locale === "ar" ? "origin-right" : "origin-left"} scale-x-0 group-hover:scale-x-100 transition-transform duration-700`}
-                      ></div>
+                      {/* Bottom: Title & Info */}
+                      <div>
+                        <div className="h-0.5 w-12 bg-[#c9a750] mb-3"></div>
+                        <h3 className="text-xl font-bold text-[#e6d5c0] mb-2 leading-snug">
+                          {project.name}
+                        </h3>
+                        <p className="text-xs text-[#e6d5c0]/75 line-clamp-2 mb-4">
+                          {project.short_desc}
+                        </p>
 
-                      {/* Title */}
-                      <h3
-                        className={`text-2xl font-bold text-[#e6d5c0] mb-3 tracking-wide leading-snug ${locale === "ar" ? "text-right" : "text-left"}`}
-                      >
-                        {project.name}
-                      </h3>
-
-                      {/* Location & Year */}
-                      <div className="flex items-center gap-4 text-[#e6d5c0]/70 text-sm mb-4">
-                        <div className="flex items-center gap-2">
-                          <MapPin className="w-4 h-4" />
-                          <span>{project.location}</span>
-                        </div>
-                        <div className="flex items-center gap-2">
-                          <Calendar className="w-4 h-4" />
-                          <span>{project.date}</span>
+                        <div className="flex items-center justify-between text-xs text-[#c9a750] font-semibold pt-2 border-t border-[#c9a750]/20">
+                          <span>اضغط لعرض تفاصيل الحالة</span>
+                          {locale === "en" ? (
+                            <ArrowRight className="w-4 h-4" />
+                          ) : (
+                            <ArrowLeft className="w-4 h-4" />
+                          )}
                         </div>
                       </div>
-
-                      {/* Tags */}
-                      <div className="flex flex-wrap gap-2 opacity-0 group-hover:opacity-100 transition-opacity duration-700 delay-100">
-                        {project.badges?.map((tag) => (
-                          <span
-                            key={tag}
-                            className="text-xs text-[#c9a750] border border-[#c9a750]/20 px-3 py-1 rounded-full"
-                          >
-                            {tag}
-                          </span>
-                        ))}
-                      </div>
-
-                      {/* View More Indicator */}
-                      <div
-                        className={`mt-4 flex items-center gap-2 text-[#c9a750] opacity-0 group-hover:opacity-100 transition-all duration-700 delay-200`}
-                      >
-                        <span className="text-sm font-semibold tracking-wider">
-                          {t("VIEW PROJECT")}
-                        </span>
-                        {locale === "en" ? (
-                          <ArrowRight className="w-4 h-4 transform group-hover:translate-x-2 transition-transform duration-300" />
-                        ) : (
-                          <ArrowLeft className="w-4 h-4 transform group-hover:-translate-x-2 transition-transform duration-300 mt-1 ms-2" />
-                        )}
-                      </div>
                     </div>
+
+                    {/* Border Frame */}
+                    <div className="absolute inset-0 border-2 border-[#c9a750]/30 rounded-3xl pointer-events-none"></div>
                   </div>
-
-                  {/* Glow Effect on Hover */}
-                  <div className="absolute inset-0 bg-gradient-to-t from-[#c9a750]/0 via-[#c9a750]/0 to-[#c9a750]/0 group-hover:from-[#c9a750]/10 group-hover:via-[#c9a750]/5 transition-all duration-700 pointer-events-none"></div>
-                </div>
-              </div>
-            ))}
+                </SwiperSlide>
+              ))}
+            </Swiper>
           </div>
-          {/* Section Footer Text — Stacked */}
+
+          {/* Desktop: Grid */}
+          <div className="hidden md:block relative">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {projects.map((project, index) => (
+                <div
+                  key={project.id}
+                  className="project-card group relative cursor-pointer"
+                  onClick={() => openModal(project)}
+                >
+                  {/* Card Container */}
+                  <div className="relative h-[480px] rounded-3xl overflow-hidden border border-[#c9a750]/20 hover:border-[#c9a750]/60 transition-all duration-700">
+                    {/* Background Image */}
+                    <div className="absolute inset-0">
+                      <div className="w-full h-full transition-all duration-[1500ms] group-hover:scale-110">
+                        <Image
+                          src={cleanImageUrl(project.thumbnail_url)}
+                          alt={project.name}
+                          fill
+                          className="object-cover"
+                        />
+                      </div>
+                      {/* Dark Overlay */}
+                      <div className="absolute inset-0 bg-gradient-to-b from-[#171410]/20 via-[#171410]/60 to-[#171410]"></div>
+                    </div>
+
+                    {/* Content */}
+                    <div
+                      className="absolute inset-0 p-8 flex flex-col justify-between"
+                      dir={locale === "ar" ? "rtl" : "ltr"}
+                    >
+                      {/* Top: Number & Category */}
+                      <div className="relative">
+                        <div className="text-6xl sm:text-7xl font-bold text-transparent bg-clip-text bg-gradient-to-br from-[#c9a750]/30 to-[#8c6d3b]/30 group-hover:from-[#c9a750] group-hover:to-[#8c6d3b] transition-all duration-700 leading-none">
+                          {(index + 1).toString().padStart(2, "0")}
+                        </div>
+                        <div className="mt-4">
+                          <span className="inline-block px-4 py-1 bg-[#c9a750]/10 border border-[#c9a750]/30 rounded-full text-[#c9a750] text-xs font-semibold tracking-wider">
+                            {project.type}
+                          </span>
+                        </div>
+                      </div>
+
+                      {/* Bottom: Title & Info */}
+                      <div>
+                        {/* Divider Line */}
+                        <div
+                          className={`h-px w-full bg-gradient-to-r from-[#c9a750] to-transparent mb-4 transform ${locale === "ar" ? "origin-right" : "origin-left"} scale-x-0 group-hover:scale-x-100 transition-transform duration-700`}
+                        ></div>
+
+                        {/* Title */}
+                        <h3
+                          className={`text-2xl font-bold text-[#e6d5c0] mb-3 tracking-wide leading-snug ${locale === "ar" ? "text-right" : "text-left"}`}
+                        >
+                          {project.name}
+                        </h3>
+
+                        {/* Location & Year */}
+                        <div className="flex items-center gap-4 text-[#e6d5c0]/70 text-sm mb-4">
+                          <div className="flex items-center gap-2">
+                            <MapPin className="w-4 h-4" />
+                            <span>{project.location}</span>
+                          </div>
+                          <div className="flex items-center gap-2">
+                            <Calendar className="w-4 h-4" />
+                            <span>{project.date}</span>
+                          </div>
+                        </div>
+
+                        {/* Tags */}
+                        <div className="flex flex-wrap gap-2 opacity-0 group-hover:opacity-100 transition-opacity duration-700 delay-100">
+                          {project.badges?.map((tag) => (
+                            <span
+                              key={tag}
+                              className="text-xs text-[#c9a750] border border-[#c9a750]/20 px-3 py-1 rounded-full"
+                            >
+                              {tag}
+                            </span>
+                          ))}
+                        </div>
+
+                        {/* View More Indicator */}
+                        <div
+                          className={`mt-4 flex items-center gap-2 text-[#c9a750] opacity-0 group-hover:opacity-100 transition-all duration-700 delay-200`}
+                        >
+                          <span className="text-sm font-semibold tracking-wider">
+                            {t("VIEW PROJECT")}
+                          </span>
+                          {locale === "en" ? (
+                            <ArrowRight className="w-4 h-4 transform group-hover:translate-x-2 transition-transform duration-300" />
+                          ) : (
+                            <ArrowLeft className="w-4 h-4 transform group-hover:-translate-x-2 transition-transform duration-300 mt-1 ms-2" />
+                          )}
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* Glow Effect on Hover */}
+                    <div className="absolute inset-0 bg-gradient-to-t from-[#c9a750]/0 via-[#c9a750]/0 to-[#c9a750]/0 group-hover:from-[#c9a750]/10 group-hover:via-[#c9a750]/5 transition-all duration-700 pointer-events-none"></div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Section Footer Text — Scientific Affiliations */}
           <div className="mt-12">
             <div className="mx-auto flex flex-col items-center text-center gap-4">
-              {/* Headline */}
-              {/* <h3 className="text-4xl font-bold text-[#e6d5c0] tracking-wide leading-tight">
-                END TO END EXECUTION
-              </h3> */}
-
-              <h4 className={`${locale === "en" ? "text-xs" : "text-sm"} md:text-2xl font-semibold text-[#e6d5c0]/80 tracking-[0.2em]`}>
-                {t("END TO END EXECUTION COLLABORATION WITH OTHER COMPANIES")}
+              <h4 className={`${locale === "en" ? "text-xs" : "text-sm"} md:text-xl font-semibold text-[#e6d5c0]/80 tracking-[0.2em] uppercase`}>
+                اعتماد وتجهيزات متوافقة مع أعلى المعايير الدولية لطب وتجميل الأسنان
               </h4>
 
               {/* Divider */}
               <div className="h-px w-full bg-gradient-to-r from-transparent via-[#c9a750] to-transparent"></div>
 
-              <div className={`text-[#e6d5c0]/70 ${locale === "en" ? "text-xs" : "text-sm"} md:text-base flex flex-wrap justify-center gap-x-2 gap-y-2`}>
-                <span>Magrabi</span>
-                <span>-</span>
-                <span>PAUL Restaurant & Cafe</span>
-                <span>-</span>
-                <span>DREAM 2000</span>
-                <span>-</span>
-                <span>FEROZAH Jewelry Shop</span>
-                <span>-</span>
-                <span>American Eagle — Magenta</span>
-                <span>-</span>
-                <span>Butcher’s Burger & Chicken & Ribs</span>
+              <div className={`text-[#e6d5c0]/70 ${locale === "en" ? "text-xs" : "text-sm"} md:text-base flex flex-wrap justify-center gap-x-3 gap-y-2`}>
+                <span>3Shape TRIOS® 3D Scanner</span>
+                <span>•</span>
+                <span>Rubber Dam Isolation System</span>
+                <span>•</span>
+                <span>Conservative & Biomimetic Dentistry</span>
+                <span>•</span>
+                <span>Microscopic Precision Care</span>
               </div>
 
               {/* Divider */}

@@ -3,6 +3,8 @@
 import { useTranslations } from "next-intl";
 import { Section } from "@/types/homeApiTypes";
 import { ShieldCheck } from "lucide-react";
+import { Swiper, SwiperSlide } from "swiper/react";
+import { EffectCoverflow, Pagination } from "swiper/modules";
 
 export default function ExecutionStandard({ sections }: { sections: Section }) {
   const t = useTranslations("home");
@@ -80,8 +82,76 @@ export default function ExecutionStandard({ sections }: { sections: Section }) {
         </h2>
       </div>
 
-      {/* Vertical Timeline/Stepper Layout */}
-      <div className="relative space-y-12 std-list">
+      {/* Mobile: 3D Swiper */}
+      <div className="block lg:hidden relative pb-8">
+        <div className="flex items-center justify-center gap-2 mb-4 text-xs text-[#c9a750]/80">
+          <span>👈 اسحب للتنقل بين معايير العناية 👉</span>
+        </div>
+
+        <Swiper
+          effect={"coverflow"}
+          grabCursor={true}
+          centeredSlides={true}
+          slidesPerView={"auto"}
+          coverflowEffect={{
+            rotate: 20,
+            stretch: 0,
+            depth: 100,
+            modifier: 1,
+            slideShadows: false,
+          }}
+          pagination={{
+            clickable: true,
+            dynamicBullets: true,
+          }}
+          modules={[EffectCoverflow, Pagination]}
+          className="w-full py-4 overflow-visible"
+        >
+          {standardsData.map((item, i) => (
+            <SwiperSlide key={item.id || i} className="!w-[85vw] max-w-[340px]">
+              <div
+                className="relative rounded-3xl p-7 border overflow-hidden shadow-[0_15px_35px_rgba(0,0,0,0.6)]"
+                style={{
+                  borderColor: "rgba(201,167,80,0.4)",
+                  background: "linear-gradient(145deg, rgba(31,27,22,0.95), rgba(23,20,16,0.98))",
+                }}
+              >
+                {/* Header with Icon and Number */}
+                <div className="flex items-center justify-between mb-5">
+                  <div
+                    className="w-14 h-14 rounded-2xl flex items-center justify-center"
+                    style={{
+                      border: "1.5px solid rgba(201,167,80,0.7)",
+                      background: "linear-gradient(135deg, rgba(201,167,80,0.15), rgba(140,109,59,0.06))",
+                      boxShadow: "0 0 20px rgba(201,167,80,0.2)",
+                      color: "#c9a750",
+                    }}
+                  >
+                    {iconList[i] || <ShieldCheck className="w-7 h-7" />}
+                  </div>
+
+                  <span className="text-2xl font-black text-[#c9a750]">
+                    {String(i + 1).padStart(2, "0")}
+                  </span>
+                </div>
+
+                <h3 className="text-lg font-bold text-[#e6d5c0] mb-3 leading-snug">
+                  {item.title}
+                </h3>
+
+                <p className="text-xs text-[#e6d5c0]/75 leading-relaxed">
+                  {item.description}
+                </p>
+
+                <div className="mt-5 h-0.5 w-12 bg-[#c9a750]"></div>
+              </div>
+            </SwiperSlide>
+          ))}
+        </Swiper>
+      </div>
+
+      {/* Desktop: Vertical Timeline/Stepper Layout */}
+      <div className="hidden lg:block relative space-y-12 std-list">
         {/* Central Vertical Line */}
         <div className="std-timeline absolute left-1/2 top-0 bottom-0 w-px bg-gradient-to-b from-[#c9a750] via-[#c9a750]/20 to-transparent -translate-x-1/2 pointer-events-none"></div>
 

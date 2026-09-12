@@ -3,6 +3,8 @@
 import { Section } from "@/types/homeApiTypes";
 import { useLocale, useTranslations } from "next-intl";
 import { ShieldCheck } from "lucide-react";
+import { Swiper, SwiperSlide } from "swiper/react";
+import { EffectCoverflow, Pagination } from "swiper/modules";
 
 export default function StepByStepExecution({ sections }: { sections: Section }) {
   const t = useTranslations("home");
@@ -112,53 +114,86 @@ export default function StepByStepExecution({ sections }: { sections: Section })
         </div>
       </div>
 
-      {/* Mobile */}
-      <div className="lg:hidden flex flex-col gap-0">
-        {executionStepsData.map((step, i) => (
-          <div key={step.id || i}>
-            <div className="rounded-2xl border overflow-hidden"
-              style={{ borderColor: "rgba(201,167,80,0.55)", background: "linear-gradient(135deg, rgba(201,167,80,0.08), rgba(23,20,16,0.7))" }}>
-              <div className="h-[2px]" style={{ background: "linear-gradient(to right, #c9a750, transparent)" }} />
-              <div className="flex items-center gap-5 p-5">
-                <div className="flex-shrink-0 w-14 h-14 rounded-full flex items-center justify-center"
-                  style={{ border: "1.5px solid rgba(201,167,80,0.7)", background: "linear-gradient(135deg, rgba(201,167,80,0.10), rgba(140,109,59,0.04))", boxShadow: "0 0 20px rgba(201,167,80,0.12)", color: "#c9a750" }}>
-                  {iconList[i] || <ShieldCheck className="w-9 h-9" />}
+      {/* Mobile: 3D Step-by-Step Swiper */}
+      <div className="lg:hidden relative pb-8">
+        <div className="flex items-center justify-center gap-2 mb-4 text-xs text-[#c9a750]/80">
+          <span>👈 اسحب للتنقل بين مراحل العلاج 👉</span>
+        </div>
+
+        <Swiper
+          effect={"coverflow"}
+          grabCursor={true}
+          centeredSlides={true}
+          slidesPerView={"auto"}
+          coverflowEffect={{
+            rotate: 20,
+            stretch: 0,
+            depth: 100,
+            modifier: 1,
+            slideShadows: false,
+          }}
+          pagination={{
+            clickable: true,
+            dynamicBullets: true,
+          }}
+          modules={[EffectCoverflow, Pagination]}
+          className="w-full py-4 overflow-visible"
+        >
+          {executionStepsData.map((step, i) => (
+            <SwiperSlide key={step.id || i} className="!w-[85vw] max-w-[340px]">
+              <div
+                className="relative rounded-3xl p-7 border overflow-hidden shadow-[0_15px_35px_rgba(0,0,0,0.6)]"
+                style={{
+                  borderColor: "rgba(201,167,80,0.6)",
+                  background: "linear-gradient(145deg, rgba(31,27,22,0.95), rgba(23,20,16,0.98))",
+                }}
+              >
+                {/* Top Accent Line */}
+                <div
+                  className="absolute top-0 left-0 right-0 h-1"
+                  style={{
+                    background: "linear-gradient(90deg, #c9a750, #8c6d3b, #c9a750)",
+                  }}
+                />
+
+                {/* Step Header */}
+                <div className="flex items-center justify-between mb-6">
+                  <div
+                    className="w-16 h-16 rounded-2xl flex items-center justify-center"
+                    style={{
+                      border: "1.5px solid rgba(201,167,80,0.8)",
+                      background: "linear-gradient(135deg, rgba(201,167,80,0.18), rgba(140,109,59,0.08))",
+                      boxShadow: "0 0 25px rgba(201,167,80,0.25)",
+                      color: "#c9a750",
+                    }}
+                  >
+                    {iconList[i] || <ShieldCheck className="w-8 h-8" />}
+                  </div>
+
+                  <div className="text-right">
+                    <span className="text-[10px] font-black tracking-[0.3em] uppercase block text-[#c9a750]">
+                      {t("Step")}
+                    </span>
+                    <span className="text-3xl font-black text-transparent bg-clip-text bg-gradient-to-r from-[#c9a750] to-[#e6d5c0]">
+                      0{i + 1}
+                    </span>
+                  </div>
                 </div>
-                <div className="flex-1">
-                  <span className="text-[10px] font-black tracking-[0.3em] uppercase block mb-1" style={{ color: "#c9a750" }}>
-                    {t("Step")} {(i + 1).toString().padStart(2, "0")}
-                  </span>
-                  <h3 className="text-base font-semibold" style={{ color: "#e6d5c0" }}>
-                    {step.title}
-                  </h3>
+
+                {/* Step Title */}
+                <h3 className="text-lg font-bold text-[#e6d5c0] leading-snug mb-3">
+                  {step.title}
+                </h3>
+
+                {/* Protocol Badge */}
+                <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-[#c9a750]/10 border border-[#c9a750]/30 mt-2">
+                  <span className="w-1.5 h-1.5 rounded-full bg-[#c9a750] animate-pulse"></span>
+                  <span className="text-xs text-[#c9a750] font-medium">بروتوكول تخصصي دقيق</span>
                 </div>
               </div>
-            </div>
-            {i < executionStepsData.length - 1 && (
-              <div className="flex justify-start pl-8" style={{ height: 48 }}>
-                <svg width="120" height="48" viewBox="0 0 120 48" fill="none" className={isRtl ? 'scale-x-[-1]' : ''}>
-                  <defs>
-                    <linearGradient id={`mg${i}`} x1="0" y1="0" x2="0" y2="1">
-                      <stop offset="0%" stopColor="#c9a750" stopOpacity="0.55" />
-                      <stop offset="100%" stopColor="#c9a750" stopOpacity="0.12" />
-                    </linearGradient>
-                  </defs>
-                  {i % 2 === 0 ? (
-                    <>
-                      <path d="M16 0 C16 24, 80 24, 80 48" stroke={`url(#mg${i})`} strokeWidth="1.5" strokeDasharray="4 3" strokeLinecap="round" fill="none" />
-                      <path d="M75 42 L80 48 L85 42" stroke="#c9a750" strokeOpacity="0.5" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" fill="none" />
-                    </>
-                  ) : (
-                    <>
-                      <path d="M80 0 C80 24, 16 24, 16 48" stroke={`url(#mg${i})`} strokeWidth="1.5" strokeDasharray="4 3" strokeLinecap="round" fill="none" />
-                      <path d="M11 42 L16 48 L21 42" stroke="#c9a750" strokeOpacity="0.5" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" fill="none" />
-                    </>
-                  )}
-                </svg>
-              </div>
-            )}
-          </div>
-        ))}
+            </SwiperSlide>
+          ))}
+        </Swiper>
       </div>
     </div>
   );
