@@ -118,7 +118,9 @@ export default function AboutSection({
     );
   }, []);
 
-  const values = ["دقة ميكرونية", "عزل تام RUBBER DAM", "ساعة لكل مريض", "بدون مقاسات مزعجة"];
+  const values = aboutSection?.features && aboutSection.features.length > 0
+    ? aboutSection.features.slice(0, 4).map((f) => (f.length > 28 ? f.substring(0, 28) + "..." : f))
+    : ["دقة ميكرونية", "عزل تام RUBBER DAM", "ساعة لكل مريض", "بدون مقاسات مزعجة"];
 
   return (
     <section
