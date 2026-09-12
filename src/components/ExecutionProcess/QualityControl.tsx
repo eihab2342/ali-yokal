@@ -59,12 +59,12 @@ export default function QualityControl({ sections }: { sections: Section }) {
     <div className="pt-10 lg:pt-20 pb-10 lg:pb-20 max-w-7xl mx-auto">
       <div className="mb-14 text-center">
         <div className="qc-label inline-block mb-4">
-          <span className="text-xs font-bold tracking-[0.35em] uppercase" style={{ color: "#c9a750" }}>{t("QualityControl-Label")}</span>
-          <div className="qc-header-line h-0.5 w-full mt-2" style={{ background: "linear-gradient(to right, transparent, #c9a750, transparent)" }}></div>
+          <span className="text-xs font-bold tracking-[0.35em] uppercase" style={{ color: "#52b788" }}>{t("QualityControl-Label")}</span>
+          <div className="qc-header-line h-0.5 w-full mt-2" style={{ background: "linear-gradient(to right, transparent, #52b788, transparent)" }}></div>
         </div>
-        <h2 className="qc-title text-3xl sm:text-4xl md:text-5xl font-bold leading-tight tracking-tight uppercase w-full" style={{ color: "#e6d5c0" }}>
+        <h2 className="qc-title text-3xl sm:text-4xl md:text-5xl font-bold leading-tight tracking-tight uppercase w-full" style={{ color: "#f8fafc" }}>
           {t("OurQuality")}{" "}
-          <span style={{ background: "linear-gradient(135deg, #c9a750 0%, #b2913c 50%, #8c6d3b 100%)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text" }}>
+          <span style={{ background: "linear-gradient(135deg, #52b788 0%, #74c69d 50%, #2d6a4f 100%)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text" }}>
             {t("ControlProcess")}
           </span>
         </h2>
@@ -74,31 +74,31 @@ export default function QualityControl({ sections }: { sections: Section }) {
         {qualityItems.map((item, i) => (
           <div key={item.id || i} className="qc-row group relative p-px rounded-3xl overflow-hidden transition-all duration-500 hover:scale-[1.02]">
             {/* Gradient Border Overlay */}
-            <div className="absolute inset-0 bg-gradient-to-br from-[#c9a750]/20 to-transparent opacity-50 group-hover:opacity-100 transition-opacity"></div>
+            <div className="absolute inset-0 bg-gradient-to-br from-[#52b788]/20 to-transparent opacity-50 group-hover:opacity-100 transition-opacity"></div>
 
-            <div className="relative h-full p-8 rounded-[1.4rem] bg-[#171410]/80 backdrop-blur-xl border border-[#c9a750]/10 flex flex-col gap-6">
+            <div className="relative h-full p-8 rounded-[1.4rem] bg-[#141f1b]/80 backdrop-blur-xl border border-[#52b788]/15 flex flex-col gap-6">
               {/* Top: Icon & Number */}
               <div className="flex items-start justify-between">
-                <div className="w-12 h-12 rounded-xl flex items-center justify-center border border-[#c9a750]/20 bg-[#c9a750]/5 text-[#c9a750] group-hover:scale-110 transition-transform">
+                <div className="w-12 h-12 rounded-xl flex items-center justify-center border border-[#52b788]/20 bg-[#52b788]/5 text-[#52b788] group-hover:scale-110 transition-transform">
                   {iconList[i] || <ShieldCheck className="w-5 h-5" />}
                 </div>
-                <div className="text-5xl font-black text-transparent bg-clip-text bg-gradient-to-br from-[#c9a750]/20 to-[#8c6d3b]/10 group-hover:from-[#c9a750]/40 group-hover:to-[#8c6d3b]/20 transition-all duration-700 leading-none">
+                <div className="text-5xl font-black text-transparent bg-clip-text bg-gradient-to-br from-[#52b788]/20 to-[#2d6a4f]/10 group-hover:from-[#52b788]/50 group-hover:to-[#74c69d]/30 transition-all duration-700 leading-none">
                   {(i + 1).toString().padStart(2, "0")}
                 </div>
               </div>
 
               {/* Content */}
               <div>
-                <h3 className="text-2xl font-bold text-[#e6d5c0] mb-3 tracking-wide">
+                <h3 className="text-2xl font-bold text-[#f8fafc] mb-3 tracking-wide">
                   {item.title}
                 </h3>
-                <p className="text-[#e6d5c0]/60 text-base leading-relaxed">
+                <p className="text-[#f8fafc]/70 text-base leading-relaxed">
                   {item.description}
                 </p>
               </div>
 
               {/* Glow Effect */}
-              <div className="absolute inset-x-0 bottom-0 h-1 bg-gradient-to-r from-transparent via-[#c9a750]/30 to-transparent transform scale-x-0 group-hover:scale-x-100 transition-transform duration-700"></div>
+              <div className="absolute inset-x-0 bottom-0 h-1 bg-gradient-to-r from-transparent via-[#52b788]/30 to-transparent transform scale-x-0 group-hover:scale-x-100 transition-transform duration-700"></div>
             </div>
           </div>
         ))}

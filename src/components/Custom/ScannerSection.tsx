@@ -30,19 +30,19 @@ export default function ScannerSection() {
   return (
     <section id="technology" className="relative py-24 px-6 md:px-12 lg:px-20 overflow-hidden">
       {/* Background glow */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-[#c9a750]/5 rounded-full blur-[140px] pointer-events-none" />
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-[#52b788]/10 rounded-full blur-[160px] pointer-events-none" />
 
       <div className="max-w-7xl mx-auto relative z-10">
         {/* Header */}
         <div className="text-center mb-16">
-          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-[#c9a750]/30 bg-[#c9a750]/10 text-[#c9a750] text-xs font-bold tracking-[0.25em] uppercase mb-4">
+          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-[#52b788]/40 bg-[#2d6a4f]/20 text-[#52b788] text-xs font-bold tracking-[0.25em] uppercase mb-4 shadow-[0_0_15px_rgba(82,183,136,0.15)]">
             <Scan className="w-3.5 h-3.5" />
             <span>التكنولوجيا الرقمية في خدمتكم</span>
           </div>
-          <h2 className="text-4xl md:text-6xl font-bold text-[#e6d5c0] leading-tight">
-            الماسح الفموي الرقمي <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#c9a750] via-[#b2913c] to-[#8c6d3b]">3D Scanner</span>
+          <h2 className="text-4xl md:text-6xl font-bold text-[#f8fafc] leading-tight">
+            الماسح الفموي الرقمي <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#52b788] via-[#74c69d] to-[#40916c]">3D Scanner</span>
           </h2>
-          <p className="text-[#e6d5c0]/70 max-w-2xl mx-auto mt-4 text-base md:text-lg">
+          <p className="text-[#cbd5e1] max-w-2xl mx-auto mt-4 text-base md:text-lg">
             نستثمر في أحدث الأجهزة والتقنيات الطبية لنضمن لك تجربة علاجية استثنائية تجمع بين الراحة التامة وأعلى معايير الدقة العلمية.
           </p>
         </div>
@@ -56,20 +56,20 @@ export default function ScannerSection() {
               return (
                 <div
                   key={idx}
-                  className="group p-6 rounded-3xl bg-gradient-to-br from-[#1f1b16] to-[#171410] border border-[#c9a750]/15 hover:border-[#c9a750]/50 transition-all duration-500 hover:shadow-[0_0_30px_rgba(201,167,80,0.1)] flex flex-col justify-between"
+                  className="group p-6 rounded-3xl bg-gradient-to-br from-[#141f1b] to-[#0c1311] border border-[#52b788]/20 hover:border-[#52b788]/60 transition-all duration-500 hover:shadow-[0_0_30px_rgba(82,183,136,0.15)] flex flex-col justify-between"
                 >
                   <div>
-                    <div className="w-12 h-12 rounded-2xl bg-[#c9a750]/10 border border-[#c9a750]/20 flex items-center justify-center text-[#c9a750] group-hover:bg-[#c9a750] group-hover:text-[#171410] transition-all duration-500 mb-5">
+                    <div className="w-12 h-12 rounded-2xl bg-[#52b788]/15 border border-[#52b788]/30 flex items-center justify-center text-[#52b788] group-hover:bg-[#52b788] group-hover:text-[#0c1311] transition-all duration-500 mb-5">
                       <Icon className="w-6 h-6" />
                     </div>
-                    <h3 className="text-xl font-bold text-[#e6d5c0] mb-3 leading-snug">
+                    <h3 className="text-xl font-bold text-[#f8fafc] mb-3 leading-snug">
                       {item.title}
                     </h3>
-                    <p className="text-[#e6d5c0]/65 text-sm leading-relaxed">
+                    <p className="text-[#94a3b8] text-sm leading-relaxed">
                       {item.description}
                     </p>
                   </div>
-                  <div className="mt-4 flex items-center gap-2 text-xs font-semibold text-[#c9a750]">
+                  <div className="mt-4 flex items-center gap-2 text-xs font-semibold text-[#52b788]">
                     <CheckCircle2 className="w-3.5 h-3.5" />
                     <span>معيار العيادة المعتمد</span>
                   </div>
@@ -78,46 +78,46 @@ export default function ScannerSection() {
             })}
           </div>
 
-          {/* Right Showcase Box */}
+          {/* Right Visual Box */}
           <div className="lg:col-span-5 relative">
-            <div className="relative rounded-3xl overflow-hidden border border-[#c9a750]/30 bg-gradient-to-br from-[#1f1b16] to-[#171410] p-8 shadow-2xl">
-              <div className="relative h-[320px] rounded-2xl overflow-hidden mb-6 border border-[#c9a750]/20">
+            <div className="relative rounded-3xl overflow-hidden border border-[#52b788]/30 bg-gradient-to-br from-[#141f1b] to-[#0c1311] p-8 shadow-2xl">
+              <div className="relative h-[260px] rounded-2xl overflow-hidden mb-6 border border-[#52b788]/20">
                 <Image
                   src="https://images.unsplash.com/photo-1629909613654-28e377c37b09?auto=format&fit=crop&w=800&q=80"
                   alt="Intra-Oral 3D Scanner"
                   fill
                   className="object-cover hover:scale-105 transition-transform duration-700"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-[#171410] via-transparent to-transparent" />
-                <div className="absolute bottom-4 left-4 right-4 p-3 rounded-xl bg-[#171410]/80 border border-[#c9a750]/30 backdrop-blur-md">
-                  <p className="text-xs font-bold text-[#c9a750] text-center">
+                <div className="absolute inset-0 bg-gradient-to-t from-[#0c1311] via-transparent to-transparent" />
+                <div className="absolute bottom-4 left-4 right-4 p-3 rounded-xl bg-[#0c1311]/80 border border-[#52b788]/30 backdrop-blur-md">
+                  <p className="text-xs font-bold text-[#52b788] text-center">
                     دقة ميكرونية فائقة للأنسجة والأسنان
                   </p>
                 </div>
               </div>
 
               <div className="space-y-4">
-                <h4 className="text-2xl font-bold text-[#e6d5c0]">
+                <h4 className="text-xl font-bold text-[#f8fafc]">
                   لماذا يفضل مرضانا المقاس الرقمي؟
                 </h4>
-                <ul className="space-y-2 text-sm text-[#e6d5c0]/80">
+                <ul className="space-y-2 text-sm text-[#cbd5e1]">
                   <li className="flex items-center gap-3">
-                    <span className="w-2 h-2 rounded-full bg-[#c9a750]" />
+                    <span className="w-2 h-2 rounded-full bg-[#52b788]" />
                     <span>مدة الفحص لا تتجاوز دقائق معدودة</span>
                   </li>
                   <li className="flex items-center gap-3">
-                    <span className="w-2 h-2 rounded-full bg-[#c9a750]" />
+                    <span className="w-2 h-2 rounded-full bg-[#52b788]" />
                     <span>إمكانية التوقف والاستراحة في أي لحظة أثناء المسح</span>
                   </li>
                   <li className="flex items-center gap-3">
-                    <span className="w-2 h-2 rounded-full bg-[#c9a750]" />
+                    <span className="w-2 h-2 rounded-full bg-[#52b788]" />
                     <span>إرسال الملف الرقمي مباشرة للمختبر المتخصص إلكترونياً</span>
                   </li>
                 </ul>
 
                 <a
                   href="#contact-us"
-                  className="block text-center w-full mt-6 py-3.5 rounded-xl bg-gradient-to-r from-[#c9a750] to-[#b2913c] text-[#171410] font-bold text-sm hover:scale-105 transition-all shadow-lg"
+                  className="block text-center w-full mt-6 py-3.5 rounded-xl bg-gradient-to-r from-[#2d6a4f] via-[#40916c] to-[#52b788] text-white font-bold text-sm hover:scale-105 transition-all shadow-[0_0_20px_rgba(82,183,136,0.3)]"
                 >
                   تجربة فحص رقمي متطورة
                 </a>

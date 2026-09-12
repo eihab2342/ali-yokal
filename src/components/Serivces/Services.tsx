@@ -119,14 +119,14 @@ export default function KoiaServicesSection({ services }: { services: Service[] 
         {/* Header */}
         <div className="services-header text-center mb-12">
           <div className="inline-block mb-3">
-            <span className="text-[#c9a750] text-xs font-bold tracking-[0.3em] uppercase">
+            <span className="text-[#52b788] text-xs font-bold tracking-[0.3em] uppercase">
               {t("Our Expertise")}
             </span>
-            <div className="services-header-line h-0.5 w-full bg-gradient-to-r from-transparent via-[#c9a750] to-transparent mt-2"></div>
+            <div className="services-header-line h-0.5 w-full bg-gradient-to-r from-transparent via-[#52b788] to-transparent mt-2"></div>
           </div>
-          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-[#e6d5c0] leading-tight">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-[#f8fafc] leading-tight">
             {t("OUR")}{" "}
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#c9a750] via-[#b2913c] to-[#8c6d3b] animate-gradient">
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#52b788] via-[#74c69d] to-[#2d6a4f] animate-gradient">
               {t("SERVICES")}
             </span>
           </h2>
@@ -134,7 +134,7 @@ export default function KoiaServicesSection({ services }: { services: Service[] 
 
         {/* Mobile: 3D Coverflow Swiper */}
         <div className="block md:hidden relative pb-10">
-          <div className="flex items-center justify-center gap-2 mb-4 text-xs text-[#c9a750]/80">
+          <div className="flex items-center justify-center gap-2 mb-4 text-xs text-[#52b788]/90 font-medium">
             <span>👈 اسحب للتنقل بين التخصصات 👉</span>
           </div>
 
@@ -163,7 +163,7 @@ export default function KoiaServicesSection({ services }: { services: Service[] 
           >
             {displayServices.map((service, i) => (
               <SwiperSlide key={service.id} className="!w-[82vw] max-w-[320px]">
-                <div className="relative h-[430px] rounded-3xl overflow-hidden border border-[#c9a750]/40 shadow-[0_10px_30px_rgba(0,0,0,0.5)] bg-[#171410]">
+                <div className="relative h-[430px] rounded-3xl overflow-hidden border border-[#52b788]/40 shadow-[0_10px_30px_rgba(0,0,0,0.6)] bg-[#141f1b]">
                   {/* Background Image */}
                   <div className="absolute inset-0">
                     <Image
@@ -172,35 +172,35 @@ export default function KoiaServicesSection({ services }: { services: Service[] 
                       fill
                       className="w-full h-full object-cover brightness-75"
                     />
-                    <div className="absolute inset-0 bg-gradient-to-b from-[#171410]/50 via-[#171410]/80 to-[#171410]"></div>
+                    <div className="absolute inset-0 bg-gradient-to-b from-[#0c1311]/50 via-[#0c1311]/80 to-[#0c1311]"></div>
                   </div>
 
                   {/* Content */}
                   <div className="absolute inset-0 p-6 flex flex-col justify-between z-10">
                     {/* Top: Number Badge */}
                     <div className="flex items-center justify-between">
-                      <div className="w-10 h-10 rounded-full border border-[#c9a750]/60 bg-[#171410]/80 flex items-center justify-center">
-                        <span className="text-sm font-bold text-[#c9a750]">0{i + 1}</span>
+                      <div className="w-10 h-10 rounded-full border border-[#52b788]/60 bg-[#0c1311]/80 flex items-center justify-center">
+                        <span className="text-sm font-bold text-[#52b788]">0{i + 1}</span>
                       </div>
-                      <span className="text-[10px] uppercase font-bold tracking-widest px-3 py-1 rounded-full bg-[#c9a750]/20 border border-[#c9a750]/40 text-[#c9a750]">
+                      <span className="text-[10px] uppercase font-bold tracking-widest px-3 py-1 rounded-full bg-[#52b788]/20 border border-[#52b788]/40 text-[#52b788]">
                         تخصص دقيق
                       </span>
                     </div>
 
                     {/* Bottom: Title & Description */}
                     <div>
-                      <div className="h-0.5 w-12 bg-[#c9a750] mb-3"></div>
-                      <h3 className="text-xl font-bold text-[#e6d5c0] mb-2 leading-snug">
+                      <div className="h-0.5 w-12 bg-[#52b788] mb-3"></div>
+                      <h3 className="text-xl font-bold text-[#f8fafc] mb-2 leading-snug">
                         {service.name}
                       </h3>
-                      <p className="text-[#e6d5c0]/85 text-xs leading-relaxed">
+                      <p className="text-[#f8fafc]/85 text-xs leading-relaxed">
                         {service.short_desc}
                       </p>
                     </div>
                   </div>
 
-                  {/* Gold Border Highlight */}
-                  <div className="absolute inset-0 border-2 border-[#c9a750]/30 rounded-3xl pointer-events-none"></div>
+                  {/* Emerald Border Highlight */}
+                  <div className="absolute inset-0 border-2 border-[#52b788]/30 rounded-3xl pointer-events-none"></div>
                 </div>
               </SwiperSlide>
             ))}
@@ -213,24 +213,24 @@ export default function KoiaServicesSection({ services }: { services: Service[] 
             {displayServices.map((service, i) => (
               <div key={service.id} className="service-card group relative">
                 {/* Card Container */}
-                <div className="relative h-[460px] rounded-3xl overflow-hidden border border-[#c9a750]/20 hover:border-[#c9a750]/60 transition-all duration-1000 ease-out">
+                <div className="relative h-[460px] rounded-3xl overflow-hidden border border-[#52b788]/20 hover:border-[#52b788]/60 transition-all duration-1000 ease-out bg-[#141f1b]">
                   {/* Background Image */}
                   <div className="absolute inset-0">
                     <Image
                       src={cleanImageUrl(service.image_url)}
-                      alt={service.alt_image || "KOIA Service"}
+                      alt={service.alt_image || "Dental Service"}
                       fill
                       className="w-full h-full object-cover transition-all duration-[1500ms] group-hover:scale-110 group-hover:brightness-75 ease-out"
                     />
                     {/* Dark Overlay */}
-                    <div className="absolute inset-0 bg-gradient-to-b from-[#171410]/60 via-[#171410]/80 to-[#171410]"></div>
+                    <div className="absolute inset-0 bg-gradient-to-b from-[#0c1311]/60 via-[#0c1311]/80 to-[#0c1311]"></div>
                   </div>
 
                   {/* Content */}
                   <div className="absolute inset-0 p-8 flex flex-col justify-between">
                     {/* Top: Number */}
                     <div className="relative">
-                      <div className="text-7xl font-bold text-transparent bg-clip-text bg-gradient-to-br from-[#c9a750]/30 to-[#8c6d3b]/30 group-hover:from-[#c9a750] group-hover:to-[#8c6d3b] transition-all duration-700 leading-none">
+                      <div className="text-7xl font-bold text-transparent bg-clip-text bg-gradient-to-br from-[#52b788]/30 to-[#2d6a4f]/30 group-hover:from-[#52b788] group-hover:to-[#74c69d] transition-all duration-700 leading-none">
                         {i + 1}
                       </div>
                     </div>
@@ -238,15 +238,15 @@ export default function KoiaServicesSection({ services }: { services: Service[] 
                     {/* Bottom: Title & Description */}
                     <div>
                       {/* Divider Line */}
-                      <div className="h-px w-full bg-gradient-to-r from-[#c9a750] to-transparent mb-4 transform origin-left scale-x-0 group-hover:scale-x-100 transition-transform duration-700"></div>
+                      <div className="h-px w-full bg-gradient-to-r from-[#52b788] to-transparent mb-4 transform origin-left scale-x-0 group-hover:scale-x-100 transition-transform duration-700"></div>
 
                       {/* Title */}
-                      <h3 className="text-2xl font-bold text-[#e6d5c0] mb-2 tracking-wide leading-snug">
+                      <h3 className="text-2xl font-bold text-[#f8fafc] mb-2 tracking-wide leading-snug">
                         {service.name}
                       </h3>
 
                       {/* Description */}
-                      <p className="text-[#e6d5c0]/70 text-sm leading-relaxed transform opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-700 delay-100 italic">
+                      <p className="text-[#f8fafc]/75 text-sm leading-relaxed transform opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-700 delay-100">
                         {service.short_desc}
                       </p>
                     </div>
@@ -255,7 +255,7 @@ export default function KoiaServicesSection({ services }: { services: Service[] 
                   </div>
 
                   {/* Glow Effect on Hover */}
-                  <div className="absolute inset-0 bg-gradient-to-t from-[#c9a750]/0 via-[#c9a750]/0 to-[#c9a750]/0 group-hover:from-[#c9a750]/10 group-hover:via-[#c9a750]/5 transition-all duration-700 pointer-events-none"></div>
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#52b788]/0 via-[#52b788]/0 to-[#52b788]/0 group-hover:from-[#52b788]/10 group-hover:via-[#52b788]/5 transition-all duration-700 pointer-events-none"></div>
                 </div>
               </div>
             ))}

@@ -271,21 +271,21 @@ export default function KoiaContactSection({ contact }: { contact: Contact }) {
     <section
       id="contact-us"
       ref={sectionRef}
-      className="relative min-h-fit overflow-hidden py-12 px-6 md:px-12 lg:px-20"
+      className="relative min-h-fit overflow-hidden py-12 px-6 md:px-12 lg:px-20 bg-[#0c1311]"
       dir={locale === "ar" ? "rtl" : "ltr"}
     >
       <div className="relative max-w-7xl mx-auto">
         {/* Header */}
         <div className="text-center mb-10 lg:mb-14">
           <div className="contact-header inline-block mb-4">
-            <span className="text-[#c9a750] text-xs font-bold tracking-[0.3em] uppercase">
+            <span className="text-[#52b788] text-xs font-bold tracking-[0.3em] uppercase">
               {t("Get In Touch")}
             </span>
-            <div className="contact-header-line h-0.5 w-full bg-gradient-to-r from-transparent via-[#c9a750] to-transparent mt-2"></div>
+            <div className="contact-header-line h-0.5 w-full bg-gradient-to-r from-transparent via-[#52b788] to-transparent mt-2"></div>
           </div>
-          <h2 className="contact-title text-3xl sm:text-4xl md:text-5xl font-bold text-[#e6d5c0] leading-tight mb-4">
+          <h2 className="contact-title text-3xl sm:text-4xl md:text-5xl font-bold text-[#f8fafc] leading-tight mb-4">
             {t("LETS")}{" "}
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#c9a750] via-[#b2913c] to-[#8c6d3b] animate-gradient">
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#52b788] via-[#74c69d] to-[#40916c] animate-gradient">
               {t("CONNECT-section")}
             </span>
           </h2>
@@ -298,18 +298,18 @@ export default function KoiaContactSection({ contact }: { contact: Contact }) {
               {contactInfo.map((info, index) => (
                 <div
                   key={info.title}
-                  className="contact-info-card group relative p-6 bg-gradient-to-r from-[#3b3121]/50 to-[#5d492c]/30 rounded-xl border border-[#c9a750]/20 hover:border-[#c9a750]/60 transition-all duration-500 hover:scale-105"
+                  className="contact-info-card group relative p-6 bg-gradient-to-r from-[#141f1b] to-[#1b2a24] rounded-xl border border-[#52b788]/20 hover:border-[#52b788]/60 transition-all duration-500 hover:scale-105 shadow-[0_10px_30px_rgba(0,0,0,0.4)]"
                   style={{ transitionDelay: `${index * 100}ms` }}
                 >
                   <div className="flex items-start gap-4">
-                    <div className="flex-shrink-0 w-12 h-12 rounded-lg bg-[#c9a750]/20 flex items-center justify-center text-[#c9a750] group-hover:bg-[#c9a750] group-hover:text-[#171410] transition-all duration-500">
+                    <div className="flex-shrink-0 w-12 h-12 rounded-lg bg-[#52b788]/15 flex items-center justify-center text-[#52b788] group-hover:bg-[#52b788] group-hover:text-[#0c1311] transition-all duration-500">
                       {info.icon}
                     </div>
                     <div>
-                      <h3 className="text-[#c9a750] text-sm font-semibold uppercase tracking-wider mb-1">
+                      <h3 className="text-[#52b788] text-sm font-semibold uppercase tracking-wider mb-1">
                         {info.title}
                       </h3>
-                      <p className="text-[#e6d5c0] text-lg">{info.value}</p>
+                      <p className="text-[#f8fafc] text-lg">{info.value}</p>
                     </div>
                   </div>
                 </div>
@@ -317,13 +317,13 @@ export default function KoiaContactSection({ contact }: { contact: Contact }) {
             </div>
 
             {/* Decorative Quote */}
-            <div className="contact-quote relative p-7 bg-gradient-to-br from-[#3b3121]/30 to-transparent rounded-xl border border-[#c9a750]/10">
+            <div className="contact-quote relative p-7 bg-gradient-to-br from-[#141f1b]/80 to-transparent rounded-xl border border-[#52b788]/20">
               <div
-                className={`absolute ${locale === "en" ? "left-4 top-4" : "right-4 top-4.5"} text-6xl text-[#c9a750]/20`}
+                className={`absolute ${locale === "en" ? "left-4 top-4" : "right-4 top-4.5"} text-6xl text-[#52b788]/20`}
               >
                 &quot;
               </div>
-              <p className="relative z-10 text-[#e6d5c0]/80 text-lg italic leading-relaxed ps-5">
+              <p className="relative z-10 text-[#cbd5e1] text-lg italic leading-relaxed ps-5">
                 {t(
                   "Quality is not an act, it is a habit Lets build something exceptional together",
                 )}
@@ -335,12 +335,12 @@ export default function KoiaContactSection({ contact }: { contact: Contact }) {
           <div className="lg:col-span-3">
             <form
               onSubmit={handleSubmit}
-              className="contact-form relative p-8 md:p-12 bg-gradient-to-br from-[#3b3121]/40 to-[#5d492c]/20 rounded-2xl border border-[#c9a750]/20 backdrop-blur-sm"
+              className="contact-form relative p-8 md:p-12 bg-gradient-to-br from-[#141f1b] to-[#1b2a24]/90 rounded-2xl border border-[#52b788]/25 backdrop-blur-sm shadow-2xl"
             >
               {/* Success Message */}
               {submitStatus === "success" && errorMessage && (
-                <div className="mb-6 p-4 bg-green-500/20 border border-green-500/50 rounded-lg">
-                  <p className="text-green-400 text-center font-semibold">
+                <div className="mb-6 p-4 bg-emerald-500/20 border border-emerald-500/50 rounded-lg">
+                  <p className="text-emerald-400 text-center font-semibold">
                     {errorMessage}
                   </p>
                 </div>
@@ -362,8 +362,8 @@ export default function KoiaContactSection({ contact }: { contact: Contact }) {
                     htmlFor="name"
                     className={`absolute ${locale === "en" ? "left-4" : "right-4"} transition-all duration-300 pointer-events-none ${
                       focusedField === "name" || formData.name
-                        ? "-top-6 text-[#c9a750]"
-                        : "top-4 text-base text-[#e6d5c0]/50"
+                        ? "-top-6 text-[#52b788]"
+                        : "top-4 text-base text-[#94a3b8]"
                     }`}
                   >
                     {t("Full Name")} *
@@ -376,9 +376,9 @@ export default function KoiaContactSection({ contact }: { contact: Contact }) {
                     onChange={handleChange}
                     onFocus={() => setFocusedField("name")}
                     onBlur={() => setFocusedField(null)}
-                    className={`w-full px-4 py-4 bg-[#171410]/50 border ${
-                      errors.name ? "border-red-500" : "border-[#c9a750]/30"
-                    } rounded-lg text-[#e6d5c0] focus:border-[#c9a750] focus:inOutline-none transition-all duration-300 ${locale === "ar" ? "text-right" : "text-left"}`}
+                    className={`w-full px-4 py-4 bg-[#0c1311]/70 border ${
+                      errors.name ? "border-red-500" : "border-[#52b788]/30"
+                    } rounded-lg text-[#f8fafc] focus:border-[#52b788] focus:outline-none transition-all duration-300 ${locale === "ar" ? "text-right" : "text-left"}`}
                     suppressHydrationWarning
                   />
                   {errors.name && (
@@ -394,8 +394,8 @@ export default function KoiaContactSection({ contact }: { contact: Contact }) {
                       htmlFor="email"
                       className={`absolute ${locale === "en" ? "left-4" : "right-4"} transition-all duration-300 pointer-events-none ${
                         focusedField === "email" || formData.email
-                          ? "-top-6 text-[#c9a750]"
-                          : "top-4 text-base text-[#e6d5c0]/50"
+                          ? "-top-6 text-[#52b788]"
+                          : "top-4 text-base text-[#94a3b8]"
                       }`}
                     >
                       {t("Email Address")} *
@@ -408,9 +408,9 @@ export default function KoiaContactSection({ contact }: { contact: Contact }) {
                       onChange={handleChange}
                       onFocus={() => setFocusedField("email")}
                       onBlur={() => setFocusedField(null)}
-                      className={`w-full px-4 py-4 bg-[#171410]/50 border ${
-                        errors.email ? "border-red-500" : "border-[#c9a750]/30"
-                      } rounded-lg text-[#e6d5c0] focus:border-[#c9a750] focus:inOutline-none transition-all duration-300 ${locale === "ar" ? "text-right" : "text-left"}`}
+                      className={`w-full px-4 py-4 bg-[#0c1311]/70 border ${
+                        errors.email ? "border-red-500" : "border-[#52b788]/30"
+                      } rounded-lg text-[#f8fafc] focus:border-[#52b788] focus:outline-none transition-all duration-300 ${locale === "ar" ? "text-right" : "text-left"}`}
                       suppressHydrationWarning
                     />
                     {errors.email && (
@@ -426,8 +426,8 @@ export default function KoiaContactSection({ contact }: { contact: Contact }) {
                       htmlFor="phone"
                       className={`absolute ${locale === "en" ? "left-4" : "right-4"} transition-all duration-300 pointer-events-none ${
                         focusedField === "phone" || formData.phone
-                          ? "-top-6 text-[#c9a750]"
-                          : "top-4 text-base text-[#e6d5c0]/50"
+                          ? "-top-6 text-[#52b788]"
+                          : "top-4 text-base text-[#94a3b8]"
                       }`}
                     >
                       {t("Phone Number")} *
@@ -440,9 +440,9 @@ export default function KoiaContactSection({ contact }: { contact: Contact }) {
                       onChange={handleChange}
                       onFocus={() => setFocusedField("phone")}
                       onBlur={() => setFocusedField(null)}
-                      className={`w-full px-4 py-4 bg-[#171410]/50 border ${
-                        errors.phone ? "border-red-500" : "border-[#c9a750]/30"
-                      } rounded-lg text-[#e6d5c0] focus:border-[#c9a750] focus:inOutline-none transition-all duration-300 ${locale === "ar" ? "text-right" : "text-left"}`}
+                      className={`w-full px-4 py-4 bg-[#0c1311]/70 border ${
+                        errors.phone ? "border-red-500" : "border-[#52b788]/30"
+                      } rounded-lg text-[#f8fafc] focus:border-[#52b788] focus:outline-none transition-all duration-300 ${locale === "ar" ? "text-right" : "text-left"}`}
                       suppressHydrationWarning
                     />
                     {errors.phone && (
@@ -461,8 +461,8 @@ export default function KoiaContactSection({ contact }: { contact: Contact }) {
                       htmlFor="job_title"
                       className={`absolute ${locale === "en" ? "left-4" : "right-4"} transition-all duration-300 pointer-events-none ${
                         focusedField === "job_title" || formData.job_title
-                          ? "-top-6 text-[#c9a750]"
-                          : "top-4 text-base text-[#e6d5c0]/50"
+                          ? "-top-6 text-[#52b788]"
+                          : "top-4 text-base text-[#94a3b8]"
                       }`}
                     >
                       {t("Job Title")}
@@ -475,7 +475,7 @@ export default function KoiaContactSection({ contact }: { contact: Contact }) {
                       onChange={handleChange}
                       onFocus={() => setFocusedField("job_title")}
                       onBlur={() => setFocusedField(null)}
-                      className={`w-full px-4 py-4 bg-[#171410]/50 border border-[#c9a750]/30 rounded-lg text-[#e6d5c0] focus:border-[#c9a750] focus:inOutline-none transition-all duration-300 ${locale === "ar" ? "text-right" : "text-left"}`}
+                      className={`w-full px-4 py-4 bg-[#0c1311]/70 border border-[#52b788]/30 rounded-lg text-[#f8fafc] focus:border-[#52b788] focus:outline-none transition-all duration-300 ${locale === "ar" ? "text-right" : "text-left"}`}
                       suppressHydrationWarning
                     />
                   </div>
@@ -486,8 +486,8 @@ export default function KoiaContactSection({ contact }: { contact: Contact }) {
                       htmlFor="company_name"
                       className={`absolute ${locale === "en" ? "left-4" : "right-4"} transition-all duration-300 pointer-events-none ${
                         focusedField === "company_name" || formData.company_name
-                          ? "-top-6 text-[#c9a750]"
-                          : "top-4 text-base text-[#e6d5c0]/50"
+                          ? "-top-6 text-[#52b788]"
+                          : "top-4 text-base text-[#94a3b8]"
                       }`}
                     >
                       {t("Company Name")}
@@ -500,7 +500,7 @@ export default function KoiaContactSection({ contact }: { contact: Contact }) {
                       onChange={handleChange}
                       onFocus={() => setFocusedField("company_name")}
                       onBlur={() => setFocusedField(null)}
-                      className={`w-full px-4 py-4 bg-[#171410]/50 border border-[#c9a750]/30 rounded-lg text-[#e6d5c0] focus:border-[#c9a750] focus:inOutline-none transition-all duration-300 ${locale === "ar" ? "text-right" : "text-left"}`}
+                      className={`w-full px-4 py-4 bg-[#0c1311]/70 border border-[#52b788]/30 rounded-lg text-[#f8fafc] focus:border-[#52b788] focus:outline-none transition-all duration-300 ${locale === "ar" ? "text-right" : "text-left"}`}
                       suppressHydrationWarning
                     />
                   </div>
@@ -512,8 +512,8 @@ export default function KoiaContactSection({ contact }: { contact: Contact }) {
                     htmlFor="message"
                     className={`absolute ${locale === "en" ? "left-4" : "right-4"} transition-all duration-300 pointer-events-none ${
                       focusedField === "message" || formData.message
-                        ? "-top-6 text-[#c9a750]"
-                        : "top-4 text-base text-[#e6d5c0]/50"
+                        ? "-top-6 text-[#52b788]"
+                        : "top-4 text-base text-[#94a3b8]"
                     }`}
                   >
                     {t("Message")} *
@@ -526,9 +526,9 @@ export default function KoiaContactSection({ contact }: { contact: Contact }) {
                     onFocus={() => setFocusedField("message")}
                     onBlur={() => setFocusedField(null)}
                     rows={6}
-                    className={`w-full px-4 py-4 bg-[#171410]/50 border ${
-                      errors.message ? "border-red-500" : "border-[#c9a750]/30"
-                    } rounded-lg text-[#e6d5c0] focus:border-[#c9a750] focus:inOutline-none transition-all duration-300 resize-none ${locale === "ar" ? "text-right" : "text-left"}`}
+                    className={`w-full px-4 py-4 bg-[#0c1311]/70 border ${
+                      errors.message ? "border-red-500" : "border-[#52b788]/30"
+                    } rounded-lg text-[#f8fafc] focus:border-[#52b788] focus:outline-none transition-all duration-300 resize-none ${locale === "ar" ? "text-right" : "text-left"}`}
                     suppressHydrationWarning
                   />
                   {errors.message && (
@@ -538,15 +538,14 @@ export default function KoiaContactSection({ contact }: { contact: Contact }) {
                   )}
                 </div>
 
-                {/* Submit Button - Made Thinner */}
+                {/* Submit Button */}
                 <button
                   type="submit"
                   disabled={isSubmitting}
-                  className="group relative cursor-pointer w-full px-8 py-3.5 bg-gradient-to-r from-[#c9a750] to-[#b2913c] rounded-lg overflow-hidden transition-all duration-300 hover:shadow-2xl hover:shadow-[#c9a750]/30 hover:scale-[1.02] disabled:opacity-50 disabled:cursor-not-allowed"
+                  className="group relative cursor-pointer w-full px-8 py-4 bg-gradient-to-r from-[#2d6a4f] via-[#40916c] to-[#52b788] rounded-xl overflow-hidden transition-all duration-300 hover:shadow-[0_0_30px_rgba(82,183,136,0.35)] hover:scale-[1.02] disabled:opacity-50 disabled:cursor-not-allowed text-white font-bold text-base tracking-wide"
                   suppressHydrationWarning
                 >
-                  <div className="absolute inset-0 bg-gradient-to-r from-[#b2913c] to-[#c9a750] opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                  <span className="relative z-10 flex items-center justify-center gap-3 text-[#171410] font-bold text-base tracking-wide">
+                  <span className="relative z-10 flex items-center justify-center gap-3">
                     {isSubmitting ? (
                       <>
                         <svg
@@ -576,7 +575,6 @@ export default function KoiaContactSection({ contact }: { contact: Contact }) {
                     )}
                   </span>
                 </button>
-
               </div>
             </form>
           </div>

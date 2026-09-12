@@ -10,10 +10,16 @@ export async function fetchHomeData(lang = "en") {
       method: "GET",
     });
 
-    const data = await response.json();
+    const text = await response.text();
+    let data = null;
+    try {
+      data = text ? JSON.parse(text) : null;
+    } catch (e) {
+      console.warn("JSON parse error:", e);
+    }
 
-    if (!response.ok) {
-      console.error("Failed to fetch home data:", data);
+    if (!response.ok || !data) {
+      console.error("Failed to fetch home data:", data || text);
       return { success: false, message: "Failed To Fetch Home Data" };
     }
 

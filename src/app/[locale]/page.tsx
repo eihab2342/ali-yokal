@@ -32,7 +32,7 @@ export default async function page({
   } = data;
 
   return (
-    <main className="bg-[#171410] text-[#e6d5c0] min-h-screen">
+    <main className="bg-[#0c1311] text-[#f8fafc] min-h-screen">
       <Header logoSrc={home.logo} />
       <Hero home={home} />
       <AboutSection about={about} statistics={statistics} />

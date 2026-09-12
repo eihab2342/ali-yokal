@@ -25,7 +25,7 @@ export default function LanguageSwitcher() {
       size="icon"
       onClick={handleSwitch}
       disabled={isPending}
-      className="cursor-pointer bg-[#c9a750] hover:bg-[#c9a75094]"
+      className="cursor-pointer bg-[#52b788] hover:bg-[#40916c] text-[#0c1311] hover:text-[#f8fafc] font-bold transition-all shadow-[0_0_15px_rgba(82,183,136,0.3)]"
       title={locale === "en" ? "Switch to Arabic" : "Switch to English"}
     >
       <Languages className="h-5 w-5" />

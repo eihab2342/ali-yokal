@@ -58,12 +58,12 @@ export default function RiskManagement({ sections }: { sections: Section }) {
     <div className="pt-6 lg:pt-16 pb-10 lg:pb-20">
       <div className="mb-14 text-center">
         <div className="risk-label inline-block mb-4">
-          <span className="text-xs font-bold tracking-[0.35em] uppercase" style={{ color: "#c9a750" }}>{t("RiskManagement-Label")}</span>
-          <div className="risk-header-line h-0.5 w-full mt-2" style={{ background: "linear-gradient(to right, transparent, #c9a750, transparent)" }}></div>
+          <span className="text-xs font-bold tracking-[0.35em] uppercase" style={{ color: "#52b788" }}>{t("RiskManagement-Label")}</span>
+          <div className="risk-header-line h-0.5 w-full mt-2" style={{ background: "linear-gradient(to right, transparent, #52b788, transparent)" }}></div>
         </div>
-        <h2 className="risk-title text-3xl sm:text-4xl md:text-5xl font-bold leading-tight tracking-tight uppercase" style={{ color: "#e6d5c0" }}>
+        <h2 className="risk-title text-3xl sm:text-4xl md:text-5xl font-bold leading-tight tracking-tight uppercase" style={{ color: "#f8fafc" }}>
           {t("HowWeControl")}{" "}
-          <span style={{ background: "linear-gradient(135deg, #c9a750 0%, #b2913c 50%, #8c6d3b 100%)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text" }}>
+          <span style={{ background: "linear-gradient(135deg, #52b788 0%, #74c69d 50%, #2d6a4f 100%)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text" }}>
             {t("ProjectRisks")}
           </span>
         </h2>
@@ -72,29 +72,29 @@ export default function RiskManagement({ sections }: { sections: Section }) {
       <div className="risk-grid grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-5">
         {riskDataItems.map((item, i) => (
           <div key={item.id || i} className="risk-card group relative rounded-2xl border overflow-hidden"
-            style={{ borderColor: "rgba(201,167,80,0.22)", background: "linear-gradient(145deg, rgba(201,167,80,0.06) 0%, rgba(23,20,16,0.5) 100%)" }}>
+            style={{ borderColor: "rgba(82,183,136,0.25)", background: "linear-gradient(145deg, rgba(82,183,136,0.08) 0%, rgba(12,19,17,0.7) 100%)" }}>
             <div className="h-[2px] origin-left scale-x-0 group-hover:scale-x-100 transition-transform duration-700"
-              style={{ background: "linear-gradient(to right, #c9a750, #8c6d3b)" }} />
+              style={{ background: "linear-gradient(to right, #52b788, #2d6a4f)" }} />
             <div className="p-7 flex flex-col gap-5">
               <div className="flex items-start justify-between">
-                <div className="w-12 h-12 rounded-xl flex items-center justify-center border transition-all duration-500 group-hover:border-[rgba(201,167,80,0.6)] group-hover:bg-[rgba(201,167,80,0.08)]"
-                  style={{ borderColor: "rgba(201,167,80,0.2)", color: "#c9a750", background: "rgba(201,167,80,0.04)" }}>
+                <div className="w-12 h-12 rounded-xl flex items-center justify-center border transition-all duration-500 group-hover:border-[rgba(82,183,136,0.6)] group-hover:bg-[rgba(82,183,136,0.12)]"
+                  style={{ borderColor: "rgba(82,183,136,0.25)", color: "#52b788", background: "rgba(82,183,136,0.05)" }}>
                   {iconList[i] || <ShieldCheck className="w-6 h-6" />}
                 </div>
                 <span className="text-5xl font-bold leading-none select-none"
-                  style={{ background: "linear-gradient(135deg, rgba(201,167,80,0.18), rgba(140,109,59,0.08))", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text" }}>
+                  style={{ background: "linear-gradient(135deg, rgba(82,183,136,0.25), rgba(45,106,79,0.1))", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text" }}>
                   {String(i + 1).padStart(2, "0")}
                 </span>
               </div>
               <h3 className="text-base font-semibold leading-snug transition-colors duration-500 group-hover:opacity-100"
-                style={{ color: "#e6d5c0", opacity: 0.75 }}>
+                style={{ color: "#f8fafc", opacity: 0.85 }}>
                 {item.title}
               </h3>
               <div className="h-px origin-left scale-x-0 group-hover:scale-x-100 transition-transform duration-700 mt-1"
-                style={{ background: "linear-gradient(to right, rgba(201,167,80,0.45), transparent)" }} />
+                style={{ background: "linear-gradient(to right, rgba(82,183,136,0.45), transparent)" }} />
             </div>
             <div className="pointer-events-none absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-700"
-              style={{ background: "radial-gradient(ellipse at 30% 0%, rgba(201,167,80,0.07) 0%, transparent 70%)" }} />
+              style={{ background: "radial-gradient(ellipse at 30% 0%, rgba(82,183,136,0.1) 0%, transparent 70%)" }} />
           </div>
         ))}
       </div>

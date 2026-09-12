@@ -208,10 +208,10 @@ export default function Footer({ social_links, services }: { social_links: Socia
         @keyframes pulse-glow {
           0%,
           100% {
-            box-shadow: 0 0 5px rgba(201, 167, 80, 0.2);
+            box-shadow: 0 0 5px rgba(82, 183, 136, 0.2);
           }
           50% {
-            box-shadow: 0 0 20px rgba(201, 167, 80, 0.4);
+            box-shadow: 0 0 20px rgba(82, 183, 136, 0.4);
           }
         }
 
@@ -243,7 +243,7 @@ export default function Footer({ social_links, services }: { social_links: Socia
           background: linear-gradient(
             90deg,
             transparent,
-            rgba(201, 167, 80, 0.3),
+            rgba(82, 183, 136, 0.3),
             transparent
           );
           background-size: 1000px 100%;
@@ -254,14 +254,14 @@ export default function Footer({ social_links, services }: { social_links: Socia
       <footer
         ref={footerRef}
         id="footer"
-        className="relative border-t border-[#c9a750]/20 overflow-hidden"
+        className="relative border-t border-[#52b788]/20 bg-[#0c1311] overflow-hidden"
       >
         {/* Animated Background Pattern */}
         <div className="absolute inset-0 opacity-5">
           <div
             className="absolute inset-0"
             style={{
-              backgroundImage: `radial-gradient(circle at 2px 2px, #c9a750 1px, transparent 0)`,
+              backgroundImage: `radial-gradient(circle at 2px 2px, #52b788 1px, transparent 0)`,
               backgroundSize: "40px 40px",
             }}
           ></div>
@@ -276,12 +276,14 @@ export default function Footer({ social_links, services }: { social_links: Socia
             {/* Brand Section */}
             <div className="lg:col-span-4 animate-on-scroll">
               <div className="mb-6">
-                <div className="transform transition-all duration-500 hover:scale-105">
-                  <Image src={logo} alt="Logo" width={120} height={40} />
+                <div className="transform transition-all duration-500 hover:scale-105 inline-block">
+                  <div className="bg-white/95 px-3 py-1.5 rounded-2xl shadow-[0_0_20px_rgba(82,183,136,0.25)] flex items-center justify-center">
+                    <Image src={logo} alt="Ali Yakout Dental Clinic" width={140} height={45} className="h-8 w-auto object-contain" />
+                  </div>
                 </div>
-                <div className="h-1 w-20 bg-gradient-to-r from-[#c9a750] to-transparent mt-2 animate-on-scroll delay-1"></div>
+                <div className="h-1 w-20 bg-gradient-to-r from-[#52b788] to-transparent mt-3 animate-on-scroll delay-1"></div>
               </div>
-              <p className="text-[#e6d5c0]/70 text-base leading-relaxed mb-6 animate-on-scroll delay-2">
+              <p className="text-[#cbd5e1] text-base leading-relaxed mb-6 animate-on-scroll delay-2">
                 {t("Footer-Description")}
               </p>
               {/* Social Links */}
@@ -292,7 +294,7 @@ export default function Footer({ social_links, services }: { social_links: Socia
                     href={social.url}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="group w-10 h-10 rounded-lg bg-[#3b3121]/50 border border-[#c9a750]/20 flex items-center justify-center text-[#c9a750] hover:bg-[#c9a750] hover:text-[#171410] hover:border-[#c9a750] transition-all duration-300 hover:scale-110"
+                    className="group w-10 h-10 rounded-lg bg-[#141f1b] border border-[#52b788]/20 flex items-center justify-center text-[#52b788] hover:bg-[#52b788] hover:text-[#0c1311] hover:border-[#52b788] transition-all duration-300 hover:scale-110"
                     style={{ animationDelay: `${index * 0.1}s` }}
                     aria-label={social.platform}
                   >
@@ -306,9 +308,9 @@ export default function Footer({ social_links, services }: { social_links: Socia
 
             {/* Company Links */}
             <div className="lg:col-span-4 animate-on-scroll delay-2">
-              <h4 className="text-[#e6d5c0] text-lg font-bold mb-6 uppercase tracking-wider relative inline-block">
+              <h4 className="text-[#f8fafc] text-lg font-bold mb-6 uppercase tracking-wider relative inline-block">
                 {t("Sections")}
-                <div className="absolute -bottom-2 left-0 h-0.5 w-12 bg-[#c9a750] shimmer-line"></div>
+                <div className="absolute -bottom-2 left-0 h-0.5 w-12 bg-[#52b788] shimmer-line"></div>
               </h4>
               <ul className="grid grid-cols-3">
                 {footerLinks.company.map((link, index) => (
@@ -320,9 +322,9 @@ export default function Footer({ social_links, services }: { social_links: Socia
                     <Link
                       href={link.href}
                       onClick={(e) => handleScroll(e, link.href)}
-                      className="group text-[#e6d5c0]/70 hover:text-[#c9a750] transition-all duration-300 flex items-center gap-2 py-1"
+                      className="group text-[#cbd5e1] hover:text-[#52b788] transition-all duration-300 flex items-center gap-2 py-1"
                     >
-                      <span className="w-0 group-hover:w-2 h-px bg-[#c9a750] transition-all duration-300"></span>
+                      <span className="w-0 group-hover:w-2 h-px bg-[#52b788] transition-all duration-300"></span>
                       <span className="transform transition-transform duration-300 group-hover:translate-x-1">
                         {link.name}
                       </span>
@@ -334,9 +336,9 @@ export default function Footer({ social_links, services }: { social_links: Socia
 
             {/* Services Links */}
             <div className="lg:col-span-4 animate-on-scroll delay-3">
-              <h4 className="text-[#e6d5c0] text-lg font-bold mb-6 uppercase tracking-wider relative inline-block">
+              <h4 className="text-[#f8fafc] text-lg font-bold mb-6 uppercase tracking-wider relative inline-block">
                 {t("Services")}
-                <div className="absolute -bottom-2 left-0 h-0.5 w-12 bg-[#c9a750] shimmer-line"></div>
+                <div className="absolute -bottom-2 left-0 h-0.5 w-12 bg-[#52b788] shimmer-line"></div>
               </h4>
               <ul className="space-y-3">
                 {services.map((service, index) => (
@@ -345,8 +347,8 @@ export default function Footer({ social_links, services }: { social_links: Socia
                     className="animate-on-scroll"
                     style={{ animationDelay: `${0.4 + index * 0.1}s` }}
                   >
-                    <div className="text-[#e6d5c0]/70 flex items-center gap-2 py-1">
-                      <span className="w-1 h-px bg-[#c9a750]/30"></span>
+                    <div className="text-[#cbd5e1] flex items-center gap-2 py-1">
+                      <span className="w-1 h-px bg-[#52b788]/40"></span>
                       <span>{service.name}</span>
                     </div>
                   </li>
@@ -356,22 +358,20 @@ export default function Footer({ social_links, services }: { social_links: Socia
           </div>
 
           {/* Divider */}
-          <div className="h-px bg-gradient-to-r from-transparent via-[#c9a750]/30 to-transparent mb-6 animate-on-scroll delay-4 shimmer-line"></div>
+          <div className="h-px bg-gradient-to-r from-transparent via-[#52b788]/30 to-transparent mb-6 animate-on-scroll delay-4 shimmer-line"></div>
 
           {/* Bottom Bar */}
           <div className="flex flex-col md:flex-row justify-center items-center gap-4 animate-on-scroll delay-4">
-            <p className="text-[#e6d5c0]/60 text-sm">
+            <p className="text-[#94a3b8] text-sm">
               {t("All Rights Reserved")}{" "}
-              <Link href="https://www.be-group.com" target="_blank" className="text-orange-400 font-medium hover:text-[#c9a750] transition-colors duration-300 cursor-default">
-                Be Group
-              </Link>{" "}
+              <span className="text-[#52b788] font-bold">عيادة د. علي ياقوت لطب وتجميل الأسنان</span>{" "}
               © {new Date().getFullYear()}
             </p>
           </div>
         </div>
 
         {/* Decorative Bottom Accent */}
-        <div className="h-1 bg-gradient-to-r from-transparent via-[#c9a750] to-transparent shimmer-line"></div>
+        <div className="h-1 bg-gradient-to-r from-transparent via-[#52b788] to-transparent shimmer-line"></div>
       </footer>
     </>
   );

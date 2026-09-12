@@ -89,7 +89,7 @@ export default function SmoothScrollProvider({ children }: SmoothScrollProps) {
   }, []);
 
   return (
-    <div id="smooth-wrapper" className="bg-[#171410]">
+    <div id="smooth-wrapper" className="bg-[#0c1311]">
       <div id="smooth-content">{children}</div>
     </div>
   );

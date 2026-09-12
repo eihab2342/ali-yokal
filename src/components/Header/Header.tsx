@@ -48,20 +48,21 @@ export default function Header({ type = "popup", logoSrc }: HeaderProps) {
       start: 1,
       onEnter: () => {
         gsap.to(headerRef.current, {
-          background:
-            "linear-gradient(180deg, rgba(230, 213, 192, 0.95) 0%, rgba(230, 213, 192, 0.98) 100%)",
-          boxShadow: "0 4px 20px rgba(23, 20, 16, 0.12)",
-          backdropFilter: "blur(12px)",
-          duration: 0.6,
-          ease: "power4.inOut",
+          background: "rgba(12, 19, 17, 0.92)",
+          borderBottom: "1px solid rgba(82, 183, 136, 0.2)",
+          boxShadow: "0 10px 30px rgba(0, 0, 0, 0.6)",
+          backdropFilter: "blur(14px)",
+          duration: 0.5,
+          ease: "power3.inOut",
         });
       },
       onLeaveBack: () => {
         gsap.to(headerRef.current, {
           background: "transparent",
+          borderBottom: "1px solid transparent",
           boxShadow: "none",
           backdropFilter: "blur(0px)",
-          duration: 0.5,
+          duration: 0.4,
           ease: "power2.inOut",
         });
       },
@@ -107,7 +108,7 @@ export default function Header({ type = "popup", logoSrc }: HeaderProps) {
     <header
       ref={headerRef}
       data-fixed
-      className="fixed top-0 left-0 right-0 z-[999] text-[#171410] transition-all duration-300 md:py-2 animate-header-fade-in opacity-0"
+      className="fixed top-0 left-0 right-0 z-[999] text-[#f8fafc] transition-all duration-300 md:py-2 animate-header-fade-in opacity-0"
       style={{ backdropFilter: "blur(0px)" }}
     >
       <div className="container mx-auto px-4 h-16 flex items-center justify-between relative">
@@ -117,13 +118,15 @@ export default function Header({ type = "popup", logoSrc }: HeaderProps) {
           onClick={(e) => handleScroll(e, "#home")}
           className="flex items-center gap-2 font-bold transition-all duration-300 hover:scale-105"
         >
-          <Image
-            src={logoSrc ? cleanImageUrl(logoSrc) : staticLogo}
-            alt="Logo"
-            width={120}
-            height={50}
-            className="w-[100px] md:w-[140px] cursor-pointer drop-shadow-[0_0_1px_rgba(255,255,255,1)]"
-          />
+          <div className="bg-white/95 px-3 py-1.5 rounded-2xl shadow-[0_0_20px_rgba(82,183,136,0.3)] flex items-center justify-center">
+            <Image
+              src={logoSrc ? cleanImageUrl(logoSrc) : staticLogo}
+              alt="Ali Yakout Dental Clinic"
+              width={140}
+              height={45}
+              className="h-7 sm:h-9 w-auto object-contain cursor-pointer"
+            />
+          </div>
         </Link>
 
         <nav className="hidden md:flex items-center gap-8">
@@ -137,19 +140,19 @@ export default function Header({ type = "popup", logoSrc }: HeaderProps) {
                   onClick={(e) => handleScroll(e, item.href)}
                   className={`relative text-base font-medium transition-all duration-300 hover:scale-105
                     ${isActive
-                      ? "text-[#b2913c]"
-                      : "text-[#b2913c] hover:text-[#b2913c]"
+                      ? "text-[#52b788] font-bold"
+                      : "text-[#f8fafc]/80 hover:text-[#52b788]"
                     }
                   `}
                 >
                   {item.name}
                   <span
-                    className={`absolute -bottom-1 left-0 h-[2px] bg-[#503c1b] rounded-full transition-all duration-300 ease-out
-                      ${isActive ? "w-full opacity-100" : "w-0 opacity-0"}
+                    className={`absolute -bottom-1 left-0 h-[2px] bg-[#52b788] rounded-full transition-all duration-300 ease-out
+                      ${isActive ? "w-full opacity-100 shadow-[0_0_10px_#52b788]" : "w-0 opacity-0"}
                     `}
                   />
                   <span
-                    className={`absolute -bottom-1 left-0 h-[2px] bg-[#5d492c] rounded-full transition-all duration-300 ease-out opacity-0 hover:opacity-50
+                    className={`absolute -bottom-1 left-0 h-[2px] bg-[#52b788]/60 rounded-full transition-all duration-300 ease-out opacity-0 hover:opacity-100
                       ${isActive ? "w-0" : "w-0 hover:w-full"}
                     `}
                   />

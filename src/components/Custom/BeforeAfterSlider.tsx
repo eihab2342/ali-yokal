@@ -94,18 +94,18 @@ export default function BeforeAfterSection({ projects }: { projects?: Project[] 
   };
 
   return (
-    <section id="cases" className="relative py-20 px-6 md:px-12 lg:px-20 overflow-hidden bg-gradient-to-b from-[#171410] via-[#1a1612] to-[#171410]">
+    <section id="cases" className="relative py-20 px-6 md:px-12 lg:px-20 overflow-hidden bg-gradient-to-b from-[#0c1311] via-[#101915] to-[#0c1311]">
       <div className="max-w-7xl mx-auto">
         {/* Header */}
         <div className="text-center mb-14">
-          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-[#c9a750]/30 bg-[#c9a750]/10 text-[#c9a750] text-xs font-bold tracking-[0.25em] uppercase mb-4">
+          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-[#52b788]/40 bg-[#2d6a4f]/20 text-[#52b788] text-xs font-bold tracking-[0.25em] uppercase mb-4 shadow-[0_0_15px_rgba(82,183,136,0.15)]">
             <Sparkles className="w-3.5 h-3.5" />
             <span>نتائج واقعية حية</span>
           </div>
-          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-[#e6d5c0] leading-tight">
-            معرض الحالات <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#c9a750] via-[#b2913c] to-[#8c6d3b]">قبل وبعد</span>
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-[#f8fafc] leading-tight">
+            معرض الحالات <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#52b788] via-[#74c69d] to-[#40916c]">قبل وبعد</span>
           </h2>
-          <p className="text-[#e6d5c0]/70 max-w-2xl mx-auto mt-4 text-base md:text-lg">
+          <p className="text-[#cbd5e1] max-w-2xl mx-auto mt-4 text-base md:text-lg">
             شاهد كيف يعيد العلاج التحفظي والحشو التجميلي الميكروني بناء الأسنان التالفة بدقة تحاكي الطبيعة تماماً.
           </p>
         </div>
@@ -121,8 +121,8 @@ export default function BeforeAfterSection({ projects }: { projects?: Project[] 
               }}
               className={`px-5 py-2.5 rounded-xl text-xs md:text-sm font-semibold transition-all duration-300 cursor-pointer border ${
                 activeCase === idx
-                  ? "bg-gradient-to-r from-[#c9a750] to-[#b2913c] text-[#171410] border-transparent shadow-[0_0_25px_rgba(201,167,80,0.3)] scale-105"
-                  : "bg-[#1a1612] text-[#e6d5c0]/70 border-[#c9a750]/20 hover:border-[#c9a750]/60 hover:text-[#e6d5c0]"
+                  ? "bg-gradient-to-r from-[#2d6a4f] via-[#40916c] to-[#52b788] text-white border-transparent shadow-[0_0_25px_rgba(82,183,136,0.35)] scale-105"
+                  : "bg-[#141f1b] text-[#cbd5e1] border-[#52b788]/20 hover:border-[#52b788]/60 hover:text-white"
               }`}
             >
               {item.title}
@@ -136,7 +136,7 @@ export default function BeforeAfterSection({ projects }: { projects?: Project[] 
           <div className="lg:col-span-8">
             <div
               ref={containerRef}
-              className="relative h-[380px] md:h-[480px] rounded-3xl overflow-hidden border border-[#c9a750]/30 shadow-2xl select-none cursor-ew-resize group"
+              className="relative h-[380px] md:h-[480px] rounded-3xl overflow-hidden border border-[#52b788]/30 shadow-2xl select-none cursor-ew-resize group"
               onMouseDown={() => setIsDragging(true)}
               onMouseUp={() => setIsDragging(false)}
               onMouseLeave={() => setIsDragging(false)}
@@ -152,7 +152,7 @@ export default function BeforeAfterSection({ projects }: { projects?: Project[] 
                   className="object-cover"
                   priority
                 />
-                <div className="absolute top-4 right-4 z-20 px-3.5 py-1 rounded-full bg-[#171410]/80 border border-[#c9a750]/40 text-[#c9a750] text-xs font-bold backdrop-blur-md">
+                <div className="absolute top-4 right-4 z-20 px-3.5 py-1 rounded-full bg-[#0c1311]/85 border border-[#52b788]/40 text-[#52b788] text-xs font-bold backdrop-blur-md">
                   بعد العلاج
                 </div>
               </div>
@@ -169,66 +169,66 @@ export default function BeforeAfterSection({ projects }: { projects?: Project[] 
                   className="object-cover brightness-95"
                   priority
                 />
-                <div className="absolute top-4 left-4 z-20 px-3.5 py-1 rounded-full bg-[#171410]/80 border border-[#e6d5c0]/30 text-[#e6d5c0] text-xs font-bold backdrop-blur-md">
+                <div className="absolute top-4 left-4 z-20 px-3.5 py-1 rounded-full bg-[#0c1311]/85 border border-white/30 text-white text-xs font-bold backdrop-blur-md">
                   قبل العلاج
                 </div>
               </div>
 
               {/* Divider Line & Handle */}
               <div
-                className="absolute top-0 bottom-0 w-1 bg-gradient-to-b from-[#c9a750] via-white to-[#c9a750] shadow-[0_0_15px_rgba(201,167,80,0.8)] z-30"
+                className="absolute top-0 bottom-0 w-1 bg-gradient-to-b from-[#52b788] via-white to-[#52b788] shadow-[0_0_15px_rgba(82,183,136,0.8)] z-30"
                 style={{ left: `${sliderPosition}%`, transform: "translateX(-50%)" }}
               >
-                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-gradient-to-r from-[#c9a750] to-[#b2913c] text-[#171410] flex items-center justify-center shadow-2xl border-2 border-white cursor-pointer hover:scale-110 transition-transform">
+                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-gradient-to-r from-[#2d6a4f] to-[#52b788] text-white flex items-center justify-center shadow-2xl border-2 border-white cursor-pointer hover:scale-110 transition-transform">
                   <MoveHorizontal className="w-5 h-5" />
                 </div>
               </div>
 
               {/* Hint */}
-              <div className="absolute bottom-4 left-1/2 -translate-x-1/2 z-20 px-4 py-1.5 rounded-full bg-[#171410]/80 text-[#e6d5c0]/80 text-xs font-medium backdrop-blur-md border border-[#c9a750]/20 pointer-events-none">
+              <div className="absolute bottom-4 left-1/2 -translate-x-1/2 z-20 px-4 py-1.5 rounded-full bg-[#0c1311]/85 text-[#cbd5e1] text-xs font-medium backdrop-blur-md border border-[#52b788]/20 pointer-events-none">
                 اسحب المؤشر لليمين واليسار لمقارنة النتيجة
               </div>
             </div>
           </div>
 
           {/* Case Info */}
-          <div className="lg:col-span-4 flex flex-col gap-6 p-6 md:p-8 rounded-3xl bg-[#1f1b16]/80 border border-[#c9a750]/20">
+          <div className="lg:col-span-4 flex flex-col gap-6 p-6 md:p-8 rounded-3xl bg-[#141f1b]/90 border border-[#52b788]/25 shadow-xl">
             <div>
-              <span className="inline-block px-3 py-1 rounded-full bg-[#c9a750]/15 text-[#c9a750] text-xs font-bold mb-3 border border-[#c9a750]/30">
+              <span className="inline-block px-3 py-1 rounded-full bg-[#52b788]/15 text-[#52b788] text-xs font-bold mb-3 border border-[#52b788]/30">
                 {currentItem.tag}
               </span>
-              <h3 className="text-2xl md:text-3xl font-bold text-[#e6d5c0] mb-2 leading-snug">
+              <h3 className="text-2xl md:text-3xl font-bold text-[#f8fafc] mb-2 leading-snug">
                 {currentItem.title}
               </h3>
-              <p className="text-[#c9a750] text-sm font-medium">
+              <p className="text-[#52b788] text-sm font-medium">
                 {currentItem.subtitle}
               </p>
             </div>
 
-            <div className="h-px bg-gradient-to-r from-[#c9a750]/30 to-transparent"></div>
+            <div className="h-px bg-gradient-to-r from-[#52b788]/30 to-transparent"></div>
 
-            <p className="text-[#e6d5c0]/70 text-sm md:text-base leading-relaxed">
+            <p className="text-[#cbd5e1] text-sm md:text-base leading-relaxed">
               {currentItem.description}
             </p>
 
             <div className="space-y-3 pt-2">
-              <div className="flex items-center gap-3 text-xs text-[#e6d5c0]/80">
-                <span className="w-2 h-2 rounded-full bg-[#c9a750]"></span>
+              <div className="flex items-center gap-3 text-xs text-[#cbd5e1]">
+                <span className="w-2 h-2 rounded-full bg-[#52b788]"></span>
                 <span>مدة الجلسة: ساعة كاملة مع العناية الفردية</span>
               </div>
-              <div className="flex items-center gap-3 text-xs text-[#e6d5c0]/80">
-                <span className="w-2 h-2 rounded-full bg-[#c9a750]"></span>
+              <div className="flex items-center gap-3 text-xs text-[#cbd5e1]">
+                <span className="w-2 h-2 rounded-full bg-[#52b788]"></span>
                 <span>عزل مطاطي تام Rubber Dam لضمان التعقيم</span>
               </div>
-              <div className="flex items-center gap-3 text-xs text-[#e6d5c0]/80">
-                <span className="w-2 h-2 rounded-full bg-[#c9a750]"></span>
+              <div className="flex items-center gap-3 text-xs text-[#cbd5e1]">
+                <span className="w-2 h-2 rounded-full bg-[#52b788]"></span>
                 <span>حفاظ تام على حيوية العصب وبنية السن</span>
               </div>
             </div>
 
             <a
               href="#contact-us"
-              className="mt-2 text-center py-3.5 px-6 rounded-xl bg-gradient-to-r from-[#c9a750] to-[#b2913c] text-[#171410] font-bold text-sm hover:scale-[1.02] transition-transform duration-300 shadow-lg"
+              className="mt-2 text-center py-3.5 px-6 rounded-xl bg-gradient-to-r from-[#2d6a4f] via-[#40916c] to-[#52b788] text-white font-bold text-sm hover:scale-[1.02] transition-transform duration-300 shadow-[0_0_20px_rgba(82,183,136,0.3)]"
             >
               احجز فحصاً لحالتك الآن
             </a>
