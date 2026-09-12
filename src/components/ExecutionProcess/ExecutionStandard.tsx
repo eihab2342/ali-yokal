@@ -43,17 +43,35 @@ export default function ExecutionStandard({ sections }: { sections: Section }) {
     ),
   ];
 
-  const standardsData = sections?.standards?.[0]?.items || [];
+  const defaultStandards = [
+    { id: 1, title: t("Std-Step-01-Title") || "الفحص المجهري واختبار حيوية العصب (Vitality Test)", description: t("Std-Step-01-Desc") || "تشخيص فائق الدقة لحالة العصب والسن قبل البدء لتحديد أقل خطة علاجية تدخلية ممكنة." },
+    { id: 2, title: t("Std-Step-02-Title") || "العزل المطاطي الشامل (Rubber Dam Isolation)", description: t("Std-Step-02-Desc") || "عزل السن تماماً عن لعاب وبكتيريا الفم لضمان أعلى مستويات التعقيم وقوة التصاق المواد الترميمية." },
+    { id: 3, title: t("Std-Step-03-Title") || "المسح الضوئي الرقمي (3D Intra-Oral Scanner)", description: t("Std-Step-03-Desc") || "أخذ مقاسات الأسنان بدقة ميكرونية عبر كاميرا رقمية متطورة دون الحاجة للمعجون والمقاسات التقليدية المزعجة." },
+    { id: 4, title: t("Std-Step-04-Title") || "جلسة هادئة ومخصصة (ساعة كاملة لكل مريض)", description: t("Std-Step-04-Desc") || "لا تسرع ولا ازدحام — نمنح كل مريض الوقت الكافي لتحقيق أدق التفاصيل التشريحية والجمالية للسن." },
+    { id: 5, title: t("Std-Step-05-Title") || "المتابعة والضمان طويل الأمد", description: t("Std-Step-05-Desc") || "جلسات مراجعة للتأكد من راحة الإطباق واستقرار الحشوات والتركيبات وصحة اللثة." },
+  ];
+
+  const backendItems = sections?.standards?.[0]?.items;
+  const isOldContractingData = backendItems?.some((item) =>
+    item.title?.includes("الموقع") ||
+    item.title?.includes("الميزانية") ||
+    item.title?.includes("الامتثال") ||
+    item.title?.includes("التنفيذي")
+  );
+
+  const standardsData = backendItems && backendItems.length > 0 && !isOldContractingData
+    ? backendItems
+    : defaultStandards;
 
   return (
-    <div className="pt-24 pb-24 relative">
+    <div className="pt-16 pb-20 relative">
       {/* Header */}
-      <div className="mb-20 text-center">
-        <div className="std-label inline-block mb-5">
+      <div className="mb-14 text-center">
+        <div className="std-label inline-block mb-4">
           <span className="text-xs font-bold tracking-[0.35em] uppercase" style={{ color: "#c9a750" }}>{t("ExecutionStandard-Label")}</span>
           <div className="std-header-line h-0.5 w-full mt-2 bg-gradient-to-r from-transparent via-[#c9a750] to-transparent"></div>
         </div>
-        <h2 className="std-title text-6xl md:text-8xl font-bold leading-[1] tracking-tight text-[#e6d5c0] uppercase">
+        <h2 className="std-title text-3xl sm:text-4xl md:text-5xl font-bold leading-tight tracking-tight text-[#e6d5c0] uppercase">
           {t("Our")}{" "}
           <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#c9a750] via-[#b2913c] to-[#8c6d3b]">
             {t("Execution-Label")}

@@ -36,16 +36,33 @@ export default function StepByStepExecution({ sections }: { sections: Section })
     ),
   ];
 
-  const executionStepsData = sections?.step_by_step?.[0]?.items || [];
+  const defaultSteps = [
+    { id: 1, title: t("Execution-Step-1") || "الفحص والتشخيص الرقمي الدقيق" },
+    { id: 2, title: t("Execution-Step-2") || "العزل الكامل Rubber Dam وتطبيق البروتوكول" },
+    { id: 3, title: t("Execution-Step-3") || "العلاج الميكروني وترميم السن الطبيعي" },
+    { id: 4, title: t("Execution-Step-4") || "المسح ثلاثي الأبعاد والتسليم النهائي" },
+  ];
+
+  const backendItems = sections?.step_by_step?.[0]?.items;
+  const isOldContractingData = backendItems?.some((item) =>
+    item.title?.includes("النطاق") ||
+    item.title?.includes("التصميم") ||
+    item.title?.includes("الإحاطة") ||
+    item.title?.includes("الموقع")
+  );
+
+  const executionStepsData = backendItems && backendItems.length > 0 && !isOldContractingData
+    ? backendItems
+    : defaultSteps;
 
   return (
-    <div className="py-12 lg:py-24">
-      <div className="mb-20 text-center">
-        <div className="ep-label inline-block mb-5">
+    <div className="py-10 lg:py-20">
+      <div className="mb-14 text-center">
+        <div className="ep-label inline-block mb-4">
           <span className="text-xs font-bold tracking-[0.35em] uppercase" style={{ color: "#c9a750" }}>{t("Our Process")}</span>
           <div className="ep-header-line h-0.5 w-full mt-2" style={{ background: "linear-gradient(to right, transparent, #c9a750, transparent)" }}></div>
         </div>
-        <h2 className="ep-title text-6xl md:text-8xl font-bold leading-[0.95] tracking-tight mb-6 uppercase" style={{ color: "#e6d5c0" }}>
+        <h2 className="ep-title text-3xl sm:text-4xl md:text-5xl font-bold leading-tight tracking-tight mb-4 uppercase" style={{ color: "#e6d5c0" }}>
           {t("Step-by-Step")}{" "}
           <span style={{ background: "linear-gradient(135deg, #c9a750 0%, #b2913c 50%, #8c6d3b 100%)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text" }}>
             {t("Execution")}

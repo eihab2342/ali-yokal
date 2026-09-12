@@ -36,16 +36,32 @@ export default function RiskManagement({ sections }: { sections: Section }) {
     ),
   ];
 
-  const riskDataItems = sections?.project_risks?.[0]?.items || [];
+  const defaultRisks = [
+    { id: 1, title: t("Risk-Step-01-Title") || "الحفاظ على السن الطبيعي ومنع البرد الجائر", description: "" },
+    { id: 2, title: t("Risk-Step-02-Title") || "تغطية العصب وتفادي علاج الجذور غير الضروري", description: "" },
+    { id: 3, title: t("Risk-Step-03-Title") || "مقاسات رقمية بدون طبعات معجونية تسبب الغثيان", description: "" },
+    { id: 4, title: t("Risk-Step-04-Title") || "مواعيد محددة بدقة وراحة تامة بدون انتظار", description: "" },
+  ];
+
+  const backendItems = sections?.project_risks?.[0]?.items;
+  const isOldContractingData = backendItems?.some((item) =>
+    item.title?.includes("الموقع") ||
+    item.title?.includes("الميزانية") ||
+    item.title?.includes("أسبوعية")
+  );
+
+  const riskDataItems = backendItems && backendItems.length > 0 && !isOldContractingData
+    ? backendItems
+    : defaultRisks;
 
   return (
-    <div className="pt-6 lg:pt-20 pb-10 lg:pb-24">
+    <div className="pt-6 lg:pt-16 pb-10 lg:pb-20">
       <div className="mb-14 text-center">
-        <div className="risk-label inline-block mb-5">
+        <div className="risk-label inline-block mb-4">
           <span className="text-xs font-bold tracking-[0.35em] uppercase" style={{ color: "#c9a750" }}>{t("RiskManagement-Label")}</span>
           <div className="risk-header-line h-0.5 w-full mt-2" style={{ background: "linear-gradient(to right, transparent, #c9a750, transparent)" }}></div>
         </div>
-        <h2 className="risk-title text-6xl md:text-8xl font-bold leading-[0.95] tracking-tight uppercase" style={{ color: "#e6d5c0" }}>
+        <h2 className="risk-title text-3xl sm:text-4xl md:text-5xl font-bold leading-tight tracking-tight uppercase" style={{ color: "#e6d5c0" }}>
           {t("HowWeControl")}{" "}
           <span style={{ background: "linear-gradient(135deg, #c9a750 0%, #b2913c 50%, #8c6d3b 100%)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text" }}>
             {t("ProjectRisks")}

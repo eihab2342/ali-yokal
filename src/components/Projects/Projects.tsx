@@ -145,14 +145,14 @@ export default function Projects({ projects }: { projects: Project[] }) {
       >
         <div className="relative max-w-[1600px] mx-auto">
           {/* Header */}
-          <div className="projects-header text-center mb-16">
-            <div className="inline-block">
-              <span className="text-[#c9a750] text-sm font-semibold tracking-[0.3em] uppercase">
+          <div className="projects-header text-center mb-12">
+            <div className="inline-block mb-3">
+              <span className="text-[#c9a750] text-xs font-bold tracking-[0.3em] uppercase">
                 {t("Portfolio")}
               </span>
               <div className="projects-header-line h-0.5 w-full bg-gradient-to-r from-transparent via-[#c9a750] to-transparent mt-2"></div>
             </div>
-            <h2 className="text-6xl md:text-8xl font-bold text-[#e6d5c0] leading-tight mt-4 uppercase">
+            <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-[#e6d5c0] leading-tight uppercase">
               {t("Selected")}{" "}
               <span className="text-transparent uppercase bg-clip-text bg-gradient-to-r from-[#c9a750] via-[#b2913c] to-[#8c6d3b] animate-gradient">
                 {t("Projects")}
@@ -169,7 +169,7 @@ export default function Projects({ projects }: { projects: Project[] }) {
                 onClick={() => openModal(project)}
               >
                 {/* Card Container */}
-                <div className="relative h-[550px] rounded-3xl overflow-hidden border border-[#c9a750]/20 hover:border-[#c9a750]/60 transition-all duration-700">
+                <div className="relative h-[480px] rounded-3xl overflow-hidden border border-[#c9a750]/20 hover:border-[#c9a750]/60 transition-all duration-700">
                   {/* Background Image */}
                   <div className="absolute inset-0">
                     <div className="w-full h-full transition-all duration-[1500ms] group-hover:scale-110">
@@ -191,7 +191,7 @@ export default function Projects({ projects }: { projects: Project[] }) {
                   >
                     {/* Top: Number & Category */}
                     <div className="relative">
-                      <div className="text-8xl font-bold text-transparent bg-clip-text bg-gradient-to-br from-[#c9a750]/30 to-[#8c6d3b]/30 group-hover:from-[#c9a750] group-hover:to-[#8c6d3b] transition-all duration-700 leading-none">
+                      <div className="text-6xl sm:text-7xl font-bold text-transparent bg-clip-text bg-gradient-to-br from-[#c9a750]/30 to-[#8c6d3b]/30 group-hover:from-[#c9a750] group-hover:to-[#8c6d3b] transition-all duration-700 leading-none">
                         {(index + 1).toString().padStart(2, "0")}
                       </div>
                       <div className="mt-4">
@@ -205,12 +205,12 @@ export default function Projects({ projects }: { projects: Project[] }) {
                     <div>
                       {/* Divider Line */}
                       <div
-                        className={`h-px w-full bg-gradient-to-r from-[#c9a750] to-transparent mb-6 transform ${locale === "ar" ? "origin-right" : "origin-left"} scale-x-0 group-hover:scale-x-100 transition-transform duration-700`}
+                        className={`h-px w-full bg-gradient-to-r from-[#c9a750] to-transparent mb-4 transform ${locale === "ar" ? "origin-right" : "origin-left"} scale-x-0 group-hover:scale-x-100 transition-transform duration-700`}
                       ></div>
 
                       {/* Title */}
                       <h3
-                        className={`text-3xl font-bold text-[#e6d5c0] mb-3 tracking-wider ${locale === "ar" ? "text-right" : "text-left"}`}
+                        className={`text-2xl font-bold text-[#e6d5c0] mb-3 tracking-wide leading-snug ${locale === "ar" ? "text-right" : "text-left"}`}
                       >
                         {project.name}
                       </h3>

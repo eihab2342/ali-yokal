@@ -276,14 +276,14 @@ export default function KoiaContactSection({ contact }: { contact: Contact }) {
     >
       <div className="relative max-w-7xl mx-auto">
         {/* Header */}
-        <div className="text-center mb-10 lg:mb-20">
-          <div className="contact-header inline-block mb-6">
-            <span className="text-[#c9a750] text-sm font-semibold tracking-[0.3em] uppercase">
+        <div className="text-center mb-10 lg:mb-14">
+          <div className="contact-header inline-block mb-4">
+            <span className="text-[#c9a750] text-xs font-bold tracking-[0.3em] uppercase">
               {t("Get In Touch")}
             </span>
             <div className="contact-header-line h-0.5 w-full bg-gradient-to-r from-transparent via-[#c9a750] to-transparent mt-2"></div>
           </div>
-          <h2 className="contact-title text-5xl md:text-7xl font-bold text-[#e6d5c0] leading-tight mb-4">
+          <h2 className="contact-title text-3xl sm:text-4xl md:text-5xl font-bold text-[#e6d5c0] leading-tight mb-4">
             {t("LETS")}{" "}
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#c9a750] via-[#b2913c] to-[#8c6d3b] animate-gradient">
               {t("CONNECT-section")}
