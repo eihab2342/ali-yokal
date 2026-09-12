@@ -290,7 +290,7 @@ export default function KoiaContactSection({
             </span>
             <div className="contact-header-line h-0.5 w-full bg-gradient-to-r from-transparent via-[#52b788] to-transparent mt-2"></div>
           </div>
-          <h2 className="contact-title text-3xl sm:text-4xl md:text-5xl font-bold text-[#f8fafc] leading-tight mb-4">
+          <h2 className="contact-title text-2xl sm:text-3xl md:text-4xl font-bold text-[#f8fafc] leading-tight mb-4">
             {t("LETS")}{" "}
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#52b788] via-[#74c69d] to-[#40916c] animate-gradient">
               {t("CONNECT-section")}

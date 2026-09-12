@@ -135,7 +135,7 @@ export default function AboutSection({
             </span>
             <div className="about-header-line h-0.5 w-full bg-gradient-to-r from-transparent via-[#52b788] to-transparent mt-2" />
           </div>
-          <h2 className="text-4xl sm:text-6xl lg:text-7xl font-bold text-[#f8fafc] leading-tight">
+          <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-[#f8fafc] leading-tight">
             {aboutSection?.title || (
               <>
                 فلسفة العيادة{" "}
@@ -150,16 +150,16 @@ export default function AboutSection({
         {/* Main Grid */}
         <div className="grid lg:grid-cols-12 gap-12 lg:gap-16 mb-20 items-center">
           {/* Left Column */}
-          <div className="lg:col-span-7 about-description flex flex-col gap-8">
+          <div className="lg:col-span-7 about-description flex flex-col gap-6">
             {/* Mindset Quote Box */}
-            <div className="relative p-6 rounded-2xl bg-gradient-to-r from-[#52b788]/15 via-[#141f1b] to-[#141f1b] border-r-4 border-[#52b788]">
-              <p className="text-[#52b788] text-lg sm:text-xl font-bold leading-relaxed">
+            <div className="relative p-5 rounded-2xl bg-gradient-to-r from-[#52b788]/15 via-[#141f1b] to-[#141f1b] border-r-4 border-[#52b788]">
+              <p className="text-[#52b788] text-base sm:text-lg font-bold leading-relaxed">
                 &ldquo;{aboutSection?.description_1 || t("Mindset Quote")}&rdquo;
               </p>
             </div>
 
             {/* Specialization Description */}
-            <p className="text-[#cbd5e1] text-base sm:text-lg leading-relaxed">
+            <p className="text-[#cbd5e1] text-sm sm:text-[15px] leading-relaxed">
               {aboutSection?.description_2 || about?.description || t("Specialization")}
             </p>
 
@@ -234,12 +234,12 @@ export default function AboutSection({
                     statRefs.current[index] = el;
                   }}
                   data-value={stat.count}
-                  className="text-3xl sm:text-4xl md:text-5xl font-black text-transparent bg-clip-text bg-gradient-to-br from-[#52b788] via-[#74c69d] to-[#40916c] mb-3"
+                  className="text-2xl sm:text-3xl md:text-4xl font-black text-transparent bg-clip-text bg-gradient-to-br from-[#52b788] via-[#74c69d] to-[#40916c] mb-2"
                 >
                   0+
                 </div>
-                <div className="h-0.5 w-10 bg-[#52b788] mx-auto mb-3 group-hover:w-16 transition-all duration-500" />
-                <div className="text-[#cbd5e1] text-xs sm:text-sm font-bold uppercase tracking-wider">
+                <div className="h-0.5 w-8 bg-[#52b788] mx-auto mb-2.5 group-hover:w-14 transition-all duration-500" />
+                <div className="text-[#cbd5e1] text-xs sm:text-[13px] font-bold uppercase tracking-wider">
                   {stat.title}
                 </div>
               </div>

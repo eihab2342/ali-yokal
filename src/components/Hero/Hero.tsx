@@ -80,36 +80,36 @@ export default function HeroSection({
             </div>
 
             {/* Main Headline */}
-            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-[#f8fafc] leading-[1.15] mb-6 tracking-tight">
+            <h1 className="text-2xl sm:text-3xl lg:text-[40px] font-extrabold text-[#f8fafc] leading-[1.25] mb-5 tracking-tight">
               <span className="block text-[#f8fafc]">
                 {titleMain}
               </span>
-              <span className="block text-transparent bg-clip-text bg-gradient-to-r from-[#52b788] via-[#74c69d] to-[#40916c] mt-2">
+              <span className="block text-transparent bg-clip-text bg-gradient-to-r from-[#52b788] via-[#74c69d] to-[#40916c] mt-1.5">
                 {titleHighlight}
               </span>
             </h1>
 
             {/* Description */}
-            <p className="text-base sm:text-lg text-[#cbd5e1] max-w-2xl leading-relaxed mb-8">
+            <p className="text-sm sm:text-[15px] text-[#cbd5e1] max-w-2xl leading-relaxed mb-6">
               {descriptionText}
             </p>
 
             {/* Key Quality Pillars / Badges */}
-            <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 w-full mb-8">
+            <div className="grid grid-cols-2 sm:grid-cols-4 gap-2.5 w-full mb-7">
               {heroSection?.stats && heroSection.stats.length > 0 ? (
                 heroSection.stats.slice(0, 4).map((st, idx) => (
-                  <div key={st.id || idx} className="p-3 rounded-2xl bg-[#141f1b] border border-[#52b788]/20 flex flex-col items-start gap-1 hover:border-[#52b788]/50 transition-colors">
-                    <span className="text-lg font-extrabold text-[#52b788]">{st.value}</span>
-                    <span className="text-xs font-semibold text-[#f8fafc]/90">{st.label}</span>
+                  <div key={st.id || idx} className="p-2.5 rounded-xl bg-[#141f1b] border border-[#52b788]/20 flex flex-col items-start gap-0.5 hover:border-[#52b788]/50 transition-colors">
+                    <span className="text-base font-extrabold text-[#52b788]">{st.value}</span>
+                    <span className="text-[11px] font-medium text-[#f8fafc]/90">{st.label}</span>
                   </div>
                 ))
               ) : (
                 defaultPillars.map((p, idx) => {
                   const Icon = p.icon;
                   return (
-                    <div key={idx} className="p-3 rounded-2xl bg-[#141f1b] border border-[#52b788]/20 flex items-center gap-2.5 hover:border-[#52b788]/50 transition-colors">
-                      <Icon className="w-5 h-5 text-[#52b788] flex-shrink-0" />
-                      <span className="text-xs font-semibold text-[#f8fafc]/90">{p.label}</span>
+                    <div key={idx} className="p-2.5 rounded-xl bg-[#141f1b] border border-[#52b788]/20 flex items-center gap-2 hover:border-[#52b788]/50 transition-colors">
+                      <Icon className="w-4 h-4 text-[#52b788] flex-shrink-0" />
+                      <span className="text-[11px] font-medium text-[#f8fafc]/90">{p.label}</span>
                     </div>
                   );
                 })
@@ -117,23 +117,23 @@ export default function HeroSection({
             </div>
 
             {/* CTA Action Buttons */}
-            <div className="flex flex-wrap items-center gap-4 w-full sm:w-auto">
+            <div className="flex flex-wrap items-center gap-3.5 w-full sm:w-auto">
               <button
                 suppressHydrationWarning
                 onClick={(e) => handleScroll(e, "#contact-us")}
-                className="group relative cursor-pointer px-8 py-4 bg-gradient-to-r from-[#2d6a4f] via-[#40916c] to-[#52b788] rounded-2xl overflow-hidden transition-all duration-300 hover:scale-105 shadow-[0_0_30px_rgba(82,183,136,0.35)] flex items-center gap-3 text-white font-bold text-base tracking-wide"
+                className="group relative cursor-pointer px-6 py-3 bg-gradient-to-r from-[#2d6a4f] via-[#40916c] to-[#52b788] rounded-xl overflow-hidden transition-all duration-300 hover:scale-105 shadow-[0_0_25px_rgba(82,183,136,0.3)] flex items-center gap-2.5 text-white font-bold text-sm tracking-wide"
               >
                 <span>{heroSection?.cta_primary_text || "احجز استشارتك الخاصة"}</span>
-                <ArrowIcon className="w-5 h-5 text-white group-hover:translate-x-1 transition-transform" />
+                <ArrowIcon className="w-4 h-4 text-white group-hover:translate-x-1 transition-transform" />
               </button>
 
               <a
                 href={whatsappLink}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="px-6 py-4 rounded-2xl bg-[#141f1b] border border-[#52b788]/30 hover:border-[#52b788] text-[#f8fafc] font-semibold text-sm transition-all duration-300 flex items-center gap-2.5 hover:bg-[#2d6a4f]/20"
+                className="px-5 py-3 rounded-xl bg-[#141f1b] border border-[#52b788]/30 hover:border-[#52b788] text-[#f8fafc] font-semibold text-xs sm:text-sm transition-all duration-300 flex items-center gap-2 hover:bg-[#2d6a4f]/20"
               >
-                <MessageCircle className="w-5 h-5 text-[#25D366]" />
+                <MessageCircle className="w-4 h-4 text-[#25D366]" />
                 <span>{heroSection?.cta_whatsapp_text || "تواصل واتساب"}</span>
               </a>
             </div>

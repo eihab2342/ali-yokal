@@ -124,7 +124,7 @@ export default function KoiaServicesSection({ services }: { services: Service[] 
             </span>
             <div className="services-header-line h-0.5 w-full bg-gradient-to-r from-transparent via-[#52b788] to-transparent mt-2"></div>
           </div>
-          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-[#f8fafc] leading-tight">
+          <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-[#f8fafc] leading-tight">
             {t("OUR")}{" "}
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#52b788] via-[#74c69d] to-[#2d6a4f] animate-gradient">
               {t("SERVICES")}
@@ -162,35 +162,36 @@ export default function KoiaServicesSection({ services }: { services: Service[] 
             className="w-full py-4 overflow-visible"
           >
             {displayServices.map((service, i) => (
-              <SwiperSlide key={service.id} className="!w-[82vw] max-w-[320px]">
-                <div className="relative h-[430px] rounded-3xl overflow-hidden border border-[#52b788]/40 shadow-[0_10px_30px_rgba(0,0,0,0.6)] bg-[#141f1b]">
+              <SwiperSlide key={service.id} className="!w-[80vw] max-w-[320px]">
+                <div className="relative h-[400px] rounded-3xl overflow-hidden shadow-[0_10px_30px_rgba(0,0,0,0.5)] border border-[#52b788]/30 bg-[#141f1b]">
                   {/* Background Image */}
                   <div className="absolute inset-0">
                     <Image
                       src={cleanImageUrl(service.image_url)}
                       alt={service.alt_image || "Dental Service"}
                       fill
-                      className="w-full h-full object-cover brightness-75"
+                      className="w-full h-full object-cover"
                     />
-                    <div className="absolute inset-0 bg-gradient-to-b from-[#0c1311]/50 via-[#0c1311]/80 to-[#0c1311]"></div>
+                    {/* Gradient Overlay */}
+                    <div className="absolute inset-0 bg-gradient-to-t from-[#0c1311] via-[#0c1311]/70 to-transparent"></div>
                   </div>
 
-                  {/* Content */}
-                  <div className="absolute inset-0 p-6 flex flex-col justify-between z-10">
+                  {/* Card Content */}
+                  <div className="relative h-full p-6 flex flex-col justify-between z-10">
                     {/* Top: Number Badge */}
                     <div className="flex items-center justify-between">
-                      <div className="w-10 h-10 rounded-full border border-[#52b788]/60 bg-[#0c1311]/80 flex items-center justify-center">
-                        <span className="text-sm font-bold text-[#52b788]">0{i + 1}</span>
+                      <div className="w-9 h-9 rounded-full border border-[#52b788]/60 bg-[#0c1311]/80 flex items-center justify-center">
+                        <span className="text-xs font-bold text-[#52b788]">0{i + 1}</span>
                       </div>
-                      <span className="text-[10px] uppercase font-bold tracking-widest px-3 py-1 rounded-full bg-[#52b788]/20 border border-[#52b788]/40 text-[#52b788]">
+                      <span className="text-[10px] uppercase font-bold tracking-widest px-2.5 py-0.5 rounded-full bg-[#52b788]/20 border border-[#52b788]/40 text-[#52b788]">
                         تخصص دقيق
                       </span>
                     </div>
 
                     {/* Bottom: Title & Description */}
                     <div>
-                      <div className="h-0.5 w-12 bg-[#52b788] mb-3"></div>
-                      <h3 className="text-xl font-bold text-[#f8fafc] mb-2 leading-snug">
+                      <div className="h-0.5 w-10 bg-[#52b788] mb-2.5"></div>
+                      <h3 className="text-base sm:text-lg font-bold text-[#f8fafc] mb-1.5 leading-snug">
                         {service.name}
                       </h3>
                       <p className="text-[#f8fafc]/85 text-xs leading-relaxed">
@@ -198,9 +199,6 @@ export default function KoiaServicesSection({ services }: { services: Service[] 
                       </p>
                     </div>
                   </div>
-
-                  {/* Emerald Border Highlight */}
-                  <div className="absolute inset-0 border-2 border-[#52b788]/30 rounded-3xl pointer-events-none"></div>
                 </div>
               </SwiperSlide>
             ))}
@@ -213,7 +211,7 @@ export default function KoiaServicesSection({ services }: { services: Service[] 
             {displayServices.map((service, i) => (
               <div key={service.id} className="service-card group relative">
                 {/* Card Container */}
-                <div className="relative h-[460px] rounded-3xl overflow-hidden border border-[#52b788]/20 hover:border-[#52b788]/60 transition-all duration-1000 ease-out bg-[#141f1b]">
+                <div className="relative h-[440px] rounded-3xl overflow-hidden border border-[#52b788]/20 hover:border-[#52b788]/60 transition-all duration-1000 ease-out bg-[#141f1b]">
                   {/* Background Image */}
                   <div className="absolute inset-0">
                     <Image
@@ -227,10 +225,10 @@ export default function KoiaServicesSection({ services }: { services: Service[] 
                   </div>
 
                   {/* Content */}
-                  <div className="absolute inset-0 p-8 flex flex-col justify-between">
+                  <div className="absolute inset-0 p-7 flex flex-col justify-between">
                     {/* Top: Number */}
                     <div className="relative">
-                      <div className="text-7xl font-bold text-transparent bg-clip-text bg-gradient-to-br from-[#52b788]/30 to-[#2d6a4f]/30 group-hover:from-[#52b788] group-hover:to-[#74c69d] transition-all duration-700 leading-none">
+                      <div className="text-5xl sm:text-6xl font-bold text-transparent bg-clip-text bg-gradient-to-br from-[#52b788]/30 to-[#2d6a4f]/30 group-hover:from-[#52b788] group-hover:to-[#74c69d] transition-all duration-700 leading-none">
                         {i + 1}
                       </div>
                     </div>
@@ -238,15 +236,15 @@ export default function KoiaServicesSection({ services }: { services: Service[] 
                     {/* Bottom: Title & Description */}
                     <div>
                       {/* Divider Line */}
-                      <div className="h-px w-full bg-gradient-to-r from-[#52b788] to-transparent mb-4 transform origin-left scale-x-0 group-hover:scale-x-100 transition-transform duration-700"></div>
+                      <div className="h-px w-full bg-gradient-to-r from-[#52b788] to-transparent mb-3.5 transform origin-left scale-x-0 group-hover:scale-x-100 transition-transform duration-700"></div>
 
                       {/* Title */}
-                      <h3 className="text-2xl font-bold text-[#f8fafc] mb-2 tracking-wide leading-snug">
+                      <h3 className="text-lg sm:text-xl font-bold text-[#f8fafc] mb-2 tracking-wide leading-snug">
                         {service.name}
                       </h3>
 
                       {/* Description */}
-                      <p className="text-[#f8fafc]/75 text-sm leading-relaxed transform opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-700 delay-100">
+                      <p className="text-[#f8fafc]/75 text-xs sm:text-[13px] leading-relaxed transform opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-700 delay-100">
                         {service.short_desc}
                       </p>
                     </div>

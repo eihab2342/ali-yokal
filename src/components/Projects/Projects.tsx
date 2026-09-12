@@ -154,7 +154,7 @@ export default function Projects({ projects }: { projects: Project[] }) {
               </span>
               <div className="projects-header-line h-0.5 w-full bg-gradient-to-r from-transparent via-[#52b788] to-transparent mt-2"></div>
             </div>
-            <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-[#f8fafc] leading-tight uppercase">
+            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-[#f8fafc] leading-tight uppercase">
               {t("Selected")}{" "}
               <span className="text-transparent uppercase bg-clip-text bg-gradient-to-r from-[#52b788] via-[#74c69d] to-[#2d6a4f] animate-gradient">
                 {t("Projects")}

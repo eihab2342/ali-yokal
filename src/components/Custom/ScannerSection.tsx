@@ -61,33 +61,33 @@ export default function ScannerSection({
             <Scan className="w-3.5 h-3.5" />
             <span>{headerLabel}</span>
           </div>
-          <h2 className="text-4xl md:text-6xl font-bold text-[#f8fafc] leading-tight">
+          <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-[#f8fafc] leading-tight">
             {headerTitle}
           </h2>
-          <p className="text-[#cbd5e1] max-w-2xl mx-auto mt-4 text-base md:text-lg">
+          <p className="text-[#cbd5e1] max-w-2xl mx-auto mt-3.5 text-sm sm:text-[15px]">
             {headerDesc}
           </p>
         </div>
 
         {/* Content Grid */}
-        <div className="grid lg:grid-cols-12 gap-12 items-center">
+        <div className="grid lg:grid-cols-12 gap-8 lg:gap-12 items-center">
           {/* Left Cards */}
-          <div className="lg:col-span-7 grid sm:grid-cols-2 gap-6">
+          <div className="lg:col-span-7 grid sm:grid-cols-2 gap-4 sm:gap-5">
             {featuresToDisplay.map((item, idx) => {
               const Icon = item.icon;
               return (
                 <div
                   key={idx}
-                  className="group p-6 rounded-3xl bg-gradient-to-br from-[#141f1b] to-[#0c1311] border border-[#52b788]/20 hover:border-[#52b788]/60 transition-all duration-500 hover:shadow-[0_0_30px_rgba(82,183,136,0.15)] flex flex-col justify-between"
+                  className="group p-5 rounded-2xl bg-gradient-to-br from-[#141f1b] to-[#0c1311] border border-[#52b788]/20 hover:border-[#52b788]/60 transition-all duration-500 hover:shadow-[0_0_30px_rgba(82,183,136,0.15)] flex flex-col justify-between"
                 >
                   <div>
-                    <div className="w-12 h-12 rounded-2xl bg-[#52b788]/15 border border-[#52b788]/30 flex items-center justify-center text-[#52b788] group-hover:bg-[#52b788] group-hover:text-[#0c1311] transition-all duration-500 mb-5">
-                      <Icon className="w-6 h-6" />
+                    <div className="w-10 h-10 rounded-xl bg-[#52b788]/15 border border-[#52b788]/30 flex items-center justify-center text-[#52b788] group-hover:bg-[#52b788] group-hover:text-[#0c1311] transition-all duration-500 mb-4">
+                      <Icon className="w-5 h-5" />
                     </div>
-                    <h3 className="text-xl font-bold text-[#f8fafc] mb-3 leading-snug">
+                    <h3 className="text-base sm:text-lg font-bold text-[#f8fafc] mb-2 leading-snug">
                       {item.title}
                     </h3>
-                    <p className="text-[#94a3b8] text-sm leading-relaxed">
+                    <p className="text-[#94a3b8] text-xs sm:text-[13px] leading-relaxed">
                       {item.description}
                     </p>
                   </div>

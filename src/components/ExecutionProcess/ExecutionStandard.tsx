@@ -79,7 +79,7 @@ export default function ExecutionStandard({
           <span className="text-xs font-bold tracking-[0.35em] uppercase" style={{ color: "#52b788" }}>{t("ExecutionStandard-Label")}</span>
           <div className="std-header-line h-0.5 w-full mt-2 bg-gradient-to-r from-transparent via-[#52b788] to-transparent"></div>
         </div>
-        <h2 className="std-title text-3xl sm:text-4xl md:text-5xl font-bold leading-tight tracking-tight text-[#f8fafc] uppercase">
+        <h2 className="std-title text-2xl sm:text-3xl md:text-4xl font-bold leading-tight tracking-tight text-[#f8fafc] uppercase">
           {t("Our")}{" "}
           <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#52b788] via-[#74c69d] to-[#2d6a4f]">
             {t("Execution-Label")}
@@ -116,16 +116,16 @@ export default function ExecutionStandard({
           {standardsData.map((item, i) => (
             <SwiperSlide key={item.id || i} className="!w-[85vw] max-w-[340px]">
               <div
-                className="relative rounded-3xl p-7 border overflow-hidden shadow-[0_15px_35px_rgba(0,0,0,0.6)]"
+                className="relative rounded-3xl p-6 border overflow-hidden shadow-[0_15px_35px_rgba(0,0,0,0.6)]"
                 style={{
                   borderColor: "rgba(82,183,136,0.4)",
                   background: "linear-gradient(145deg, rgba(20,31,27,0.95), rgba(12,19,17,0.98))",
                 }}
               >
                 {/* Header with Icon and Number */}
-                <div className="flex items-center justify-between mb-5">
+                <div className="flex items-center justify-between mb-4">
                   <div
-                    className="w-14 h-14 rounded-2xl flex items-center justify-center"
+                    className="w-12 h-12 rounded-2xl flex items-center justify-center"
                     style={{
                       border: "1.5px solid rgba(82,183,136,0.7)",
                       background: "linear-gradient(135deg, rgba(82,183,136,0.18), rgba(45,106,79,0.08))",
@@ -133,15 +133,15 @@ export default function ExecutionStandard({
                       color: "#52b788",
                     }}
                   >
-                    {iconList[i] || <ShieldCheck className="w-7 h-7" />}
+                    {iconList[i] || <ShieldCheck className="w-6 h-6" />}
                   </div>
 
-                  <span className="text-2xl font-black text-[#52b788]">
+                  <span className="text-xl font-black text-[#52b788]">
                     {String(i + 1).padStart(2, "0")}
                   </span>
                 </div>
 
-                <h3 className="text-lg font-bold text-[#f8fafc] mb-3 leading-snug">
+                <h3 className="text-base font-bold text-[#f8fafc] mb-2 leading-snug">
                   {item.title}
                 </h3>
 
@@ -149,7 +149,7 @@ export default function ExecutionStandard({
                   {item.description}
                 </p>
 
-                <div className="mt-5 h-0.5 w-12 bg-[#52b788]"></div>
+                <div className="mt-4 h-0.5 w-10 bg-[#52b788]"></div>
               </div>
             </SwiperSlide>
           ))}
@@ -157,7 +157,7 @@ export default function ExecutionStandard({
       </div>
 
       {/* Desktop: Vertical Timeline/Stepper Layout */}
-      <div className="hidden lg:block relative space-y-12 std-list">
+      <div className="hidden lg:block relative space-y-10 std-list">
         {/* Central Vertical Line */}
         <div className="std-timeline absolute left-1/2 top-0 bottom-0 w-px bg-gradient-to-b from-[#52b788] via-[#52b788]/20 to-transparent -translate-x-1/2 pointer-events-none"></div>
 
@@ -165,22 +165,22 @@ export default function ExecutionStandard({
           <div key={item.id || i} className={`std-item group relative flex flex-col lg:flex-row items-center lg:items-center gap-8 ${i % 2 !== 0 ? 'lg:flex-row-reverse' : ''}`}>
 
             {/* Number/Icon Node */}
-            <div className="relative z-10 w-16 h-16 flex-shrink-0 flex items-center justify-center rounded-2xl bg-[#0c1311] border-2 border-[#52b788] shadow-[0_0_20px_rgba(82,183,136,0.2)] transition-all duration-500 group-hover:scale-110 group-hover:shadow-[0_0_30px_rgba(82,183,136,0.4)]">
-              <span className="absolute -top-6 text-xs font-bold text-[#52b788] tracking-widest">{String(i + 1).padStart(2, "0")}</span>
-              <div className="text-[#52b788]">{iconList[i] || <ShieldCheck className="w-7 h-7" />}</div>
+            <div className="relative z-10 w-14 h-14 flex-shrink-0 flex items-center justify-center rounded-2xl bg-[#0c1311] border-2 border-[#52b788] shadow-[0_0_20px_rgba(82,183,136,0.2)] transition-all duration-500 group-hover:scale-110 group-hover:shadow-[0_0_30px_rgba(82,183,136,0.4)]">
+              <span className="absolute -top-5 text-[11px] font-bold text-[#52b788] tracking-widest">{String(i + 1).padStart(2, "0")}</span>
+              <div className="text-[#52b788]">{iconList[i] || <ShieldCheck className="w-6 h-6" />}</div>
             </div>
 
             {/* Content Card */}
-            <div className={`flex-1 p-8 rounded-3xl bg-gradient-to-br from-[#141f1b] to-[#1b2a24] border border-[#52b788]/15 hover:border-[#52b788]/50 transition-all duration-500 lg:w-[45%] text-center ${i % 2 !== 0 ? 'lg:text-right' : 'lg:text-left'}`}>
-              <h3 className="text-xl md:text-3xl font-bold text-[#f8fafc] mb-4 text-start">
+            <div className={`flex-1 p-6 sm:p-7 rounded-3xl bg-gradient-to-br from-[#141f1b] to-[#1b2a24] border border-[#52b788]/15 hover:border-[#52b788]/50 transition-all duration-500 lg:w-[45%] text-center ${i % 2 !== 0 ? 'lg:text-right' : 'lg:text-left'}`}>
+              <h3 className="text-lg md:text-xl font-bold text-[#f8fafc] mb-3 text-start">
                 {item.title}
               </h3>
-              <p className="text-[#f8fafc]/70 text-base md:text-lg text-start leading-relaxed max-w-lg mx-auto lg:mx-0">
+              <p className="text-[#f8fafc]/70 text-sm sm:text-[15px] text-start leading-relaxed max-w-lg mx-auto lg:mx-0">
                 {item.description}
               </p>
 
               {/* Decorative detail */}
-              <div className={`mt-6 h-1 w-12 bg-[#52b788] group-hover:w-full transition-all duration-700 mx-auto ${i % 2 !== 0 ? 'lg:ml-auto' : 'lg:mr-auto'}`}></div>
+              <div className={`mt-5 h-0.5 w-10 bg-[#52b788] group-hover:w-full transition-all duration-700 mx-auto ${i % 2 !== 0 ? 'lg:ml-auto' : 'lg:mr-auto'}`}></div>
             </div>
 
             {/* Empty space for alternating layout */}

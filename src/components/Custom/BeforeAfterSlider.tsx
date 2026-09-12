@@ -115,10 +115,10 @@ export default function BeforeAfterSection({
             <Sparkles className="w-3.5 h-3.5" />
             <span>نتائج واقعية حية</span>
           </div>
-          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-[#f8fafc] leading-tight">
+          <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-[#f8fafc] leading-tight">
             معرض الحالات <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#52b788] via-[#74c69d] to-[#40916c]">قبل وبعد</span>
           </h2>
-          <p className="text-[#cbd5e1] max-w-2xl mx-auto mt-4 text-base md:text-lg">
+          <p className="text-[#cbd5e1] max-w-2xl mx-auto mt-3.5 text-sm sm:text-[15px]">
             شاهد كيف يعيد العلاج التحفظي والحشو التجميلي الميكروني بناء الأسنان التالفة بدقة تحاكي الطبيعة تماماً.
           </p>
         </div>

@@ -67,7 +67,7 @@ export default function RiskManagement({
           <span className="text-xs font-bold tracking-[0.35em] uppercase" style={{ color: "#52b788" }}>{t("RiskManagement-Label")}</span>
           <div className="risk-header-line h-0.5 w-full mt-2" style={{ background: "linear-gradient(to right, transparent, #52b788, transparent)" }}></div>
         </div>
-        <h2 className="risk-title text-3xl sm:text-4xl md:text-5xl font-bold leading-tight tracking-tight uppercase" style={{ color: "#f8fafc" }}>
+        <h2 className="risk-title text-2xl sm:text-3xl md:text-4xl font-bold leading-tight tracking-tight uppercase" style={{ color: "#f8fafc" }}>
           {t("HowWeControl")}{" "}
           <span style={{ background: "linear-gradient(135deg, #52b788 0%, #74c69d 50%, #2d6a4f 100%)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text" }}>
             {t("ProjectRisks")}
