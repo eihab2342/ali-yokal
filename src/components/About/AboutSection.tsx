@@ -24,17 +24,14 @@ export default function AboutSection({ about, statistics }: { about: About; stat
     "خدمة معتمدة لمرتادي نادي سبورتنج وطلبة الجامعة ونقابة المهن الطبية",
   ];
 
-  const defaultStats = statistics && statistics.length > 0 ? statistics.map((s) => ({
-    id: s.id,
-    title: s.title,
-    count: s.count,
-    suffix: "+",
-  })) : [
-    { id: 1, title: "دكتوراه في العلاج التحفظي", count: 1, suffix: "" },
-    { id: 2, title: "ساعة مخصصة لكل مريض", count: 60, suffix: " دقيقة" },
-    { id: 3, title: "نسبة نجاح الحفاظ على العصب", count: 98, suffix: "%" },
-    { id: 4, title: "مرضى يومياً لضمان الدقة", count: 4, suffix: " كحد أقصى" },
+  const defaultStats = [
+    { id: 1, title: t("Projects Delivered") || "حالة تجميلية ناجحة", count: 250 },
+    { id: 2, title: t("Collaborations") || "سنوات خبرة وتميز", count: 4 },
+    { id: 3, title: t("Business Clients Reached") || "ساعة رعاية مخصصة", count: 60 },
+    { id: 4, title: t("Projects Per Year") || "مرضى يومياً كحد أقصى", count: 4 },
   ];
+
+  const statsList = statistics && statistics.length > 0 ? statistics : defaultStats;
 
   useGSAP(() => {
     const tl = gsap.timeline({
@@ -60,8 +57,7 @@ export default function AboutSection({ about, statistics }: { about: About; stat
               current = endValue;
               clearInterval(counter);
             }
-            const suffix = el.dataset.suffix || "+";
-            el.innerText = Math.floor(current) + suffix;
+            el.innerText = Math.floor(current) + "+";
           }, stepTime);
         });
       },
@@ -211,9 +207,9 @@ export default function AboutSection({ about, statistics }: { about: About; stat
 
         {/* Stats Grid */}
         <div className="about-stats-container grid grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
-          {defaultStats.map((stat, index) => (
+          {statsList.map((stat, index) => (
             <div
-              key={stat.id}
+              key={stat.id || index}
               className="relative text-center py-8 px-4 bg-gradient-to-br from-[#1f1b16] to-[#171410] rounded-3xl border border-[#c9a750]/15 hover:border-[#c9a750]/40 transition-all duration-500 hover:shadow-2xl overflow-hidden group"
             >
               <div className="relative z-10">
@@ -222,10 +218,9 @@ export default function AboutSection({ about, statistics }: { about: About; stat
                     statRefs.current[index] = el;
                   }}
                   data-value={stat.count}
-                  data-suffix={stat.suffix}
-                  className="text-4xl sm:text-5xl font-black text-transparent bg-clip-text bg-gradient-to-br from-[#c9a750] via-[#b2913c] to-[#8c6d3b] mb-3"
+                  className="text-3xl sm:text-4xl md:text-5xl font-black text-transparent bg-clip-text bg-gradient-to-br from-[#c9a750] via-[#b2913c] to-[#8c6d3b] mb-3"
                 >
-                  0{stat.suffix}
+                  0+
                 </div>
                 <div className="h-0.5 w-10 bg-[#c9a750] mx-auto mb-3 group-hover:w-16 transition-all duration-500" />
                 <div className="text-[#e6d5c0]/70 text-xs sm:text-sm font-bold uppercase tracking-wider">
