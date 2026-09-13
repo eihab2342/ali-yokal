@@ -210,10 +210,10 @@ export default function AboutSection({
 
               <div className="absolute bottom-6 left-6 right-6 p-4 rounded-2xl bg-[#0c1311]/90 border border-[#52b788]/30 backdrop-blur-md">
                 <p className="text-sm font-bold text-[#f8fafc]">
-                  رعاية علاجية وتجميلية متكاملة
+                  {aboutSection?.label || about?.title || "رعاية علاجية وتجميلية متكاملة"}
                 </p>
                 <p className="text-xs text-[#52b788] mt-1">
-                  أعلى معايير الدقة والتعقيم والنتائج طويلة الأمد
+                  {aboutSection?.features?.[0] || "أعلى معايير الدقة والتعقيم والنتائج طويلة الأمد"}
                 </p>
               </div>
             </div>

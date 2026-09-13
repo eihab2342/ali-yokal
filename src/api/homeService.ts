@@ -8,6 +8,8 @@ export async function fetchHomeData(lang = "en") {
         "Accept-Language": lang,
       },
       method: "GET",
+      cache: "no-store",
+      next: { revalidate: 0 },
     });
 
     const text = await response.text();

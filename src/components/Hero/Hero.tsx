@@ -45,11 +45,16 @@ export default function HeroSection({
   const ArrowIcon = isAr ? ChevronLeft : ChevronRight;
 
   const badgeText = heroSection?.badge || `${clinicInfo?.doctor_name || "د. علي ياقوت"} — ${clinicInfo?.doctor_title || "دكتوراه في العلاج التحفظي وتجميل الأسنان"}`;
-  const titleMain = heroSection?.title_main || (isAr ? "فن الحفاظ على ابتسامتك الطبيعية" : "Preserving Your Natural Smile");
-  const titleHighlight = heroSection?.title_highlight || (isAr ? "بأعلى دقة ميكرونية وعناية فردية" : "With Micron Precision & Dedicated Care");
+  
+  const titleMain = heroSection?.title_main || (isAr ? "ابتسامة طبيعية متناسقة" : "Preserving Your Natural Smile");
+  const titleHighlight = heroSection?.title_highlight || (isAr ? "بدون ألم أو برد جائر" : "With Micron Precision");
+
   const descriptionText = heroSection?.description || home?.description || (isAr
-    ? "نؤمن بأن أفضل سن هو سنك الطبيعي. نطبق بروتوكول العلاج التحفظي الدقيق مع العزل المطاطي الكامل وحماية العصب، ونخصص ساعة كاملة لكل مريض لضمان أقصى مستويات الراحة والجودة."
-    : "We believe your natural tooth is irreplaceable. Applying meticulous conservative dentistry with full rubber dam isolation, pulp protection, and dedicating a full hour per patient for unmatched quality.");
+    ? "نقدم تجربة علاجية استثنائية قائمة على أحدث تقنيات طب الأسنان التحفظي، الحفاظ على بنية السن الطبيعية، وأحدث أجهزة المسح الضوئي الرقمي ثلاثي الأبعاد 3Shape TRIOS®."
+    : "We offer an exceptional treatment experience based on the latest conservative dentistry techniques, preserving natural tooth structure, and advanced 3Shape TRIOS® 3D digital scanners.");
+
+  const doctorImgRaw = heroSection?.doctor_image || home?.sliders?.[0]?.image_url;
+  const doctorImg = doctorImgRaw ? cleanImageUrl(doctorImgRaw) : doctorHeroImg;
 
   const whatsappLink = clinicInfo?.whatsapp || (clinicInfo?.phone ? `https://wa.me/${clinicInfo.phone.replace(/[^0-9]/g, "")}` : "https://wa.me/201000000000");
 
@@ -80,13 +85,15 @@ export default function HeroSection({
             </div>
 
             {/* Main Headline */}
-            <h1 className="text-2xl sm:text-3xl lg:text-[40px] font-extrabold text-[#f8fafc] leading-[1.25] mb-5 tracking-tight">
+            <h1 className="text-2xl sm:text-3xl lg:text-[40px] font-extrabold text-[#f8fafc] leading-[1.3] mb-5 tracking-tight">
               <span className="block text-[#f8fafc]">
                 {titleMain}
               </span>
-              <span className="block text-transparent bg-clip-text bg-gradient-to-r from-[#52b788] via-[#74c69d] to-[#40916c] mt-1.5">
-                {titleHighlight}
-              </span>
+              {titleHighlight && (
+                <span className="block text-transparent bg-clip-text bg-gradient-to-r from-[#52b788] via-[#74c69d] to-[#40916c] mt-1.5">
+                  {titleHighlight}
+                </span>
+              )}
             </h1>
 
             {/* Description */}
@@ -123,7 +130,7 @@ export default function HeroSection({
                 onClick={(e) => handleScroll(e, "#contact-us")}
                 className="group relative cursor-pointer px-6 py-3 bg-gradient-to-r from-[#2d6a4f] via-[#40916c] to-[#52b788] rounded-xl overflow-hidden transition-all duration-300 hover:scale-105 shadow-[0_0_25px_rgba(82,183,136,0.3)] flex items-center gap-2.5 text-white font-bold text-sm tracking-wide"
               >
-                <span>{heroSection?.cta_primary_text || "احجز استشارتك الخاصة"}</span>
+                <span>{heroSection?.cta_primary_text || (isAr ? "احجز موعد كشف واستشارة" : "Book Consultation")}</span>
                 <ArrowIcon className="w-4 h-4 text-white group-hover:translate-x-1 transition-transform" />
               </button>
 
@@ -134,7 +141,7 @@ export default function HeroSection({
                 className="px-5 py-3 rounded-xl bg-[#141f1b] border border-[#52b788]/30 hover:border-[#52b788] text-[#f8fafc] font-semibold text-xs sm:text-sm transition-all duration-300 flex items-center gap-2 hover:bg-[#2d6a4f]/20"
               >
                 <MessageCircle className="w-4 h-4 text-[#25D366]" />
-                <span>{heroSection?.cta_whatsapp_text || "تواصل واتساب"}</span>
+                <span>{heroSection?.cta_whatsapp_text || (isAr ? "تواصل عبر واتساب" : "Contact via WhatsApp")}</span>
               </a>
             </div>
           </div>
@@ -148,7 +155,7 @@ export default function HeroSection({
               {/* Doctor Image */}
               <div className="relative h-[480px] sm:h-[540px] w-full overflow-hidden">
                 <Image
-                  src={heroSection?.doctor_image ? cleanImageUrl(heroSection.doctor_image) : doctorHeroImg}
+                  src={doctorImg}
                   alt={clinicInfo?.doctor_name || "د. علي ياقوت - دكتوراه العلاج التحفظي وتجميل الأسنان"}
                   fill
                   priority

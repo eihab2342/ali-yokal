@@ -122,15 +122,14 @@ export default function Header({ type = "popup", logoSrc, clinicInfo }: HeaderPr
           onClick={(e) => handleScroll(e, "#home")}
           className="flex items-center gap-2 font-bold transition-all duration-300 hover:scale-105 z-10"
         >
-          <div className="bg-white/95 px-3 py-1.5 rounded-2xl shadow-[0_0_20px_rgba(82,183,136,0.3)] flex items-center justify-center">
-            <Image
-              src={logoSrc ? cleanImageUrl(logoSrc) : staticLogo}
-              alt={clinicInfo?.name || "Ali Yakout Dental Clinic"}
-              width={140}
-              height={45}
-              className="h-7 sm:h-9 w-auto object-contain cursor-pointer"
-            />
-          </div>
+          <Image
+            src={logoSrc ? cleanImageUrl(logoSrc) : staticLogo}
+            alt={clinicInfo?.name || "Ali Yakout Dental Clinic"}
+            width={150}
+            height={48}
+            className="h-8 sm:h-10 w-auto object-contain cursor-pointer"
+            priority
+          />
         </Link>
 
         {/* Center: Navigation Items */}
